@@ -1,0 +1,36 @@
+/*
+ 
+	Theme Name: Joyo Bootstrap
+	Theme URI: http://www.studiojoyo.com
+	Description: A custom theme based on Bootstrap Twitter
+	Author: Studio Joyo - Marcel Spaan - Ruud Laan	
+	------------------------------------------------------------------	
+	Css files are loaded via header
+	This file is only for identification of the theme within Wordpress
+   
+   
+   
+----------------------------------------------------------------------
+ BASE FILES:
+ 
+	- index.php
+		-> loop-404.php 
+	  	-> loop.php (single item for pages and posts)
+	- archive.php
+		-> loop-404.php
+		-> loop-list-title.php
+		-> loop-list-title-date-excerpt.php
+	- search.php
+		-> loop-404.php
+	  	-> loop-list-search.php
+	- 404.php
+		-> loop-404.php
+	- template-homepage.php (no sidebars)
+	
+	- template-elements.php 
+	
+*/
+
+
+
+

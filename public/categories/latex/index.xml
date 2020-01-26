@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LaTeX | Thomas de Graaff</title>
+    <link>thomasdegraaff.nl/categories/latex/</link>
+      <atom:link href="thomasdegraaff.nl/categories/latex/index.xml" rel="self" type="application/rss+xml" />
+    <description>LaTeX</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Wed, 25 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>LaTeX</title>
+      <link>thomasdegraaff.nl/categories/latex/</link>
+    </image>
+    
+    <item>
+      <title>Drawing Edgeworth boxes with LaTeX</title>
+      <link>thomasdegraaff.nl/post/2015-11-25-edgeworth/</link>
+      <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2015-11-25-edgeworth/</guid>
+      <description>&lt;h2 id=&#34;factor-mobility-and-welfare&#34;&gt;Factor mobility and welfare&lt;/h2&gt;
+&lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; students the Edgeworth-Bowley box. At first sight the concept is quite simple, but because there are restrictions for the total amount of both labour and capital in both regions or countries, the intuition behind the model  and especially the drawing of the box is rather complex. Therefore, I once wrote a straightforward but elaborate LaTeX script invoking the Tikz package.&lt;/p&gt;
+&lt;p&gt;The setting is as follows. We consider two regions, $A$ and $B$. The productionfunction of $A$ is $Y_A = K_A^{0.2}L_A^{0.8}$ and the productionfunction of $B$ is $Y_B = K_B^{0.6}L_B^{0.4}$. In the initial situation is the amount of capital in both regions equal to 1 ($K_A = K_B = 1$). The amount of labour is as well in both regions in the initial situation equal to 1 ($L_A = L_B = 1$). The next script shows how to draw an Edgeworth-Bowley box in $\LaTeX$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;% Edgeworth box---Optimal allocation of inputs for two economies
+% Author: Thomas de Graaff
+\documentclass{article} 
+\usepackage{tikz, verbatim}
+\usepackage{pgfplots}   %include other needed packages here    
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{0pt}%
+\begin{comment}
+:Title: Edgeworth box---Optimal allocation of inputs for two economies
+:Tags: pgfplots, economics
+:Author: Thomas de Graaff
+
+This edgeworth box describes the optimal allocation (pareto efficient) of inputs for the Cobb-Douglas production functions of two countries/regions (A and B). In addition, it shows the initial endowments of inputs and the resulting area of patero improvements. Parameters that can be changes: capital intensity parameter region A/B, total amount of labour and capital in A and B, and initial endowment K and L in A.
+\end{comment}
+\begin{document}   
+
+\begin{tikzpicture}[scale=1,thick]
+\usetikzlibrary{calc, intersections}	       %allows coordinate calculations.
+
+% Define parameters
+\def\alpha{0.2}		% Capital intensity parameter for region A.
+\def\beta{0.6}		% Capital intensity parameter for region B.
+\def\L{2}		% Total amount of labour in economy.
+\def\K{2}  		% Total amount of capital in economy.
+\def\PK{0.5}		% Share K in A in initial endowment.
+\def\PL{0.5}		% Share L in A in initial endowment.
+
+% Define isoquants
+
+\def\TotalY{(\L^\alpha)*(\K^(1-\alpha))}
+\def\InitYA{((\PL*\L)^(1-\alpha))*((\PK*\K)^(\alpha))}		
+\def\InitYB{(((1-\PL)*\L)^(1-\beta))*(((1-\PK)*\K)^(\beta))}
+\def\InitYAfromB{\TotalY-\InitYB}	
+
+\def\La{0.2*\L}
+\def\Lb{0.4*\L}
+\def\Lc{0.6*\L}
+\def\Ld{0.8*\L}
+
+\def\Ka{\alpha*(1-\beta)*\K*\La/((1-\alpha)*\beta*(\L-\La)+\alpha*(1-\beta)*\La)}
+\def\Kb{\alpha*(1-\beta)*\K*\Lb/((1-\alpha)*\beta*(\L-\Lb)+\alpha*(1-\beta)*\Lb)}
+\def\Kc{\alpha*(1-\beta)*\K*\Lc/((1-\alpha)*\beta*(\L-\Lc)+\alpha*(1-\beta)*\Lc)}
+\def\Kd{\alpha*(1-\beta)*\K*\Ld/((1-\alpha)*\beta*(\L-\Ld)+\alpha*(1-\beta)*\Ld)}
+
+\def\YAa{((\La)^(1-\alpha)*((\Ka)^\alpha)}
+\def\YAb{((\Lb)^(1-\alpha)*((\Kb)^\alpha)}
+\def\YAc{((\Lc)^(1-\alpha)*((\Kc)^\alpha)}
+\def\YAd{((\Ld)^(1-\alpha)*((\Kd)^\alpha)}
+
+\def\YBa{((\L-\La)^(1-\beta)*((\K-\Ka)^\beta)}
+\def\YBb{((\L-\Lb)^(1-\beta)*((\K-\Kb)^\beta)}
+\def\YBc{((\L-\Lc)^(1-\beta)*((\K-\Kc)^\beta)}
+\def\YBd{((\L-\Ld)^(1-\beta)*((\K-\Kd)^\beta)}
+
+\begin{axis}[
+        restrict y to domain=0:\K,
+        samples = 1000,     		
+        xmin = 0, xmax = \L,
+        ymin = 0, ymax = \K,
+		xlabel=$L_A$,
+		ylabel=$K_A$,
+		axis y line=left,
+        axis x line=bottom,
+        y axis line style={-}, 
+		x axis line style={-}
+		]
+		\def\LineA{(\InitYA/\x^(1-\alpha))^(1/\alpha))};
+		\def\LineB {\K-(\InitYB/(\L-\x)^(1-\beta))^(1/\beta)};
+		\def\LineAfromB{(\InitYAfromB/\x^(1-\alpha))^(1/\alpha))};
+			
+% color the area with all pareto improvements			
+      \addplot [fill=orange!40, opacity=0.5, draw=none,domain=0:\L] {\LineB} \closedcycle;
+      \addplot [fill=white, draw=none,domain=0:\L] {\LineA} |- (axis cs:0,0) -- (axis cs:0,\K)--cycle; 
+      			
+	  %Draw isoquants
+      \addplot[thin, dotted, mark=none, domain=0:\L] {(\YAa/\x^(1-\alpha))^(1/\alpha)};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {(\YAb/\x^(1-\alpha))^(1/\alpha)};
+      \addplot[thick, mark=none, domain=0:\L] {\LineA};     
+      \addplot[thin, dotted, mark=none, domain=0:\L] {(\YAc/\x^(1-\alpha))^(1/\alpha)};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {(\YAd/\x^(1-\alpha))^(1/\alpha)};
+   
+      \addplot[thin, dotted, mark=none, domain=0:\L] {\K-(\YBa/(\L-\x)^(1-\beta))^(1/\beta)};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {\K-(\YBb/(\L-\x)^(1-\beta))^(1/\beta)};
+      \addplot[thick, mark=none, domain=0:\L] {\LineB};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {\K-(\YBc/(\L-\x)^(1-\beta))^(1/\beta)};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {\K-(\YBd/(\L-\x)^(1-\beta))^(1/\beta)};
+      
+	  %Draw contractcurve
+	  \addplot[mark=none, domain=0:\L, color=blue,thick]	{\alpha*(1-\beta)*\K*\x/((1-\alpha)*\beta*(\L-\x)+\alpha*(1-\beta)*\x)};
+	  %Draw initial endowments
+	 \addplot[thick, mark=*, fill=red!50] coordinates {(\L*\PL,\K*\PK)};
+\end{axis}
+
+% Draw mirrored axis
+\begin{axis}[
+        restrict y to domain=0:\K,
+        minor tick num=1,
+		xlabel=$L_B$,
+		ylabel=$K_B$,
+        xmin = 0, xmax = \L,
+        ymin = 0, ymax = \K,
+        axis y line=right, 
+        axis x line=top,
+        x dir=reverse,
+        y dir=reverse,
+        y axis line style={-}, 
+		x axis line style={-}
+		]
+\end{axis}
+\end{tikzpicture}
+\end{document} 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This produces the following diagram:&lt;/p&gt;
+&lt;img src=&#34;thomasdegraaff.nl/img/EdgeworthBox.png&#34; width = 800&gt;
+&lt;figcaption&gt;The Edgeworth-Bowley box and the corresponding Pareto improving area.&lt;/figcaption&gt;
+&lt;p&gt;Clearly, the initial situation (1,1) is not efficient and both regions
+can increase their welfare by &lt;em&gt;both&lt;/em&gt; migrating capital and
+labour. Labour will move from $B$ to $A$ and capital will move from
+$A$ to $B$. Note that the light grey area (should be light orange) area
+denotes the area with all pareto improvements.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Krugman&#39;s Increasing Returns and Economic Geography</title>
+      <link>thomasdegraaff.nl/post/2015-10-05-krugman/</link>
+      <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2015-10-05-krugman/</guid>
+      <description>&lt;h2 id=&#34;drawing-the-diagram-of-a-stylized-version-of-krugmans-increasing-returns-and-economic-geography&#34;&gt;Drawing the diagram of a stylized version of Krugman&#39;s &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; a simplified version of Krugman&#39;s model in his paper titled  &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;. The model we have adopted goes as follows:&lt;/p&gt;
+&lt;p&gt;We consider a simplified economy with two regions and 1 (million) workers ( $L=1$ ) in total. Region 1 is inhabited by 100,000 farmers (bound to their land so immobile), while in Region 2 there are 200,000 farmers. Note that in the notation of Krugman this boils down to $\pi_1 = 0.1$ and $\pi_2 = 0.2$. All other workers work in manufacturing. Assume now that there is a representative firm that has to choose if and in which region if would settle or that it would settle in both regions by having two branches (one in each region). The fixed costs to establish a firm (or branch) is 0.15. The transportcosts to move goods between region 1 and 2 are equal to 1 and each worker consumer consumes exactly one unit of the final product.&lt;/p&gt;
+&lt;p&gt;It is now up to the student to determine the equilibria in this economy (whether stable or unstable) and identify the trade-off for the firm. Doing this the most insightful and simple way is draw the so-called PP-line and the MM-line. Using the Tikz package within Latex simplifies this enormously. The following code shows how this can be done.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;% Krugman91---Firm location in two regions 
+% Author: Thomas de Graaff
+\documentclass{article}
+\usepackage{tikz, verbatim}
+\usepackage{pgfplots}   %include other needed packages here
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{0pt}%
+\begin{comment}
+:Title: Krugman91---Firm location in two regions 
+:Tags: Economic geography, economics, location behavior, 
+multiple equilbria
+:Author: Thomas de Graaff
+\end{comment}
+\begin{document}
+
+\begin{tikzpicture}[scale=1,thick]
+\usetikzlibrary{calc, intersections}   %allows coordinate calculations.
+
+% Define parameters
+\def\L{1} 				% Total amount of workers (normalized)
+\def\Pa{0.1}			% Total amount of farmers in regio 1
+\def\Pb{0.2}			% Total amount of farmers in regio 2
+\def\x{1} 				% Total demand (normalized)
+\def\F{0.15} 			% Fixed costs to set up a plant
+\def\t{1}				% Transportcosts
+
+\def\Fa{\F/(\t*\x)}
+\def\Fb{1-\F/(\t*\x)}
+\def\Eq{(\Pa/(\Pa+\Pb)}
+\def\Eqa{((\Fa-\Pa)/(1-\Pa-\Pb)}
+\def\Eqb{((\Fb-\Pa)/(1-\Pa-\Pb)}
+\def\Eqleft{min(\Fa-\Pa, 0)}
+\def\Eqright{max(\Fb-(1-\Pb), 0)}
+
+\begin{axis}[
+restrict y to domain=0:\L,
+samples = 1000,     		
+xmin = 0, xmax = \L,
+ymin = 0, ymax = \L,
+xlabel=$S_m$,
+ylabel=$S_p$,
+y axis line style={-}, 
+x axis line style={-},
+grid=major,
+legend pos=north west,
+legend entries={45$^\circ$ line,PP line, MM line}
+]
+\addplot[dotted, mark=none, domain=0:\L] {x};
+\addplot[thick, red, mark=none, domain=0:\L] coordinates {(0,\Pa) (1,1-\Pb)};
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(0,0) (0,\Fa)};			
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(1,1) (1,\Fb)};
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(0,\Fa) (\Fa,\Fa)};			
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(1,\Fb) (\Fb,\Fb)};
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(\Fa,\Fa) (\Fb,\Fb)};
+\addplot[thick, mark=*, fill=red!90] coordinates {(0,\Pa+1000*\Eqleft)};			
+\addplot[thick, mark=*, fill=red!90] coordinates {(1,1-\Pb+1000*\Eqright)}; 
+\addplot[thick, mark=*, fill=red!90] coordinates {(\Eq,\Eq)};
+\addplot[thick, mark=*, fill=red!10] coordinates {(\Eqa,\Fa)}; 			 	
+\addplot[thick, mark=*, fill=red!10] coordinates {(\Eqb,\Fb)}; 			
+\end{axis}
+\end{tikzpicture}
+\end{document}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This produces the following diagram:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&#34;thomasdegraaff.nl/img/Krugman91.png&#34;&gt;&lt;img src=&#34;thomasdegraaff.nl/img/Krugman91.png&#34;&gt;&lt;/a&gt;
+  &lt;figcaption&gt;Equilibria in a stylized version of Krugman (1991).&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Clearly, there are with this configuration 3 equilibria; two are stable and one is unstable.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Thomas de Graaff</title>
+    <link>/blog/</link>
+    <description>Recent content in Blog on Thomas de Graaff</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 31 Dec 2019 16:23:15 +0100</lastBuildDate>
+    
+	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bloggin with hugo &amp; org   :@&lt;Org:@Hugo:@Ox-Hugo&gt;:</title>
+      <link>/blog/2019-12-31_blogging_with_hugo_and_org/</link>
+      <pubDate>Tue, 31 Dec 2019 16:23:15 +0100</pubDate>
+      
+      <guid>/blog/2019-12-31_blogging_with_hugo_and_org/</guid>
+      <description>This is my first cruddy attempt to blog directly from org with ox_hugo</description>
+    </item>
+    
+  </channel>
+</rss>

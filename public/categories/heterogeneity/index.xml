@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Heterogeneity | Thomas de Graaff</title>
+    <link>thomasdegraaff.nl/categories/heterogeneity/</link>
+      <atom:link href="thomasdegraaff.nl/categories/heterogeneity/index.xml" rel="self" type="application/rss+xml" />
+    <description>Heterogeneity</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Sun, 18 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Heterogeneity</title>
+      <link>thomasdegraaff.nl/categories/heterogeneity/</link>
+    </image>
+    
+    <item>
+      <title>Valuation of Ethnic Diversity: Heterogeneous Effects in an Integrated Labor and Housing Market</title>
+      <link>thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</guid>
+      <description>&lt;p&gt;Our paper &lt;em&gt;Valuation of Ethnic Diversity: Heterogeneous Effects in an Integrated Labor and Housing Market&lt;/em&gt; written together with Jessie Bakens is accepted in the &lt;strong&gt;Journal of Economic Geopraphy&lt;/strong&gt;. Jessie and I worked quite hard on this and I am glad that we got the results. The abstract reads as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;We estimate the heterogeneous impact of the scale, composition and consumer good-effect of ethnic diversity on individuals&#39; job and residential location. Using an extensive pooled micro panel-data set in which homeowners in the Netherlands are identified in both the housing and labor market we can derive the combined effect of ethnic diversity in both markets. We test a model that integrates the utility and production function such that the location of work and residence are determined simultaneously by taking into account observed and unobserved heterogeneous individual behavior on both markets. We find that the scale of ethnic diversity, i.e., the share of immigrants, at the city level is mostly positively related to both wages and house prices. This is mainly through a positive productivity effect of immigrants, which results in negative implicit prices for housing (although small) in a city with a higher scale of ethnic diversity for the majority of the individuals in our data. The scale of ethnic diversity is only positively related to utility for a small group of homeowners, while the composition (diversity among immigrants) and consumer good-effect (ethnic diversity of restaurants) of ethnic diversity show overall no significant effect on both markets nor significant implicit prices. Moreover, we find that the majority of Dutch homeowners do not sort themselves out over municipalities by their preferences for ethnic diversity.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sortingmod: an R-package for sorting models</title>
+      <link>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
+      <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;sortingmod is a package for estimating the sorting model - a discrete choice model which explains the location decision of heterogeneous individuals over a set of alternative locations. The model is developed by Bayer et al. (2004) following the work of Berry et al. (1995). It relies on the assumptions that individuals choose a location that maximizes their utility, and that heterogeneous individuals with different characteristics have different preferences, and different valuation for location characteristics. The results of the model provide choice probabilities for each alternative, as well as insight on the valuation patterns of heterogeneous agents, and marginal willingness-to-pay values for location characteristics. For the R-vignette go to 
+&lt;a href=&#34;http://www.thomasdegraaff.nl/sortingmod&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.thomasdegraaff.nl/sortingmod&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;The package is constructed as an accompanying tool for the Summer School in “Hedonic price analysis and the residential location choice”, hosted by the Kraks Fond - Institute for Urban Economic Research (Copenhagen, Denmark).&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sortingmod&lt;/code&gt; is not currently available from CRAN, but you can install the development version from github with (note that you need to install the package &lt;code&gt;devtools&lt;/code&gt; to be able to install packages from GitHub:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(&amp;quot;devtools&amp;quot;)
+library(&amp;quot;devtools&amp;quot;)
+devtools::install_github(&amp;quot;thdegraaff/sortingmod&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once installation is completed, the package can be loaded as follows&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(sortingmod)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;components&#34;&gt;Components&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;first_stage(code_name, Z_names, X_names, data, print_detail = 3)&lt;/code&gt; - Estimates the first stage of a. sorting model&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;second_stage(s1.results, data, endog = NULL, instr = NULL)&lt;/code&gt; - Estimates the second of a sorting model&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sorting_inst(s1.results, endog, data, n.iterations = 3, stepsize = 0.05, threshold = 0.0005)&lt;/code&gt; - Calculates an instrument for an endogenous variable in a sorting model setting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The data for the estimation should be in data frame format, and it must contain:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One or more columns indicating characteristics (&lt;code&gt;Z_names&lt;/code&gt;) of a unique agent making a discrete choice between available alternatives (individuals, households, etc.).&lt;/li&gt;
+&lt;li&gt;A vector indicating the chosen alternative (&lt;code&gt;code_name&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;One or more columns indicating characteristics (&lt;code&gt;X_names&lt;/code&gt;) of the chosen alternative.&lt;/li&gt;
+&lt;li&gt;Each row of the data frame should represent a unique individual. The number of alternatives should therefore be smaller or equal to the number of individuals.&lt;/li&gt;
+&lt;li&gt;Individual and alternative characteristics should be numeric variables. Factor variables are not yet supported, so it&#39;s best to transform them into numeric dummy variables if you intend to include them in the model.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Define dataset, alternative identifier variable and explanatory variable sets X and Z&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data &amp;lt;- municipality
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Estimate the first stage of the sorting model&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;X.vars &amp;lt;- c(&amp;quot;lnprice&amp;quot;,&amp;quot;nature&amp;quot;,&amp;quot;monuments&amp;quot;,&amp;quot;schools_3km&amp;quot;)
+Z.vars &amp;lt;- c(&amp;quot;income&amp;quot;,&amp;quot;double_earner_hh&amp;quot;,&amp;quot;hh_kids&amp;quot;,&amp;quot;age&amp;quot;)
+Alt.var = &amp;quot;mun_code&amp;quot;
+s1.results &amp;lt;- first_stage(code_name = Alt.var,
+                          X_names = X.vars
+                          Z_names = Z.vars,
+                          data = data,
+                          print_detail = 1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Estimate the second stage of the model, assuming exogeneity of explanatory variables&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;s2.results &amp;lt;- second_stage(s1.results, data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Define endogenous variables and calculate an instrument based on equilibrium conditions. Estimate the second stage of the sorting model using the calculated instrument.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;endog &amp;lt;- (&amp;quot;lnprice&amp;quot;)
+phat &amp;lt;- sorting_inst(s1.results, &amp;quot;lnprice&amp;quot;, data, stepsize = 0.02)
+plot(phat$sorting_inst, phat$endogenous, xlab=&amp;quot;Instrument&amp;quot;, ylab=&amp;quot;Endogeneous variable&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Estimate the second stage of the model, using instruments for the endogenous variables.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;instruments &amp;lt;- cbind(sorting_inst = phat$sorting_inst, historical.monuments = monuments)
+s2.results &amp;lt;- second_stage(s1.results, data, c(&amp;quot;lnprice&amp;quot;,&amp;quot;cafes_1km&amp;quot;), instruments)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;getting-help&#34;&gt;Getting help&lt;/h2&gt;
+&lt;p&gt;If you need assistance using &lt;code&gt;sortingmod&lt;/code&gt;, you can get in touch by emailing 
+&lt;a href=&#34;t.de.graaff@vu.nl&#34;&gt;t.de.graaff@vu.nl&lt;/a&gt;
+ or 
+&lt;a href=&#34;o.d.levkovich@vu.nl&#34;&gt;o.d.levkovich@vu.nl&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;p&gt;Bayer, P., McMillan, R., &amp;amp; Rueben, K. (2004). An equilibrium model of sorting in an urban housing market (No. w10865). National Bureau of Economic Research.&lt;/p&gt;
+&lt;p&gt;Berry, S., Levinsohn, J., &amp;amp; Pakes, A. (1995). Automobile prices in market equilibrium. Econometrica: Journal of the Econometric Society, 841-890.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Heatmap of the Robustness of Determinants of European City growth</title>
+      <link>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
+      <pubDate>Fri, 21 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Understanding what makes a city tick (e.g., the determinants that makes cities succesful in employment of economic growth) is vital for both policy makers and (regional) economists. Indeed, local policy makers usually want to know what they can contribute to the performance of their city or region. If policy makers can at all influence the performance, then most likely instruments vary between cities and regions. What is good for one city is not necessarily good for another. To analyse this, I ran many regressions of combinations of determinants and analyse their robustness (e.g., sign changes, changes in significance level and coefficients). The research is commissioned by the PBL Netherlands Environmental Assessment Agency.&lt;/p&gt;
+&lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;
+&lt;p&gt;One way of looking at city or regional performance is to make use of growth models. Typically, an empirical growth model comes in the following shape:&lt;/p&gt;
+&lt;p&gt;$$
+\ln(\frac{y_t}{y_0})=\ln(y_0)+\mathbf{X}\beta+\epsilon,
+$$&lt;/p&gt;
+&lt;p&gt;where $y_t$ denotes a regional or city performance measure (gdp or employment), so $\ln(\frac{y_t}{y_0})$ denotes the growth rate of $y$ between $t$ and $0$. On the right hand side, typically one controls for the initial state of $y$ at time $0$ and for a whole bunch of other variables $\mathbf{X}$. And it is exactly these variables we are interested in:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Which variables, if any, have a systematic and robust impact on the growth rate of $y$?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, we estimate the model above multiple times where each time $\mathbf{X}$ is formed by a subset of all determinants (in our case we use for each regression 4 variables out of around 70). This yield a database of many regression results (actually two databased: one with the coefficients and one with the t-values). One way of assessing the robustness of a particular indicator is to look at how many times that indicator is signicant and display the percentage in a heatmap&lt;/p&gt;
+&lt;h2 id=&#34;creating-a-heat-map-of-the-regression-results&#34;&gt;Creating a heat map of the regression results&lt;/h2&gt;
+&lt;p&gt;After I have run all possible regressions (and there are many given the formula $\frac{71!}{4!(71-4)!}$, I can perform an ex-post analysis on the results. For my purpose, I have looked at city gdp for all sectors combined, and separately for 7 sectors and have created a dataset that consists of how many times (in percentages) a variable was significant in the regression above. This had led to the table below with sectors as variables and each determinant as an observation (alas, sector names and variables are in Dutch).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; data
+# A tibble: 71 × 8
+                      Variable    Totaal     Landbouw Constructie         fbs   Industrie
+                         &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+1                        Banen 0.9999791 0.6722262812 0.999937376 0.846926208 1.000000000
+2            Levensverwachting 1.0000000 0.9523640539 0.999519883 0.816386598 0.845819852
+3          Kwaliteit onderwijs 0.9756184 0.0577601503 0.694269909 0.998893644 0.579000104
+4                    Recreatie 0.5286922 0.0000000000 0.999874752 0.595031834 0.593695856
+5                 Natuurrampen 1.0000000 0.0002087465 0.082580106 0.985867863 0.006137146
+6            Clustering chemie 0.8412901 0.0003131197 0.027157917 0.291034339 0.034631041
+7       Specialisatie landbouw 0.9799395 0.0001878718 0.225634067 1.000000000 0.045360610
+8  Specialisatie electriciteit 0.9998956 0.0001669972 0.005531782 0.004905542 0.999645131
+9               Bereikbaarheid 0.9505062 0.2850224402 0.759482309 0.999979125 0.935392965
+10                     Cultuur 0.9457468 0.0352364054 1.000000000 0.973363949 0.828368646
+# ... with 61 more rows, and 2 more variables: `Niet markt diensten` &amp;lt;dbl&amp;gt;, wrtdchc &amp;lt;dbl&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To make a heat map I first have to create a tidy dataset using the gather function:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; data &amp;lt;- gather(data, sector, waarde, -Variable)
+&amp;gt; data
+# A tibble: 497 × 3
+                      Variable sector    waarde
+                         &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt;
+1                        Banen Totaal 0.9999791
+2            Levensverwachting Totaal 1.0000000
+3          Kwaliteit onderwijs Totaal 0.9756184
+4                    Recreatie Totaal 0.5286922
+5                 Natuurrampen Totaal 1.0000000
+6            Clustering chemie Totaal 0.8412901
+7       Specialisatie landbouw Totaal 0.9799395
+8  Specialisatie electriciteit Totaal 0.9998956
+9               Bereikbaarheid Totaal 0.9505062
+10                     Cultuur Totaal 0.9457468
+# ... with 487 more rows
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To be able to sort the heat map based on average values, I create a new variable with the average of all the percentages, order it in descending order and refactor the sector names, so that it remains in the order I want in the heatmap:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;data &amp;lt;- data %&amp;gt;%
+  group_by(Variable) %&amp;gt;%
+  mutate(gemiddelde  = mean(waarde), 
+    sector &amp;lt;- as.character(sector),
+    sector &amp;lt;- factor(sector, 
+              levels=c(&amp;quot;Totaal&amp;quot;, &amp;quot;Landbouw&amp;quot;, &amp;quot;Constructie&amp;quot;, 
+                       &amp;quot;fbs&amp;quot;, &amp;quot;Industrie&amp;quot;, &amp;quot;Niet markt diensten&amp;quot;,
+                       &amp;quot;wrtdchc&amp;quot;))) %&amp;gt;%
+  arrange(desc(gemiddelde))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The data now looks like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; data
+# A tibble: 497 × 6
+            Variable              sector    waarde gemiddelde `sector &amp;lt;- as.character(sector)`
+               &amp;lt;chr&amp;gt;              &amp;lt;fctr&amp;gt;     &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;                            &amp;lt;chr&amp;gt;
+1     Waarde in 1991              Totaal 1.0000000  1.0000000                           Totaal
+2     Waarde in 1991            Landbouw 1.0000000  1.0000000                         Landbouw
+3     Waarde in 1991         Constructie 1.0000000  1.0000000                      Constructie
+4     Waarde in 1991                 fbs 1.0000000  1.0000000                              fbs
+5     Waarde in 1991           Industrie 1.0000000  1.0000000                        Industrie
+6     Waarde in 1991 Niet markt diensten 1.0000000  1.0000000              Niet markt diensten
+7     Waarde in 1991             wrtdchc 1.0000000  1.0000000                          wrtdchc
+8  Levensverwachting              Totaal 1.0000000  0.9134179                           Totaal
+9  Levensverwachting            Landbouw 0.9523641  0.9134179                         Landbouw
+10 Levensverwachting         Constructie 0.9995199  0.9134179                      Constructie
+# ... with 487 more rows, and 1 more variables: `sector &amp;lt;- factor(sector, levels =
+#   c(&amp;quot;...` &amp;lt;fctr&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With the &lt;code&gt;geom_tile&lt;/code&gt; aesthetic from &lt;code&gt;ggplot2&lt;/code&gt; I can now create the heat map I want as follows (note that I used the package &lt;code&gt;RColorBrewer&lt;/code&gt; for my colour palette):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  # Note that for ggplot I still have to reorder the variable I want based on the gemiddelde
+  p &amp;lt;- ggplot(data,aes(x = sector, y = reorder(Variable,gemiddelde))) +  
+     geom_tile(aes(fill = waarde),colour = &amp;quot;white&amp;quot;) + 
+     scale_fill_distiller(&amp;quot;Percentage\nsignificant&amp;quot;, 
+                          palette = &amp;quot;Spectral&amp;quot;) +
+     theme_grey(base_size = 9) + 
+     labs(x = &amp;quot;&amp;quot;,y = &amp;quot;&amp;quot;) + 
+     scale_x_discrete(expand = c(0, 0)) +
+       scale_y_discrete(expand = c(0, 0)) + 
+       theme(axis.ticks = element_blank(), 
+        axis.text.x = element_text(size = 9 *0.8, 
+        angle = 330, hjust = 0, colour = &amp;quot;grey50&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which finally produces the following plot.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
+
+
+  &lt;img src=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Heatmap of percentage significance of indicators on European city growth.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;implications&#34;&gt;Implications&lt;/h2&gt;
+&lt;p&gt;When looking at the plot above, it is remarkable that most of the variables are not significant at all times. Worse, most of them are not even significant 75% or even 50% of all cases. This casts great doubt upon the robustness and even validity of most of the determinants oftentimes used in these type of analyses. On the other hand, some of the determinants of city growth may only be important in combination with other determinants. So the next step, would be to look at the impact conditional on other determinants.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Social Interaction and Crime</title>
+      <link>thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</link>
+      <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</guid>
+      <description>&lt;h2 id=&#34;social-interaction-and-crime-an-investigation-using-individual-offender-data-in-dutch-neighborhoods-conditionally-accepted-in-restat&#34;&gt;&lt;em&gt;Social Interaction and Crime: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; conditionally accepted in RESTAT&lt;/h2&gt;
+&lt;p&gt;Just heard that my paper &lt;em&gt;Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; written together with Wim Bernasco, Jan Rouwendal and Wouter Steenbeek is conditionally accepted in the &lt;strong&gt;Review of Economics and Statistics&lt;/strong&gt;. Im am rather happy with this result; especially given the fact that we have worked on this for more than 5 years (not consecutively but still). For those interested in the paper or forgotten what it is all about, here is the abstract:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Using data on the age, sex, ethnicity and criminal involvement of more than 14 million residents of all ages residing in approximately 4,000 neighborhoods in the Netherlands, this article tests if an individual&#39;s criminal involvement is affected by the proportion of criminals living in their neighborhood of residence. We develop a binomial discrete choice model for criminal involvement and estimate it on individual data. We control for the endogeneity that may be related to the unobserved neighborhood characteristics and take into account possible biases that may result from sorting behavior. We find significant social interaction effects but in contrast to earlier results our findings do not imply multiple equilibria or large multiplier effects.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;There is a Tinbergen Institute discussion paper but that is rather old. More will follow later with hopefully a link to the pre-print version.&lt;/p&gt;
+&lt;h3 id=&#34;follow-up&#34;&gt;Follow-up&lt;/h3&gt;
+&lt;p&gt;The paper is now (November 17th, 2016) fully accepted for publication.&lt;/p&gt;
+&lt;h3 id=&#34;heterogeneous-impacts-of-crime&#34;&gt;Heterogeneous impacts of crime&lt;/h3&gt;
+&lt;p&gt;For creating heterogeneous impacts for each neighborhood, I wrote the
+following &lt;code&gt;R&lt;/code&gt; code which creates sigmoids, and thus different
+equilibria conditional on neighborhood variables, for each neighborhood using
+&lt;code&gt;ggplot2&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;makefig &amp;lt;- function(estoutput){
+
+# Plots all sigmoids for each neighborhood.
+#
+# Args:
+#   EstOutput: a list with outout from iteration2sls procedure
+#
+# Returns:
+#   A ggplot2 object
+
+EC &amp;lt;- seq(0,1,0.01)
+temp &amp;lt;- coef(estoutput$iv)[&amp;quot;pfield&amp;quot;]*100 +
+        coef(estoutput$iv)[&amp;quot;interaction&amp;quot;]*100*addresdensity
+tempmat &amp;lt;- EC%*%t(temp) + rep(1,101)%*%(tail(estoutput$phi,1))
+ECmapping &amp;lt;- exp(tempmat)/(1+exp(tempmat))
+figdata &amp;lt;- data.frame(EC, ECmapping )
+figdata_long &amp;lt;- melt(figdata, id=&amp;quot;EC&amp;quot;)
+myplot &amp;lt;- ggplot(figdata_long, aes(x=EC,y=value, colour =variable))  +
+          geom_line() +ylim(0,1)
+myplot &amp;lt;- myplot  + geom_line(aes(x=EC,y=EC), size =1, colour = &amp;quot;black&amp;quot;) +
+          theme_bw() +
+theme(legend.position = &amp;quot;none&amp;quot;) + 
+labs(x = &amp;quot;IE&amp;quot;, y = &amp;quot;f(IE)&amp;quot;)
+
+return(myplot)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which produces the following plot.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&#34;thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;img src=&#34;thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;/a&gt;
+  &lt;figcaption&gt;Offender rates of property crime with
+  neighborhood-specific variables and for the youth only.&lt;/figcaption&gt;
+&lt;/figure&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Stedelijke voorzieningen en bevolking: wie woont waar en waarom?</title>
+      <link>thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</link>
+      <pubDate>Sat, 15 Feb 2014 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</guid>
+      <description>&lt;h2 id=&#34;waarom-zijn-sommige-steden-aantrekkelijker-dan-andere-steden&#34;&gt;Waarom zijn sommige steden aantrekkelijker dan andere steden?&lt;/h2&gt;
+&lt;p&gt;Eén van de belangrijke en boeiende onderzoeksvragen in de ruimtelijke economie betreft het verklaren waarom sommige steden aantrekkelijker zijn voor huishoudens en bedrijven dan andere. Als maatstaven voor aantrekkelijkheid worden vaak lonen en huizenprijzen genomen en deze verschillen inderdaad significant tussen gemeenten in Nederland. Zoals bijvoorbeeld de publicatie Stad en Land (De Groot e.a., 2010) al liet zien, kunnen de verschillen tussen grondprijzen in Nederland oplopen tot een factor 200 per vierkante meter kunnen jaarlonen verschillen tot 7 procent voor een zelfde soort baan. Een belangrijke verklaring voor deze verschillen ligt in de aanwezigheid van (stedelijke) voorzieningen. Huishoudens kunnen nu eenmaal een voorkeur hebben voor een historische binnenstad, de aanwezigheid van veel horeca of veel groenvoorzieningen en zijn daarom bereid om een relatief hogere huizenprijs te betalen; het is dus de locatie die voor een deel de huizenprijs bepaalt. Evenzo kunnen voorzieningen ertoe leiden dat werkgevers een voorkeur hebben voor een bepaald vestigingsgebied, en in het uiterste geval kunnen er zelfs productiviteitsverschillen ontstaan.&lt;/p&gt;
+&lt;p&gt;Deze publicatie geeft inzicht in de heterogene verschillen en kan 
+&lt;a href=&#34;thomasdegraaff.nl/papers/StedelijkeVoorzieningen.pdf&#34;&gt;hier&lt;/a&gt;
+ gedownload worden.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

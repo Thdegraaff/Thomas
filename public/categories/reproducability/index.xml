@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reproducability | Thomas de Graaff</title>
+    <link>thomasdegraaff.nl/categories/reproducability/</link>
+      <atom:link href="thomasdegraaff.nl/categories/reproducability/index.xml" rel="self" type="application/rss+xml" />
+    <description>Reproducability</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Fri, 08 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Reproducability</title>
+      <link>thomasdegraaff.nl/categories/reproducability/</link>
+    </image>
+    
+    <item>
+      <title>Sortingmod: an R-package for sorting models</title>
+      <link>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
+      <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;sortingmod is a package for estimating the sorting model - a discrete choice model which explains the location decision of heterogeneous individuals over a set of alternative locations. The model is developed by Bayer et al. (2004) following the work of Berry et al. (1995). It relies on the assumptions that individuals choose a location that maximizes their utility, and that heterogeneous individuals with different characteristics have different preferences, and different valuation for location characteristics. The results of the model provide choice probabilities for each alternative, as well as insight on the valuation patterns of heterogeneous agents, and marginal willingness-to-pay values for location characteristics. For the R-vignette go to 
+&lt;a href=&#34;http://www.thomasdegraaff.nl/sortingmod&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.thomasdegraaff.nl/sortingmod&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;The package is constructed as an accompanying tool for the Summer School in “Hedonic price analysis and the residential location choice”, hosted by the Kraks Fond - Institute for Urban Economic Research (Copenhagen, Denmark).&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sortingmod&lt;/code&gt; is not currently available from CRAN, but you can install the development version from github with (note that you need to install the package &lt;code&gt;devtools&lt;/code&gt; to be able to install packages from GitHub:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(&amp;quot;devtools&amp;quot;)
+library(&amp;quot;devtools&amp;quot;)
+devtools::install_github(&amp;quot;thdegraaff/sortingmod&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once installation is completed, the package can be loaded as follows&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(sortingmod)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;components&#34;&gt;Components&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;first_stage(code_name, Z_names, X_names, data, print_detail = 3)&lt;/code&gt; - Estimates the first stage of a. sorting model&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;second_stage(s1.results, data, endog = NULL, instr = NULL)&lt;/code&gt; - Estimates the second of a sorting model&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sorting_inst(s1.results, endog, data, n.iterations = 3, stepsize = 0.05, threshold = 0.0005)&lt;/code&gt; - Calculates an instrument for an endogenous variable in a sorting model setting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The data for the estimation should be in data frame format, and it must contain:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One or more columns indicating characteristics (&lt;code&gt;Z_names&lt;/code&gt;) of a unique agent making a discrete choice between available alternatives (individuals, households, etc.).&lt;/li&gt;
+&lt;li&gt;A vector indicating the chosen alternative (&lt;code&gt;code_name&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;One or more columns indicating characteristics (&lt;code&gt;X_names&lt;/code&gt;) of the chosen alternative.&lt;/li&gt;
+&lt;li&gt;Each row of the data frame should represent a unique individual. The number of alternatives should therefore be smaller or equal to the number of individuals.&lt;/li&gt;
+&lt;li&gt;Individual and alternative characteristics should be numeric variables. Factor variables are not yet supported, so it&#39;s best to transform them into numeric dummy variables if you intend to include them in the model.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Define dataset, alternative identifier variable and explanatory variable sets X and Z&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data &amp;lt;- municipality
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Estimate the first stage of the sorting model&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;X.vars &amp;lt;- c(&amp;quot;lnprice&amp;quot;,&amp;quot;nature&amp;quot;,&amp;quot;monuments&amp;quot;,&amp;quot;schools_3km&amp;quot;)
+Z.vars &amp;lt;- c(&amp;quot;income&amp;quot;,&amp;quot;double_earner_hh&amp;quot;,&amp;quot;hh_kids&amp;quot;,&amp;quot;age&amp;quot;)
+Alt.var = &amp;quot;mun_code&amp;quot;
+s1.results &amp;lt;- first_stage(code_name = Alt.var,
+                          X_names = X.vars
+                          Z_names = Z.vars,
+                          data = data,
+                          print_detail = 1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Estimate the second stage of the model, assuming exogeneity of explanatory variables&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;s2.results &amp;lt;- second_stage(s1.results, data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Define endogenous variables and calculate an instrument based on equilibrium conditions. Estimate the second stage of the sorting model using the calculated instrument.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;endog &amp;lt;- (&amp;quot;lnprice&amp;quot;)
+phat &amp;lt;- sorting_inst(s1.results, &amp;quot;lnprice&amp;quot;, data, stepsize = 0.02)
+plot(phat$sorting_inst, phat$endogenous, xlab=&amp;quot;Instrument&amp;quot;, ylab=&amp;quot;Endogeneous variable&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Estimate the second stage of the model, using instruments for the endogenous variables.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;instruments &amp;lt;- cbind(sorting_inst = phat$sorting_inst, historical.monuments = monuments)
+s2.results &amp;lt;- second_stage(s1.results, data, c(&amp;quot;lnprice&amp;quot;,&amp;quot;cafes_1km&amp;quot;), instruments)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;getting-help&#34;&gt;Getting help&lt;/h2&gt;
+&lt;p&gt;If you need assistance using &lt;code&gt;sortingmod&lt;/code&gt;, you can get in touch by emailing 
+&lt;a href=&#34;t.de.graaff@vu.nl&#34;&gt;t.de.graaff@vu.nl&lt;/a&gt;
+ or 
+&lt;a href=&#34;o.d.levkovich@vu.nl&#34;&gt;o.d.levkovich@vu.nl&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;p&gt;Bayer, P., McMillan, R., &amp;amp; Rueben, K. (2004). An equilibrium model of sorting in an urban housing market (No. w10865). National Bureau of Economic Research.&lt;/p&gt;
+&lt;p&gt;Berry, S., Levinsohn, J., &amp;amp; Pakes, A. (1995). Automobile prices in market equilibrium. Econometrica: Journal of the Econometric Society, 841-890.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Choosing statistical software packages for education in the social sciences</title>
+      <link>thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</link>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</guid>
+      <description>&lt;h2 id=&#34;introduction-the-empirical-workflow&#34;&gt;Introduction: the empirical workflow&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Econometrics is much easier without the data&amp;mdash;Marno Verbeek&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The quote above does not only apply to economics and econometrics, but
+to all of the social sciences in general. Empirical research&amp;mdash;that is,
+dealing with data in all its forms&amp;mdash;requires a rigorous approach, even
+more so, with the increasing emphasis on openness and reproducibility of
+all kinds of scientific research. Therefore, it is strange that in
+academic education there is not much guidance in choosing which research
+tools to use and in the philosophy behing choosing an efficient and
+reproducable workflow.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;This note deals with the suitability of various software packages for
+applying applied econometrics in specific and data science in
+general.&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; Specifically, In will focus on STATA, R and Python.&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; I
+will not say which tool to use. Instead, I will focus on the various
+strengths and weaknessess of each software package combined with it
+specific approach. The main elements I will consider are the package
+suitability for education and how well it can be integrated in an
+efficient workflow. The former is mostly important for doing (small)
+data exercises, whilst the latter is vital for larger research project,
+such as theses and later on perhaps research papers.&lt;/p&gt;
+&lt;p&gt;To illustrate why the concept of reproducibility is vital, note that a
+typical empirical workflow in the social sciences looks as follows:&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;Generate data&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Data is read from an external source (recording, questionnaire, file
+or online database) or is simulated.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Manipulate data&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;This is usually the most time demanding phase&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; and includes
+(amongst many other things) manipulating missing data, merging data
+and relabeling data&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Analyse data&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;This phase includes not only standard ecometrics and statistical or
+machine learning techniques, but as well as graphical
+representations as maps and figures.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Present results&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Finally, documents in the forms of papers, posters, theses, or
+presentations have to be drafted. Note that ideally one wants to do
+so in various formats, such as in pdf for physical papers and in
+html for web display.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Unfortunately, all these steps do not necessarily run sequentially in
+time. Supervisors, referees, colleagues, and the future you, always want
+to add or delete elements to or from your research. For instance,
+variables have to be added, model specifications have to be checked, and
+3D pie charts have to be changed in something useful.&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Therefore, it is vital that all these steps are both (&lt;em&gt;i&lt;/em&gt;) very well
+documented so that the future you can easily retrace your steps,
+implement changes and redo the whole research if needed, and (&lt;em&gt;ii&lt;/em&gt;) well
+connected to each other. The latter does not necessarily entail that the
+whole research should be done in one software environment, but instead
+that the outcome of one research step (e.g., generating data) can easily
+serve as an input for another step (e.g., data manipulation).&lt;/p&gt;
+&lt;p&gt;In the next section I will lay out the strengths and weaknesses of three
+statistical software packages with this workflow in mind. Subsequently,
+I discuss the suitability of each package in teaching and, thereafter, I
+conclude with some more general comments.&lt;/p&gt;
+&lt;h2 id=&#34;statistical-software-packages&#34;&gt;Statistical software packages&lt;/h2&gt;
+&lt;p&gt;I review the various packages according to several criteria. There are
+several others that will be discussed, but these I find most important
+for a suitable software package to be used for teaching in the social
+sciences.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;Open source&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;The most important argument to use an open source package is
+reproducibility. Your work is simply less accessible and thus
+reproducible if the code can only be run with applications that
+costs over .&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Learning curve&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;First, and foremost, students should be able to use the package for
+straightforward econometric research. If that is not possible after
+one six-week&#39;s course, the software package is not particularly
+suitable.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Size of the community&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Nobody wants to be locked in with obsolete technology. A large
+userbase ensures a high probability that the software package will
+be used and maintained in the future as well. Moreover, all sorts of
+indirect effects, such as user written routines, packages and
+documentation, come along for free with a large community.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Usefulness outside academia&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Often forgotten as an argument but outside academic life, some
+applications are more used than others. And with the recent emphasis
+on better preparation for the labor market, this argument seems to
+become more important. By the way, the application still mostly used
+would be the ubiquitous Excel and its related visual basic language.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Flexibility&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Ideally, a software approach should be both extendable and scalable.
+The former ensures that slight deviations from standard approaches
+can relatively easy be implemented. The latter is important when the
+size of the database increases, as typically is the case with recent
+improvements in remote sensing techniques.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Scriptable&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Finally, a software package should be scriptable&amp;mdash;both internally
+as externally. Internally scriptable indicates that within the
+package scripts or programs can be written so that every step within
+the workflow can be reproduced. With externally scriptable I mean
+that the software package should also be used in combination with
+other software packages or languages, such as LaTeX, markdown, make,
+html, sql, C++, etc.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Other software packages that I will not review, typically score badly on
+more than one of these criteria. For example, SPSS is proprietary
+software, which has some issues with scriptability and is not very
+flexible. Moreover, a sizeable part of the user community moved over to
+other software packages (most notably R). Other software packages I will
+not review for reasons of similarity (such as Matlab to some extent) or
+my lack of experience with them (most notably SAS).&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&#34;stata&#34;&gt;STATA&lt;/h2&gt;
+&lt;p&gt;STATA is proprietary software copyrighted by the StataCorp LLC
+corporation.&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt; It is especially popular among economists, although the
+growth of STATA seems almost comparable with that of R (Python is in its
+own league, however).&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;The biggest comparative advantage of STATA is its learning curve
+(although some students might disagree). It is relatively
+straightforward to teach students basic econometrics (including time
+series, panel data and count data techniques, discrete choice models and
+duration models). Indeed, STATA has the advantage of being one of the
+only tools dedicated to econometric research. While it is not so
+flexible, it is often possible (and simple) to apply cutting-edge models
+and other techniques. For example, regressing &lt;code&gt;y&lt;/code&gt; on &lt;code&gt;x1&lt;/code&gt; and &lt;code&gt;x2&lt;/code&gt; can
+simply be stated as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;reg y x1 x2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Moreover, you can do so in a structured way by writing scripts (the
+so-called do files). Many students appreciate as well the fact that
+STATA command can be given interactively (via a drop-down menu) of
+directly from the console enabling them to memorize the various commands
+on the fly.&lt;/p&gt;
+&lt;p&gt;There is a large STATA community. This ensures the availability of many
+useful so-called user-written routines and tutorial material, whether
+via Youtube or in pdf (there is a STATA journal). The STATA community is
+not only huge, but as well very helpful (although the help documentation
+is oftentimes cumbersome). The first hit on Google on a sometimes not
+very focused question usually suffices.&lt;/p&gt;
+&lt;p&gt;Unfortunately, not many organizations outside academia use
+STATA&amp;mdash;although I heard recently that some Danish consultancy agencies
+in Denmark do. Most organizations now typically use R or Python in
+combination with even more focused software applications as Hadoop or
+Julia (again, apart from Excel). Usually, this does not matter much as
+programming skills are easily transferable, but, unfortunately, the
+STATA language is hardly a programming language. Instead, it is more a
+sequence of very specific commands. Therefore, it is hard to relate the
+commands to something as Python.&lt;/p&gt;
+&lt;p&gt;Another downside is the flexibility of STATA. For procedures that
+slightly deviate from the &amp;lsquo;basic&amp;rsquo; ones&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;, STATA can give you a hard
+time. Mostly, because the source code is not known, working with
+matrices is cumbersome (to say the least) and the number of programming
+tools is rather limited. Moreover, STATA can only work with one active
+dataset, which makes merging datasets sometimes difficult. Finally,
+although there are some plugins, STATA is not designed for working with
+data stored on servers somewhere else via application programming
+interfaces (API&#39;s). Unfortunately, working via API&#39;s&lt;sup id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; becomes
+increasingly important, if not only for the recent surge in open access
+data via local governments, Google, Twitter, Foursquare, etc.&lt;/p&gt;
+&lt;p&gt;STATA itself is well scriptable internally. although it is less
+programming and more sequencing commands, for the majority of research
+projects this is definitely good enough. Externally, however, there are
+other issues which has to do with its proprietary nature. Other
+applications, such as great ?nix utilities as make and pandoc but as
+well git and github have difficulties &amp;lsquo;communicating&amp;rsquo; with STATA. It is
+possible, however, to export from STATA to other formats, especially to
+ubiquitous text files format, which enables automatic generation of
+LaTeX tables.&lt;/p&gt;
+&lt;p&gt;Finally, alas, STATA is not open source. This hinders reproducibility,
+insight in the source code (&amp;ldquo;How the hell did they do that?&amp;quot;) as well as
+the transferability of data (the STATA .dta dataformat is not accessible
+to read directly, although many other packages, including R, have
+created special read procedures for STATA dataformats).&lt;/p&gt;
+&lt;h2 id=&#34;r&#34;&gt;R&lt;/h2&gt;
+&lt;p&gt;R emerged in 1995 as the open-source (GNU) version of the S language and
+quickly surpassed its predecessor in popularity.&lt;sup id=&#34;fnref:11&#34;&gt;&lt;a href=&#34;#fn:11&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;11&lt;/a&gt;&lt;/sup&gt; R itself consists
+of a base distribution which can be enhanced with packages, and it is
+exactly the ease of writing, distributing and using packages that makes
+R so attractive for many users. At the moment there are more than 10,000
+packages on the official CRAN website, but Github contains many
+more.&lt;sup id=&#34;fnref:12&#34;&gt;&lt;a href=&#34;#fn:12&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;12&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Because of its open-source nature and its large and very active
+community, the quality of most of the packages is almost guaranteed.
+Indeed, if there are killer applications in the data science world, then
+R has most of them, with as most notifiable examples dplyr for quick and
+robust data manipulation and ggplot2 for structural plotting using the
+&lt;em&gt;grammar of graphics&lt;/em&gt; approach as advocated by @wilkinson2006grammar and
+implemented by @wickham2013implementation.&lt;/p&gt;
+&lt;p&gt;The learning curve of R is however steeper than that of STATA.&lt;sup id=&#34;fnref:13&#34;&gt;&lt;a href=&#34;#fn:13&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;13&lt;/a&gt;&lt;/sup&gt;
+Having said that, learning basic R is still relatively quick (and
+accessible) and can be done in a short time with great free online
+courses. Today, teaching Stata to students requires at least one
+tutorial class, where teaching R can&amp;mdash;theoretically, at least&amp;mdash; be
+self-contained.&lt;/p&gt;
+&lt;p&gt;Typically, R is characterized as:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;R is written by statisticians, for statisticians.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Unfortunately, this can be seen in the R language itself. Best described
+as &amp;lsquo;quirky&amp;rsquo;, the R language is not the most beautiful or best designed
+programming language. For example, usually there is more than one (often
+actually more than three) ways to accomplish something, which leads to a
+myriad of styles and types of coding. In applied statistics, though, R
+shines. Although slightly more cumbersome than STATA, commands for basic
+econometric techniques are relatively straightforward. Estimating a
+linear regression simply looks as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# ordinary least squares regression
+model &amp;lt;- lm(y ~ x1 + x2, data = data1)
+summary(model)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note the difference with STATA, where in STATA one simply uses
+&lt;code&gt;reg y x1 x2&lt;/code&gt;. However, in R one can store everything in an object (in
+this case the object &amp;ldquo;model&amp;rdquo;) and use it later, and one can use several
+databases (&amp;lsquo;dataframes&amp;rsquo;) at the same time. Both features are extremely
+useful for dealing with larger research projects. And although STATA
+still is more straightforward in basic econometrics, R users have
+developed several packages to emulate STATA&#39;s ease of use.&lt;sup id=&#34;fnref:14&#34;&gt;&lt;a href=&#34;#fn:14&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;14&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Because R is very flexible and the community is that huge (across
+disciplines as well), for almost every (statistical) problem a package
+most likely is developed (if feasible). The problem is, however, that
+terminology with respect to models differs across fields. Moreover, what
+economists find important (causality anyone?) is generally less
+important within biometrics, physics, statistics of sociology. So, using
+R also means spending a great deal of time finding and checking the
+correct package.&lt;sup id=&#34;fnref:15&#34;&gt;&lt;a href=&#34;#fn:15&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;15&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;If anything, R if flexible in terms of what it can do. Spatial data
+analysis, Bayesian inference, optimization, network analysis and&amp;mdash;above
+all&amp;mdash;producing wonderful plots that can even be used as interactive web
+applications. Therefore, it is used intensively outside academia as well
+by large companies such as Facebook, Google, Twitter, Microsoft,
+Booking.com, Uber and Airbnb, mainly for &amp;lsquo;quick and dirty&amp;rsquo; data science
+and data and output visualization.&lt;/p&gt;
+&lt;p&gt;Unfortunately, R is not very scalable, as only internal computer memory
+(RAM) is used for data storage (similar to matlab, STATA and comparable
+languages). There are ways to circumvent this (typically in combination
+with other languages, such as Hadoop or using parallel computing
+techniques), but it is cumbersome for very large research projects with
+huge amounts of data (remote sensing data in geographical analysis comes
+to mind or up to 100 million records when using micro data).&lt;/p&gt;
+&lt;p&gt;Finally, R is extremely scriptable, both internally and externally.
+Internally, the R language is a full blow object-oriented language,
+although perhaps not the most beautiful one. Especially the ease of
+writing and reading packages is very useful for groups of researchers
+who are working on the same project. Externally, R really has a
+comparative advantage as that it can be scripted from a command line (a
+terminal), can be used in combination with other languages (e.g., python
+via rpy and C++ via rcpp to speed up procedures if needed) and works as
+a charm in combination with both LaTeX and html for creating
+webpages.&lt;sup id=&#34;fnref:16&#34;&gt;&lt;a href=&#34;#fn:16&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;16&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
+&lt;p&gt;Opposite to STATA and even R, Python is an open source general object
+oriented programming language more in line with a language such as
+C++.&lt;sup id=&#34;fnref:17&#34;&gt;&lt;a href=&#34;#fn:17&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;17&lt;/a&gt;&lt;/sup&gt; Python was implemented by Guido van Rossum in the late 1980&#39;s
+and was built on the Modula-3 programming language. As it is a general
+progamming language one needs several so-called packages in order to
+make it work for econometrics in particular and data science in general,
+most notably: NumPy, SciPy, Matplotlib and pandas.&lt;/p&gt;
+&lt;p&gt;Using Python for applied econometrics is not as straightforward as in
+STATA but nowadays relatively similar to R using SciPy.&lt;sup id=&#34;fnref:18&#34;&gt;&lt;a href=&#34;#fn:18&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;18&lt;/a&gt;&lt;/sup&gt; A typical
+regression routine looks as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import ols
+mymodel = ols.ols(y,x,y_varnm,x_varnm)
+mymodel_summary()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which is rather close to R, although the ols class from SciPy needs to
+be loaded. The class is however not as general as the lm function from
+R.&lt;/p&gt;
+&lt;p&gt;For an introductory econometrics course this might be too cumbersome.
+However, the language itself is defined beautifully and &lt;strong&gt;everything&lt;/strong&gt;
+works similarly. So, once you get used to the seemingly cumbersome
+approach of Python with respect to basic econometrics, other
+functionalities requires far less investment in time, because the
+grammar, style and approach is always consistent.&lt;sup id=&#34;fnref:19&#34;&gt;&lt;a href=&#34;#fn:19&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;19&lt;/a&gt;&lt;/sup&gt; Note, that this
+is rather different from R which is far more chaotic in terms of
+approaches, which might lead to the argument that Python is actually
+simpler than R to learn because of its uniformity.&lt;/p&gt;
+&lt;p&gt;So, arguably the learning curve of Python is much steeper than that of
+STATA or R. However, in the end it does pay off when learning the
+language as it is not only a good language for learning programming, it
+is as well very useful for projects just outside the realm of basic
+econometrics. Working with strings (text analysis), images, spatial
+data, API&#39;s, large amounts of data, etcetera, is all very common and
+relatively straightforward in Python. Moreover, the community is very
+large (larger than that of R). But, not all of them are working in data
+science.&lt;/p&gt;
+&lt;p&gt;R and Python are often compared in their usefulness for statistical
+research in particular and data science in general.&lt;sup id=&#34;fnref:20&#34;&gt;&lt;a href=&#34;#fn:20&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;20&lt;/a&gt;&lt;/sup&gt; The outcome is
+still undecided. R has the killer applications but Python is catching up
+fast. Python is perhaps faster and at least better scalable, so perhaps
+should be considered for larger projects. One of Python benefits is that
+it is a more general skill which could be applied for other tasks as
+well. In any case, both of them are used very frequently outside
+academia.&lt;/p&gt;
+&lt;p&gt;Finally, Python is perhaps even more scriptable than R and can be
+combined with other languages as well. In terms of literature
+programming, Python has interactive notebooks (now called Jupyter
+notebooks) which are web applications where text and code can be run
+interactively.&lt;/p&gt;
+&lt;h2 id=&#34;statistics-in-social-science-education&#34;&gt;Statistics in social science education&lt;/h2&gt;
+&lt;p&gt;Choosing which statistical package in academic tuition to be used is a
+tough call&amp;mdash;mostly because of limited course time available, possible
+lock-in effects and vested interests in academic staff. And each of the
+software packages reviewed above have their own pros and cons.&lt;/p&gt;
+&lt;p&gt;STATA is arguably the winner when it comes to applying basic
+econometrics. However, it is not very flexible when it comes to
+non-econometric statistics (e.g., statistical or machine learning
+techniques), visualization and web interfaces. Moreover, it is not open
+source.&lt;/p&gt;
+&lt;p&gt;R is slightly more cumbersome than STATA when it comes to basic
+econometrics techniques, but it shines in flexibility, variety of
+packages (of which some have become killer application status),
+visualization support and interaction with other languages and
+applications.&lt;/p&gt;
+&lt;p&gt;Python is the most cumbersome in dealing with basic econometrics, but
+once learned the language can be used for a variety of applications and
+together with packages such as pandas and SciPy it can accomplish most
+tasks R can do but then in a more elegant, structured and consistent
+manner.&lt;/p&gt;
+&lt;p&gt;In the end it depends on the education goal. If students in the end
+should be able to apply &amp;lsquo;straighforward&amp;rsquo; econometrics techniques, such
+as diff-in-diff approaches as put forward by @angrist2008mostly, then
+STATA definitely suffices (and more than that). If only STATA would be
+open source.&lt;/p&gt;
+&lt;p&gt;However, if students need to be more flexible as in working with
+geo-referenced data, application programming interfaces, bayesian
+techniques, network analysis, more complex discrete choice models or
+writing their own likelihood functions, then STATA does not suffice
+anymore and should one, e.g., choose for R or Python. As perhaps
+anecdotal evidence, but I have seen many PhD students move from STATA to
+R as the former was not able to do anymore what they wanted.&lt;/p&gt;
+&lt;p&gt;As perhaps a final argument, R and especially Python skills are very
+transferable to other languages and outside academia. Not only the
+programming techniques, but as well working from command lines and
+integrating several files in a reproducible manner, are skills that are
+very useful, but unfortunately very missing as well.&lt;/p&gt;
+&lt;h2 id=&#34;concluding-remarks&#34;&gt;Concluding remarks&lt;/h2&gt;
+&lt;p&gt;What is often heard by students (and staff) is that they do not want to
+be programmers but social sience researchers instead, and I acknowledge
+that. My plea here is perhaps not to definitely choose for one of the
+applications above, but for a more systematic thinking in the type of
+research tools we teach our students and for trying to do so
+consistently throughout the academic curriculum. Teaching an
+introductory Python course, for example, and not using elements of that
+course in later courses seems a definite waste of time. So, above all,
+if STATA, Python or R is learned, let it come back in some form later at
+least in every period. Most courses somehow do use data (if only to
+create 3D pie charts).&lt;/p&gt;
+&lt;p&gt;Finally, by the audience at large there is now a greater need for
+reproducibility. This requires teaching our students perhaps different
+research tools and perhaps a different workflow when it comes to
+empirical research. At least, greater emphasis should be put on revision
+management, openness and scripting. Granted, some research tools are
+better in this than others, but it typically is the combination of
+research tools and the philosophy behind the set of research tools used
+that is essential.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;There are some exceptions, see, e.g., @healy2011choosing and
+@Arribas-Bel2014misc for a workshop I gave together with Daniel
+Arribas-Bel. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;There is a difference between econometrics on the one hand and
+applied statistics (including the now very popular data science) on
+the other hand. Economics students first and foremost need to able
+to apply applied econometric techniques, such as presented in
+@stock2007introduction and perhaps later in @angrist2008mostly. &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I will also briefly touch upon some other packages, but these
+three mentioned are most likely the ones most used in economics,
+except of course for the ubiquitous Excel. &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;There is and old saying that says that 80% of your research time
+goes in transforming data, while 20% is only spent on analysing the
+data. &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;For a wonderful timelapse video on the nonlinearity and even
+sometimes chaos of writing a research paper, see this
+
+&lt;a href=&#34;https://www.youtube.com/watch?v=hNENiG7LAnc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link&lt;/a&gt;
+. &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I should mention the object oriented matrix language Ox as well,
+which is mostly used by econometricians. Because of the steep
+learning curve and relatively small community I will not consider it
+here, but I am aware of its popularity in some particular research
+groups. &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See 
+&lt;a href=&#34;https://www.stata.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.stata.com/&lt;/a&gt;
+. &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I have to be careful though in making these sorts of statements.
+Usually, the popularity of software applications is researched by
+looking at search engine counts for jobs, frequently asked questions
+or counting popularity on the stackoverflow site
+(&lt;a href=&#34;https://stackoverflow.com/&#34;&gt;https://stackoverflow.com/&lt;/a&gt;). An interesting recent overview can
+be found on &lt;a href=&#34;http://r4stats.com/2017/06/19/scholarly-articles/&#34;&gt;http://r4stats.com/2017/06/19/scholarly-articles/&lt;/a&gt;. &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Although the set of &amp;lsquo;basic&amp;rsquo; procedures is quite extensive. &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:10&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Note that I do hesitate to drop the hype term &amp;lsquo;big data&amp;rsquo; here. &lt;a href=&#34;#fnref:10&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:11&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See &lt;a href=&#34;https://www.r-project.org/about.html&#34;&gt;https://www.r-project.org/about.html&lt;/a&gt;. &lt;a href=&#34;#fnref:11&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:12&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See
+&lt;a href=&#34;http://blog.revolutionanalytics.com/2017/01/cran-10000.html&#34;&gt;http://blog.revolutionanalytics.com/2017/01/cran-10000.html&lt;/a&gt;. &lt;a href=&#34;#fnref:12&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:13&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Steep learning curves are in principle not problematic as it
+indicates that you learn rapidly and in the end the pay-off should
+be large. For &amp;lsquo;quick and dirty&amp;rsquo; solutions, however, steep learning
+curves are problematic. &lt;a href=&#34;#fnref:13&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:14&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Good examples are the margins package in R that has similar
+features as the very useful margins command in STATA and the plm
+package for implementing fixed effects. &lt;a href=&#34;#fnref:14&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:15&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Fortunately, there is the great website 
+&lt;a href=&#34;https://cran.r-project.org/web/views/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN Task
+Views&lt;/a&gt;
+ which gives good
+overviews of the most important packages in several subfields, such
+as dealing with spatial data, Bayesian inference, econometrics and
+mathematical programming. &lt;a href=&#34;#fnref:15&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:16&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;R has one of the best implementations of so-called literate
+programming via the package knitr. Literate programming as
+originally coined by @knuth1984literate indicates that output of
+coding and documentation are generated simultaneously. Whether or
+not this is a good idea for larger research projects, literate
+programming can be very useful for generating documentation of R
+packages, web blogs, teaching assignments and smaller research
+papers. &lt;a href=&#34;#fnref:16&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:17&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See &lt;a href=&#34;https://www.python.org/&#34;&gt;https://www.python.org/&lt;/a&gt;. &lt;a href=&#34;#fnref:17&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:18&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Although there are some good tutorial texts to be found on
+internet, such as @sargent2015quantitative. &lt;a href=&#34;#fnref:18&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:19&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;For example, working with geospatial data by using the excellent
+
+&lt;a href=&#34;http://geopandas.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GeoPandas&lt;/a&gt;
+ package is then a breeze, which
+as a bonus might also obfuscates the need for using expensive and
+bloated GIS software applications. &lt;a href=&#34;#fnref:19&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:20&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;This seems another of these heavily disputed standard wars, such
+as the notorious 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Editor_war&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;editor
+war&lt;/a&gt;
+. A nice infographic
+of pros and cons of Python and R can be found
+
+&lt;a href=&#34;https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;
+. &lt;a href=&#34;#fnref:20&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A lines map of building height in Amsterdam</title>
+      <link>thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</link>
+      <pubDate>Tue, 02 May 2017 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I just came across this wonderfull post on &lt;a href=&#34;https://www.r-bloggers.com&#34;&gt;https://www.r-bloggers.com&lt;/a&gt; &lt;a href=&#34;http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/&#34;&gt;http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/&lt;/a&gt; called Population Lines: How and Why I Created it) by James Cheshire. It allows for wonderfull (and artistic) maps constructed by only varations in height of horizontal lines. One might wonder how useful they are, but they sure are beautiful as one can see below in the population lines map of Europe.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/europe.png&#34; data-caption=&#34;Population lines map of Europe (source http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html).&#34;&gt;
+
+
+  &lt;img src=&#34;thomasdegraaff.nl/img/europe.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Population lines map of Europe (source &lt;a href=&#34;http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html)&#34;&gt;http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html)&lt;/a&gt;.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;I decided to redo this but then for Amsterdam and then not using population data but instead data for the height of the buildings (the data is used by Maria Teresa Borzacchiello, Peter Nijkamp and Eric Koomen in an article in Environment &amp;amp; Planning B called Accessibility and urban development: a grid-based comparative statistical analysis of Dutch cities in 2010). The link to the data can be found in this article. The code for the large map in the header of this post is surprisingly simple and concise and explained below.&lt;/p&gt;
+&lt;p&gt;The code
+First, I read in the csv dataset and rename the grid numbers as articifial latitute and longitute coordinates.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;height &amp;lt;- read.csv(&#39;./buildingheight/amsterdam.csv&#39;, header = FALSE)
+colnames(height) &amp;lt;- seq(1, ncol(height))
+height$lat &amp;lt;- seq(nrow(height),1)
+height &amp;lt;- gather(height, lat, value)
+height$lon &amp;lt;- as.numeric(height[,2])
+height &amp;lt;- subset(height, select = -2 )
+height &amp;lt;- filter(height, value &amp;gt; 0) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then it is simply a matter of invoking the ggplot package where we group observations by each latitude and apply a line aesthetic.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(ggplot2)
+height %&amp;gt;% 
+    mutate(lat = lat/100,
+    lon = lon/100) %&amp;gt;%
+    group_by(lat=round(lat, 1), lon=round(lon, 1)) %&amp;gt;%
+    summarize(value = sum(value, na.rm=TRUE))  %&amp;gt;%
+    ungroup() %&amp;gt;%
+    complete(lat, lon) %&amp;gt;%
+    ggplot(aes(lon, lat + 5*(value/max(value, na.rm=TRUE)))) +
+    geom_line(size=0.4, alpha=0.8, color=&#39;#5A3E37&#39;, aes(group=lat), na.rm=TRUE) +
+    ggthemes::theme_map() +
+    coord_equal(0.9)
+
+ggsave(&#39;Amsterdam.png&#39;, width=10, height=10)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which has the following wonderful result:&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/Amsterdam.png&#34; data-caption=&#34;Height of buildings in Amsterdam&#34;&gt;
+
+
+  &lt;img src=&#34;thomasdegraaff.nl/img/Amsterdam.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Height of buildings in Amsterdam
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>A Heatmap of the Robustness of Determinants of European City growth</title>
+      <link>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
+      <pubDate>Fri, 21 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Understanding what makes a city tick (e.g., the determinants that makes cities succesful in employment of economic growth) is vital for both policy makers and (regional) economists. Indeed, local policy makers usually want to know what they can contribute to the performance of their city or region. If policy makers can at all influence the performance, then most likely instruments vary between cities and regions. What is good for one city is not necessarily good for another. To analyse this, I ran many regressions of combinations of determinants and analyse their robustness (e.g., sign changes, changes in significance level and coefficients). The research is commissioned by the PBL Netherlands Environmental Assessment Agency.&lt;/p&gt;
+&lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;
+&lt;p&gt;One way of looking at city or regional performance is to make use of growth models. Typically, an empirical growth model comes in the following shape:&lt;/p&gt;
+&lt;p&gt;$$
+\ln(\frac{y_t}{y_0})=\ln(y_0)+\mathbf{X}\beta+\epsilon,
+$$&lt;/p&gt;
+&lt;p&gt;where $y_t$ denotes a regional or city performance measure (gdp or employment), so $\ln(\frac{y_t}{y_0})$ denotes the growth rate of $y$ between $t$ and $0$. On the right hand side, typically one controls for the initial state of $y$ at time $0$ and for a whole bunch of other variables $\mathbf{X}$. And it is exactly these variables we are interested in:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Which variables, if any, have a systematic and robust impact on the growth rate of $y$?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, we estimate the model above multiple times where each time $\mathbf{X}$ is formed by a subset of all determinants (in our case we use for each regression 4 variables out of around 70). This yield a database of many regression results (actually two databased: one with the coefficients and one with the t-values). One way of assessing the robustness of a particular indicator is to look at how many times that indicator is signicant and display the percentage in a heatmap&lt;/p&gt;
+&lt;h2 id=&#34;creating-a-heat-map-of-the-regression-results&#34;&gt;Creating a heat map of the regression results&lt;/h2&gt;
+&lt;p&gt;After I have run all possible regressions (and there are many given the formula $\frac{71!}{4!(71-4)!}$, I can perform an ex-post analysis on the results. For my purpose, I have looked at city gdp for all sectors combined, and separately for 7 sectors and have created a dataset that consists of how many times (in percentages) a variable was significant in the regression above. This had led to the table below with sectors as variables and each determinant as an observation (alas, sector names and variables are in Dutch).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; data
+# A tibble: 71 × 8
+                      Variable    Totaal     Landbouw Constructie         fbs   Industrie
+                         &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+1                        Banen 0.9999791 0.6722262812 0.999937376 0.846926208 1.000000000
+2            Levensverwachting 1.0000000 0.9523640539 0.999519883 0.816386598 0.845819852
+3          Kwaliteit onderwijs 0.9756184 0.0577601503 0.694269909 0.998893644 0.579000104
+4                    Recreatie 0.5286922 0.0000000000 0.999874752 0.595031834 0.593695856
+5                 Natuurrampen 1.0000000 0.0002087465 0.082580106 0.985867863 0.006137146
+6            Clustering chemie 0.8412901 0.0003131197 0.027157917 0.291034339 0.034631041
+7       Specialisatie landbouw 0.9799395 0.0001878718 0.225634067 1.000000000 0.045360610
+8  Specialisatie electriciteit 0.9998956 0.0001669972 0.005531782 0.004905542 0.999645131
+9               Bereikbaarheid 0.9505062 0.2850224402 0.759482309 0.999979125 0.935392965
+10                     Cultuur 0.9457468 0.0352364054 1.000000000 0.973363949 0.828368646
+# ... with 61 more rows, and 2 more variables: `Niet markt diensten` &amp;lt;dbl&amp;gt;, wrtdchc &amp;lt;dbl&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To make a heat map I first have to create a tidy dataset using the gather function:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; data &amp;lt;- gather(data, sector, waarde, -Variable)
+&amp;gt; data
+# A tibble: 497 × 3
+                      Variable sector    waarde
+                         &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt;
+1                        Banen Totaal 0.9999791
+2            Levensverwachting Totaal 1.0000000
+3          Kwaliteit onderwijs Totaal 0.9756184
+4                    Recreatie Totaal 0.5286922
+5                 Natuurrampen Totaal 1.0000000
+6            Clustering chemie Totaal 0.8412901
+7       Specialisatie landbouw Totaal 0.9799395
+8  Specialisatie electriciteit Totaal 0.9998956
+9               Bereikbaarheid Totaal 0.9505062
+10                     Cultuur Totaal 0.9457468
+# ... with 487 more rows
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To be able to sort the heat map based on average values, I create a new variable with the average of all the percentages, order it in descending order and refactor the sector names, so that it remains in the order I want in the heatmap:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;data &amp;lt;- data %&amp;gt;%
+  group_by(Variable) %&amp;gt;%
+  mutate(gemiddelde  = mean(waarde), 
+    sector &amp;lt;- as.character(sector),
+    sector &amp;lt;- factor(sector, 
+              levels=c(&amp;quot;Totaal&amp;quot;, &amp;quot;Landbouw&amp;quot;, &amp;quot;Constructie&amp;quot;, 
+                       &amp;quot;fbs&amp;quot;, &amp;quot;Industrie&amp;quot;, &amp;quot;Niet markt diensten&amp;quot;,
+                       &amp;quot;wrtdchc&amp;quot;))) %&amp;gt;%
+  arrange(desc(gemiddelde))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The data now looks like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; data
+# A tibble: 497 × 6
+            Variable              sector    waarde gemiddelde `sector &amp;lt;- as.character(sector)`
+               &amp;lt;chr&amp;gt;              &amp;lt;fctr&amp;gt;     &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;                            &amp;lt;chr&amp;gt;
+1     Waarde in 1991              Totaal 1.0000000  1.0000000                           Totaal
+2     Waarde in 1991            Landbouw 1.0000000  1.0000000                         Landbouw
+3     Waarde in 1991         Constructie 1.0000000  1.0000000                      Constructie
+4     Waarde in 1991                 fbs 1.0000000  1.0000000                              fbs
+5     Waarde in 1991           Industrie 1.0000000  1.0000000                        Industrie
+6     Waarde in 1991 Niet markt diensten 1.0000000  1.0000000              Niet markt diensten
+7     Waarde in 1991             wrtdchc 1.0000000  1.0000000                          wrtdchc
+8  Levensverwachting              Totaal 1.0000000  0.9134179                           Totaal
+9  Levensverwachting            Landbouw 0.9523641  0.9134179                         Landbouw
+10 Levensverwachting         Constructie 0.9995199  0.9134179                      Constructie
+# ... with 487 more rows, and 1 more variables: `sector &amp;lt;- factor(sector, levels =
+#   c(&amp;quot;...` &amp;lt;fctr&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With the &lt;code&gt;geom_tile&lt;/code&gt; aesthetic from &lt;code&gt;ggplot2&lt;/code&gt; I can now create the heat map I want as follows (note that I used the package &lt;code&gt;RColorBrewer&lt;/code&gt; for my colour palette):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  # Note that for ggplot I still have to reorder the variable I want based on the gemiddelde
+  p &amp;lt;- ggplot(data,aes(x = sector, y = reorder(Variable,gemiddelde))) +  
+     geom_tile(aes(fill = waarde),colour = &amp;quot;white&amp;quot;) + 
+     scale_fill_distiller(&amp;quot;Percentage\nsignificant&amp;quot;, 
+                          palette = &amp;quot;Spectral&amp;quot;) +
+     theme_grey(base_size = 9) + 
+     labs(x = &amp;quot;&amp;quot;,y = &amp;quot;&amp;quot;) + 
+     scale_x_discrete(expand = c(0, 0)) +
+       scale_y_discrete(expand = c(0, 0)) + 
+       theme(axis.ticks = element_blank(), 
+        axis.text.x = element_text(size = 9 *0.8, 
+        angle = 330, hjust = 0, colour = &amp;quot;grey50&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which finally produces the following plot.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
+
+
+  &lt;img src=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Heatmap of percentage significance of indicators on European city growth.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;implications&#34;&gt;Implications&lt;/h2&gt;
+&lt;p&gt;When looking at the plot above, it is remarkable that most of the variables are not significant at all times. Worse, most of them are not even significant 75% or even 50% of all cases. This casts great doubt upon the robustness and even validity of most of the determinants oftentimes used in these type of analyses. On the other hand, some of the determinants of city growth may only be important in combination with other determinants. So the next step, would be to look at the impact conditional on other determinants.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>WooW-II: Workshop on open Workflows</title>
+      <link>thomasdegraaff.nl/post/2015-07-29-woow-ii/</link>
+      <pubDate>Wed, 29 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2015-07-29-woow-ii/</guid>
+      <description>&lt;p&gt;&lt;em&gt;With Daniel Arribas-Bel&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This resource describes WooW-II, a two-day workshop on open workflows for quantitative social scientists. The workshop is broken down in five main parts, where each of them typically consists of an introductionary tutorial and a hands-on assignment. The specific tools discussed in this workshop are Markdown, Pandoc, Git, Github, R, and Rstudio, but the theoretical approach applies to a wider range of tools (e.g., LaTeX, and Python).&lt;/p&gt;
+&lt;p&gt;By the end of the workshop, participants should be able to reproduce a paper of their own and make it available in an open form applying the concepts and tools introduced.&lt;/p&gt;
+&lt;p&gt;The original text can be found 
+&lt;a href=&#34;https://github.com/Thdegraaff/REGION_resource&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here on GitHub&lt;/a&gt;
+ and is now published as a resource in &lt;strong&gt;REGION&lt;/strong&gt;, see the link 
+&lt;a href=&#34;http://openjournals.wu.ac.at/ojs/index.php/region/article/view/85&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;
+.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

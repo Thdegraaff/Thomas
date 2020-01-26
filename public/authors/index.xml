@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Thomas de Graaff</title>
+    <link>thomasdegraaff.nl/authors/</link>
+      <atom:link href="thomasdegraaff.nl/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Authors</title>
+      <link>thomasdegraaff.nl/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>thomasdegraaff.nl/authors/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/authors/admin/</guid>
+      <description>&lt;p&gt;I am a spatial and urban economist employed at the department of Spatial
+Economics of the Vrije Universiteit Amsterdam. My fields of professional
+interests include international migration, teleworking, (spatial) econometrics,
+transport economics, and most aspects of regional economics in general.&lt;/p&gt;
+&lt;p&gt;Most recent research focusses on the impact and the use of (un)observed
+heterogeneity, and I am rather interested in all sorts of non-parametric
+econometrics and statistics as well. Basically, this site aims to give access to
+my research, code snippets and workshops and to give additional information
+about some of my work, thoughts and other musings.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

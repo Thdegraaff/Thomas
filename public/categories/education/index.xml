@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Education | Thomas de Graaff</title>
+    <link>thomasdegraaff.nl/categories/education/</link>
+      <atom:link href="thomasdegraaff.nl/categories/education/index.xml" rel="self" type="application/rss+xml" />
+    <description>Education</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Sun, 04 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Education</title>
+      <link>thomasdegraaff.nl/categories/education/</link>
+    </image>
+    
+    <item>
+      <title>New Economic Geography model with R</title>
+      <link>thomasdegraaff.nl/post/new-economic-geography-model-with-r/</link>
+      <pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/new-economic-geography-model-with-r/</guid>
+      <description>&lt;h2 id=&#34;new-economic-geography-model-with-r&#34;&gt;New economic geography model with R&lt;/h2&gt;
+&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;Why some regions have more economic activiy than others depend on a variety of factors, including regions&amp;rsquo; endowments, good policy and just sheer luck (oftentimes called path dependency). In the 1990s Paul Krugman constructed a model, the Core-Periphery model, that was able to model all these three elements. This model received quite some positive criticism (including a Nobel price), but still is rather complex in wielding it. In this post I show how one can actually program and depict the short term and long term equilibria that the model yields. The derived estimations are coming from Henri de Groot.&lt;/p&gt;
+&lt;h3 id=&#34;the-actual-code&#34;&gt;The actual code&lt;/h3&gt;
+&lt;p&gt;We first need to read in some packages that we will use&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;################################################################
+# Read in libraries
+################################################################
+
+library(nleqslv)  # for solving system of nonlinear equations
+library(ggplot2)  # for structurally making plots
+library(ggthemes) # for using economist theme
+library(dplyr)    # for data wrangling
+library(cowplot)  # for combining plots
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we define some constants. Note that you can change them if you need a different set-up.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;################################################################
+# Define parameters
+################################################################
+
+L       &amp;lt;- 2.0  # Total labor force
+phi1    &amp;lt;- 0.48 # fraction of food works living in region 1
+gam     &amp;lt;- 0.3  # fraction that works in manufacturing
+eps     &amp;lt;- 5.0  # elasticity of demand
+rho     &amp;lt;- 0.8  # substitution parameter of variety
+bet     &amp;lt;- 0.8  # variable costs
+alp     &amp;lt;- 0.08 # fixed costs
+delta   &amp;lt;- 0.4  # budget share manufacturing
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Moreover, we need some additional (none structural) constants, but needed for the iteration and the granularity of our plots&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;################################################################
+# Define iterations and stepsize for transporation and lambda
+################################################################
+
+iter_l &amp;lt;- 999
+step_l &amp;lt;- 0.001
+start_l &amp;lt;- 0.001
+
+iter_t &amp;lt;- 51
+start_t &amp;lt;- 1.5
+step_t &amp;lt;- 0.01
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The model containts 6 non-linear equations, namely:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$$\begin{align} Y_1 &amp;amp;= \phi_1(1-\gamma)L + \lambda_1 \gamma LW_1 \\ Y_2 &amp;amp;= \phi_2(1-\gamma)L + (1-\lambda_1) \gamma LW_2 \\ W_1 &amp;amp;= \rho \beta^{-\rho}\left(\frac{\delta}{\alpha(\epsilon-1)}\right)^{1/\epsilon} \left(Y_1 I_1^{\epsilon-1} + T^{1-\epsilon}Y_2 I_2^{\epsilon-1}\right)^{1/\epsilon}\\ W_2 &amp;amp;= \rho \beta^{-\rho}\left(\frac{\delta}{\alpha(\epsilon-1)}\right)^{1/\epsilon} \left(T^{1-\epsilon}Y_1 I_1^{\epsilon-1} + Y_2 I_2^{\epsilon-1}\right)^{1/\epsilon}\\ I_1 &amp;amp;= \left(\frac{\gamma L}{\alpha \epsilon} \right)^{1/(1-\epsilon)}\left(\frac{\beta}{\rho}\right) \left(\lambda W_1^{1-\epsilon} + (1-\lambda)T^{1-\epsilon} W_2^{1-\epsilon}\right)^{1/(1-\epsilon)}\\ I_2 &amp;amp;= \left(\frac{\gamma L}{\alpha \epsilon} \right)^{1/(1-\epsilon)}\left(\frac{\beta}{\rho}\right) \left(\lambda T^{1-\epsilon} W_1^{1-\epsilon} + (1-\lambda) W_2^{1-\epsilon}\right)^{1/(1-\epsilon)}\\ \end{align}$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The first two equations are total regional incomes, equation 3 and 4 give the regional wages and the last two equations determine regional price indices.&lt;/p&gt;
+&lt;p&gt;Thus, the key optimalisation procedure looks as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;################################################################
+# Definite optimal function
+################################################################
+
+equilibrium &amp;lt;- function(x){
+  
+    Y1 &amp;lt;- x[1]
+    Y2 &amp;lt;- x[2]
+    W1 &amp;lt;- x[3]
+    W2 &amp;lt;- x[4]
+    I1 &amp;lt;- x[5]
+    I2 &amp;lt;- x[6]
+    
+    y &amp;lt;- rep(NA, length(x))
+      
+    y[1] &amp;lt;- Y1-phi1*(1-gam)*L-lam*gam*L*W1
+    y[2] &amp;lt;- Y2-(1-phi1)*(1-gam)*L-(1-lam)*gam*L*W2
+    y[3] &amp;lt;- W1-rho*bet^(-rho)*(delta/(alp*(eps-1)))^(1/eps)*(Y1*I1^(eps-1)+T^(1-eps)*Y2*I2^(eps-1))^(1/eps)
+    y[4] &amp;lt;- W2-rho*bet^(-rho)*(delta/(alp*(eps-1)))^(1/eps)*(T^(1-eps)*Y1*I1^(eps-1)+Y2*I2^(eps-1))^(1/eps)
+    y[5] &amp;lt;- I1-(gam*L/(alp*eps))^(1/(1-eps))*(bet/rho)*(lam*W1^(1-eps)+(1-lam)*T^(1-eps)*W2^(1-eps))^(1/(1-eps))
+    y[6] &amp;lt;- I2-(gam*L/(alp*eps))^(1/(1-eps))*(bet/rho)*(lam*T^(1-eps)*W1^(1-eps)+(1-lam)*W2^(1-eps))^(1/(1-eps))
+    
+    return(y)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And finally we need the loop below to create the figures&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;################################################################
+# Create the vector where the output is stored
+# This is faster than using append
+# we will only append the equilibrium dataframe to find the
+# stable and unstable equiliria (do that in the slower (outer) 
+# loop)
+################################################################
+
+rel       &amp;lt;- vector(length = iter_l*iter_t)
+lambda    &amp;lt;- vector(length = iter_l*iter_t)
+transport &amp;lt;- vector(length = iter_l*iter_t)
+welfare   &amp;lt;- vector(length = iter_l*iter_t)
+w_man_h   &amp;lt;- vector(length = iter_l*iter_t)
+w_man_f   &amp;lt;- vector(length = iter_l*iter_t)
+w_farm_h  &amp;lt;- vector(length = iter_l*iter_t)
+w_farm_f  &amp;lt;- vector(length = iter_l*iter_t)
+
+################################################################
+# Set the double loop for the  optimal solution using the  
+# package nleqslv. 
+# The fast (inner) loop is over gamma, The slow (outer) loop is 
+# over the transportation costs
+################################################################
+
+# Completely parameterized
+loop_transport &amp;lt;- seq( start_t, start_t + iter_t * step_t - step_t, by = step_t)
+loop_gamma &amp;lt;- seq( start_l, start_l + iter_l * step_l - step_l, by = step_l )
+equilibria &amp;lt;- data.frame(T = numeric(0), gamma = numeric(0), stable = numeric(0))
+
+# Create intial starting values
+start &amp;lt;- c(1,1,1,1,1,1)
+
+iteration &amp;lt;- 0 # General counter
+for (T in loop_transport){
+  iter_eq &amp;lt;- 0 # Counter to find the equilibria for lambda
+  lam_vec &amp;lt;- vector(length = iter_l) # initialize lambda vector
+  t_vec   &amp;lt;- vector(length = iter_l) # initialize transport vector
+  rel_vec &amp;lt;- vector(length = iter_l) # initialize relative real wage diff vector
+  for (lam in loop_gamma){
+    iteration &amp;lt;- iteration + 1
+    iter_eq   &amp;lt;-  iter_eq + 1
+    opt &amp;lt;- nleqslv(start, equilibrium)
+    Y1 &amp;lt;- opt$x[1]
+    Y2 &amp;lt;- opt$x[2]
+    W1 &amp;lt;- opt$x[3]
+    W2 &amp;lt;- opt$x[4]
+    I1 &amp;lt;- opt$x[5]
+    I2 &amp;lt;- opt$x[6]
+    
+    # Fill the various vectors
+    rel[iteration]       &amp;lt;- (W1/I1^delta)/(W2/I2^delta)
+    welfare[iteration]   &amp;lt;- Y1/(I1^delta)+Y2/(I2^delta)
+    w_man_h[iteration]   &amp;lt;- W1/I1^delta 
+    w_man_f[iteration]   &amp;lt;- W2/I2^delta
+    w_farm_h[iteration]  &amp;lt;- 1/I1^delta 
+    w_farm_f[iteration]  &amp;lt;- 1/I2^delta 
+    lambda[iteration]    &amp;lt;- lam
+    transport[iteration] &amp;lt;- T
+    
+    # Needed to find the equilibria (a bit redundant but more readible so)
+    lam_vec[iter_eq]     &amp;lt;- lam
+    t_vec[iter_eq]       &amp;lt;- T
+    rel_vec[iter_eq]     &amp;lt;- (W1/I1^delta)/(W2/I2^delta)
+  }
+  eq &amp;lt;- data.frame(t_vec, lam_vec, rel_vec)
+  eq &amp;lt;- eq %&amp;gt;% 
+    mutate(
+           dpos = ifelse( ( (rel_vec - 1) &amp;gt;= 0 &amp;amp; ( lag(rel_vec) - 1)  &amp;lt; 0), 1, 0 ),
+           dneg = ifelse( ( (rel_vec - 1) &amp;lt;= 0 &amp;amp; ( lag(rel_vec) - 1)  &amp;gt; 0), 1, 0 )
+           )
+  stable &amp;lt;- eq %&amp;gt;% 
+    filter(dneg == 1) %&amp;gt;%
+    mutate(stable =1) %&amp;gt;%
+    select(-dpos)
+  unstable &amp;lt;- eq %&amp;gt;% 
+    filter(dpos == 1) %&amp;gt;%
+    mutate(stable =0) %&amp;gt;%
+    select(-dneg)
+  if (nrow(stable) &amp;gt; 0 ) {
+      equilibria &amp;lt;- rbind(equilibria, data.frame(stable[1], stable[2], stable[5]))
+      } 
+  if (nrow(unstable) &amp;gt; 0) {
+      equilibria &amp;lt;- rbind(equilibria, data.frame(unstable[1], unstable[2], unstable[5]))
+      }
+  if (nrow(unstable) == 1){
+    equilibria &amp;lt;- rbind(equilibria, c(unstable[1,1], 0, 1))
+    equilibria &amp;lt;- rbind(equilibria, c(unstable[1,1], 1, 1))
+  }
+  if ( (nrow(unstable) == 1) &amp;amp; (nrow(stable) == 1) ) {
+    if (stable$lam_vec[1] &amp;gt; unstable$lam_vec[1] ){
+      equilibria &amp;lt;- rbind(equilibria, c(unstable[1,1], 0, 1))
+    }  
+    if (stable$lam_vec[1] &amp;lt; unstable$lam_vec[1] ){
+      equilibria &amp;lt;- rbind(equilibria, c(unstable[1,1], 1, 1))
+    }
+  }
+  if ((nrow(unstable) + nrow(stable)) == 3) {
+      equilibria &amp;lt;- rbind(equilibria, c(unstable[1,1], 1, 1))
+      equilibria &amp;lt;- rbind(equilibria, c(unstable[1,1], 0, 1))
+  }
+}
+
+################################################################
+# Create the dataframe called neg_data
+################################################################
+
+neg_data &amp;lt;- data.frame(transport, lambda, rel, welfare,
+                       w_man_h, w_man_f, w_farm_h, w_farm_f)
+
+################################################################
+# For creating the plots
+################################################################
+
+#Indicate which lines should be highlighted
+top_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;1.5&amp;quot;, ]
+bottom_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;2&amp;quot;, ]
+mid_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;1.75&amp;quot;, ]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So we can get our wiggle and tomahawk picture we want:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(neg_data) + aes(lambda, rel, group = transport) + geom_line(size = 0.5, colour=&amp;quot;grey&amp;quot;, alpha = 0.5) +
+  geom_line(data = top_line, aes(x = lambda, y = rel, group = transport, colour = &amp;quot;steelblue&amp;quot;), size = 1) +
+  geom_line(data = bottom_line, aes(x = lambda, y = rel, group = transport, colour = &amp;quot;black&amp;quot;), size = 1) +
+  geom_line(data = mid_line, aes(x = lambda, y = rel, group = transport, colour = &amp;quot;red&amp;quot;), size = 1) +
+  scale_colour_discrete(name = &amp;quot;Transportation costs&amp;quot;, labels = c(&amp;quot;High&amp;quot;, &amp;quot;Medium&amp;quot;, &amp;quot;Low&amp;quot;)) +
+  geom_hline(yintercept = 1, size = 1, colour = &amp;quot;red&amp;quot;, linetype = 4) +
+  theme_economist() +  
+  labs(title =&amp;quot;Wiggle diagram&amp;quot;, y = &amp;quot;Relative real wage&amp;quot;,
+       subtitle = &amp;quot;Changes in relative real wage with varying lambda and transportation costs&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(equilibria) + aes(t_vec, lam_vec) + 
+  geom_point(aes(colour = factor(stable))) + 
+  theme_economist() +
+  theme(legend.title=element_blank()) +
+  scale_colour_discrete(breaks = c(&amp;quot;0&amp;quot;, &amp;quot;1&amp;quot;), labels=c(&amp;quot;Unstable equilibrium&amp;quot;, &amp;quot;Stable equilibrium&amp;quot;)) +
+  labs(title =&amp;quot;Tomahawk&amp;quot;, y = &amp;quot;lambda&amp;quot;, x = &amp;quot;transportation costs&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Choosing statistical software packages for education in the social sciences</title>
+      <link>thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</link>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</guid>
+      <description>&lt;h2 id=&#34;introduction-the-empirical-workflow&#34;&gt;Introduction: the empirical workflow&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Econometrics is much easier without the data&amp;mdash;Marno Verbeek&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The quote above does not only apply to economics and econometrics, but
+to all of the social sciences in general. Empirical research&amp;mdash;that is,
+dealing with data in all its forms&amp;mdash;requires a rigorous approach, even
+more so, with the increasing emphasis on openness and reproducibility of
+all kinds of scientific research. Therefore, it is strange that in
+academic education there is not much guidance in choosing which research
+tools to use and in the philosophy behing choosing an efficient and
+reproducable workflow.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;This note deals with the suitability of various software packages for
+applying applied econometrics in specific and data science in
+general.&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; Specifically, In will focus on STATA, R and Python.&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; I
+will not say which tool to use. Instead, I will focus on the various
+strengths and weaknessess of each software package combined with it
+specific approach. The main elements I will consider are the package
+suitability for education and how well it can be integrated in an
+efficient workflow. The former is mostly important for doing (small)
+data exercises, whilst the latter is vital for larger research project,
+such as theses and later on perhaps research papers.&lt;/p&gt;
+&lt;p&gt;To illustrate why the concept of reproducibility is vital, note that a
+typical empirical workflow in the social sciences looks as follows:&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;Generate data&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Data is read from an external source (recording, questionnaire, file
+or online database) or is simulated.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Manipulate data&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;This is usually the most time demanding phase&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; and includes
+(amongst many other things) manipulating missing data, merging data
+and relabeling data&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Analyse data&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;This phase includes not only standard ecometrics and statistical or
+machine learning techniques, but as well as graphical
+representations as maps and figures.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Present results&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Finally, documents in the forms of papers, posters, theses, or
+presentations have to be drafted. Note that ideally one wants to do
+so in various formats, such as in pdf for physical papers and in
+html for web display.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Unfortunately, all these steps do not necessarily run sequentially in
+time. Supervisors, referees, colleagues, and the future you, always want
+to add or delete elements to or from your research. For instance,
+variables have to be added, model specifications have to be checked, and
+3D pie charts have to be changed in something useful.&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Therefore, it is vital that all these steps are both (&lt;em&gt;i&lt;/em&gt;) very well
+documented so that the future you can easily retrace your steps,
+implement changes and redo the whole research if needed, and (&lt;em&gt;ii&lt;/em&gt;) well
+connected to each other. The latter does not necessarily entail that the
+whole research should be done in one software environment, but instead
+that the outcome of one research step (e.g., generating data) can easily
+serve as an input for another step (e.g., data manipulation).&lt;/p&gt;
+&lt;p&gt;In the next section I will lay out the strengths and weaknesses of three
+statistical software packages with this workflow in mind. Subsequently,
+I discuss the suitability of each package in teaching and, thereafter, I
+conclude with some more general comments.&lt;/p&gt;
+&lt;h2 id=&#34;statistical-software-packages&#34;&gt;Statistical software packages&lt;/h2&gt;
+&lt;p&gt;I review the various packages according to several criteria. There are
+several others that will be discussed, but these I find most important
+for a suitable software package to be used for teaching in the social
+sciences.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;Open source&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;The most important argument to use an open source package is
+reproducibility. Your work is simply less accessible and thus
+reproducible if the code can only be run with applications that
+costs over .&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Learning curve&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;First, and foremost, students should be able to use the package for
+straightforward econometric research. If that is not possible after
+one six-week&#39;s course, the software package is not particularly
+suitable.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Size of the community&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Nobody wants to be locked in with obsolete technology. A large
+userbase ensures a high probability that the software package will
+be used and maintained in the future as well. Moreover, all sorts of
+indirect effects, such as user written routines, packages and
+documentation, come along for free with a large community.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Usefulness outside academia&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Often forgotten as an argument but outside academic life, some
+applications are more used than others. And with the recent emphasis
+on better preparation for the labor market, this argument seems to
+become more important. By the way, the application still mostly used
+would be the ubiquitous Excel and its related visual basic language.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Flexibility&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Ideally, a software approach should be both extendable and scalable.
+The former ensures that slight deviations from standard approaches
+can relatively easy be implemented. The latter is important when the
+size of the database increases, as typically is the case with recent
+improvements in remote sensing techniques.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Scriptable&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Finally, a software package should be scriptable&amp;mdash;both internally
+as externally. Internally scriptable indicates that within the
+package scripts or programs can be written so that every step within
+the workflow can be reproduced. With externally scriptable I mean
+that the software package should also be used in combination with
+other software packages or languages, such as LaTeX, markdown, make,
+html, sql, C++, etc.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Other software packages that I will not review, typically score badly on
+more than one of these criteria. For example, SPSS is proprietary
+software, which has some issues with scriptability and is not very
+flexible. Moreover, a sizeable part of the user community moved over to
+other software packages (most notably R). Other software packages I will
+not review for reasons of similarity (such as Matlab to some extent) or
+my lack of experience with them (most notably SAS).&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&#34;stata&#34;&gt;STATA&lt;/h2&gt;
+&lt;p&gt;STATA is proprietary software copyrighted by the StataCorp LLC
+corporation.&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt; It is especially popular among economists, although the
+growth of STATA seems almost comparable with that of R (Python is in its
+own league, however).&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;The biggest comparative advantage of STATA is its learning curve
+(although some students might disagree). It is relatively
+straightforward to teach students basic econometrics (including time
+series, panel data and count data techniques, discrete choice models and
+duration models). Indeed, STATA has the advantage of being one of the
+only tools dedicated to econometric research. While it is not so
+flexible, it is often possible (and simple) to apply cutting-edge models
+and other techniques. For example, regressing &lt;code&gt;y&lt;/code&gt; on &lt;code&gt;x1&lt;/code&gt; and &lt;code&gt;x2&lt;/code&gt; can
+simply be stated as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;reg y x1 x2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Moreover, you can do so in a structured way by writing scripts (the
+so-called do files). Many students appreciate as well the fact that
+STATA command can be given interactively (via a drop-down menu) of
+directly from the console enabling them to memorize the various commands
+on the fly.&lt;/p&gt;
+&lt;p&gt;There is a large STATA community. This ensures the availability of many
+useful so-called user-written routines and tutorial material, whether
+via Youtube or in pdf (there is a STATA journal). The STATA community is
+not only huge, but as well very helpful (although the help documentation
+is oftentimes cumbersome). The first hit on Google on a sometimes not
+very focused question usually suffices.&lt;/p&gt;
+&lt;p&gt;Unfortunately, not many organizations outside academia use
+STATA&amp;mdash;although I heard recently that some Danish consultancy agencies
+in Denmark do. Most organizations now typically use R or Python in
+combination with even more focused software applications as Hadoop or
+Julia (again, apart from Excel). Usually, this does not matter much as
+programming skills are easily transferable, but, unfortunately, the
+STATA language is hardly a programming language. Instead, it is more a
+sequence of very specific commands. Therefore, it is hard to relate the
+commands to something as Python.&lt;/p&gt;
+&lt;p&gt;Another downside is the flexibility of STATA. For procedures that
+slightly deviate from the &amp;lsquo;basic&amp;rsquo; ones&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;, STATA can give you a hard
+time. Mostly, because the source code is not known, working with
+matrices is cumbersome (to say the least) and the number of programming
+tools is rather limited. Moreover, STATA can only work with one active
+dataset, which makes merging datasets sometimes difficult. Finally,
+although there are some plugins, STATA is not designed for working with
+data stored on servers somewhere else via application programming
+interfaces (API&#39;s). Unfortunately, working via API&#39;s&lt;sup id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; becomes
+increasingly important, if not only for the recent surge in open access
+data via local governments, Google, Twitter, Foursquare, etc.&lt;/p&gt;
+&lt;p&gt;STATA itself is well scriptable internally. although it is less
+programming and more sequencing commands, for the majority of research
+projects this is definitely good enough. Externally, however, there are
+other issues which has to do with its proprietary nature. Other
+applications, such as great ?nix utilities as make and pandoc but as
+well git and github have difficulties &amp;lsquo;communicating&amp;rsquo; with STATA. It is
+possible, however, to export from STATA to other formats, especially to
+ubiquitous text files format, which enables automatic generation of
+LaTeX tables.&lt;/p&gt;
+&lt;p&gt;Finally, alas, STATA is not open source. This hinders reproducibility,
+insight in the source code (&amp;ldquo;How the hell did they do that?&amp;quot;) as well as
+the transferability of data (the STATA .dta dataformat is not accessible
+to read directly, although many other packages, including R, have
+created special read procedures for STATA dataformats).&lt;/p&gt;
+&lt;h2 id=&#34;r&#34;&gt;R&lt;/h2&gt;
+&lt;p&gt;R emerged in 1995 as the open-source (GNU) version of the S language and
+quickly surpassed its predecessor in popularity.&lt;sup id=&#34;fnref:11&#34;&gt;&lt;a href=&#34;#fn:11&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;11&lt;/a&gt;&lt;/sup&gt; R itself consists
+of a base distribution which can be enhanced with packages, and it is
+exactly the ease of writing, distributing and using packages that makes
+R so attractive for many users. At the moment there are more than 10,000
+packages on the official CRAN website, but Github contains many
+more.&lt;sup id=&#34;fnref:12&#34;&gt;&lt;a href=&#34;#fn:12&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;12&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Because of its open-source nature and its large and very active
+community, the quality of most of the packages is almost guaranteed.
+Indeed, if there are killer applications in the data science world, then
+R has most of them, with as most notifiable examples dplyr for quick and
+robust data manipulation and ggplot2 for structural plotting using the
+&lt;em&gt;grammar of graphics&lt;/em&gt; approach as advocated by @wilkinson2006grammar and
+implemented by @wickham2013implementation.&lt;/p&gt;
+&lt;p&gt;The learning curve of R is however steeper than that of STATA.&lt;sup id=&#34;fnref:13&#34;&gt;&lt;a href=&#34;#fn:13&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;13&lt;/a&gt;&lt;/sup&gt;
+Having said that, learning basic R is still relatively quick (and
+accessible) and can be done in a short time with great free online
+courses. Today, teaching Stata to students requires at least one
+tutorial class, where teaching R can&amp;mdash;theoretically, at least&amp;mdash; be
+self-contained.&lt;/p&gt;
+&lt;p&gt;Typically, R is characterized as:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;R is written by statisticians, for statisticians.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Unfortunately, this can be seen in the R language itself. Best described
+as &amp;lsquo;quirky&amp;rsquo;, the R language is not the most beautiful or best designed
+programming language. For example, usually there is more than one (often
+actually more than three) ways to accomplish something, which leads to a
+myriad of styles and types of coding. In applied statistics, though, R
+shines. Although slightly more cumbersome than STATA, commands for basic
+econometric techniques are relatively straightforward. Estimating a
+linear regression simply looks as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# ordinary least squares regression
+model &amp;lt;- lm(y ~ x1 + x2, data = data1)
+summary(model)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note the difference with STATA, where in STATA one simply uses
+&lt;code&gt;reg y x1 x2&lt;/code&gt;. However, in R one can store everything in an object (in
+this case the object &amp;ldquo;model&amp;rdquo;) and use it later, and one can use several
+databases (&amp;lsquo;dataframes&amp;rsquo;) at the same time. Both features are extremely
+useful for dealing with larger research projects. And although STATA
+still is more straightforward in basic econometrics, R users have
+developed several packages to emulate STATA&#39;s ease of use.&lt;sup id=&#34;fnref:14&#34;&gt;&lt;a href=&#34;#fn:14&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;14&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Because R is very flexible and the community is that huge (across
+disciplines as well), for almost every (statistical) problem a package
+most likely is developed (if feasible). The problem is, however, that
+terminology with respect to models differs across fields. Moreover, what
+economists find important (causality anyone?) is generally less
+important within biometrics, physics, statistics of sociology. So, using
+R also means spending a great deal of time finding and checking the
+correct package.&lt;sup id=&#34;fnref:15&#34;&gt;&lt;a href=&#34;#fn:15&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;15&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;If anything, R if flexible in terms of what it can do. Spatial data
+analysis, Bayesian inference, optimization, network analysis and&amp;mdash;above
+all&amp;mdash;producing wonderful plots that can even be used as interactive web
+applications. Therefore, it is used intensively outside academia as well
+by large companies such as Facebook, Google, Twitter, Microsoft,
+Booking.com, Uber and Airbnb, mainly for &amp;lsquo;quick and dirty&amp;rsquo; data science
+and data and output visualization.&lt;/p&gt;
+&lt;p&gt;Unfortunately, R is not very scalable, as only internal computer memory
+(RAM) is used for data storage (similar to matlab, STATA and comparable
+languages). There are ways to circumvent this (typically in combination
+with other languages, such as Hadoop or using parallel computing
+techniques), but it is cumbersome for very large research projects with
+huge amounts of data (remote sensing data in geographical analysis comes
+to mind or up to 100 million records when using micro data).&lt;/p&gt;
+&lt;p&gt;Finally, R is extremely scriptable, both internally and externally.
+Internally, the R language is a full blow object-oriented language,
+although perhaps not the most beautiful one. Especially the ease of
+writing and reading packages is very useful for groups of researchers
+who are working on the same project. Externally, R really has a
+comparative advantage as that it can be scripted from a command line (a
+terminal), can be used in combination with other languages (e.g., python
+via rpy and C++ via rcpp to speed up procedures if needed) and works as
+a charm in combination with both LaTeX and html for creating
+webpages.&lt;sup id=&#34;fnref:16&#34;&gt;&lt;a href=&#34;#fn:16&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;16&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
+&lt;p&gt;Opposite to STATA and even R, Python is an open source general object
+oriented programming language more in line with a language such as
+C++.&lt;sup id=&#34;fnref:17&#34;&gt;&lt;a href=&#34;#fn:17&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;17&lt;/a&gt;&lt;/sup&gt; Python was implemented by Guido van Rossum in the late 1980&#39;s
+and was built on the Modula-3 programming language. As it is a general
+progamming language one needs several so-called packages in order to
+make it work for econometrics in particular and data science in general,
+most notably: NumPy, SciPy, Matplotlib and pandas.&lt;/p&gt;
+&lt;p&gt;Using Python for applied econometrics is not as straightforward as in
+STATA but nowadays relatively similar to R using SciPy.&lt;sup id=&#34;fnref:18&#34;&gt;&lt;a href=&#34;#fn:18&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;18&lt;/a&gt;&lt;/sup&gt; A typical
+regression routine looks as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import ols
+mymodel = ols.ols(y,x,y_varnm,x_varnm)
+mymodel_summary()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which is rather close to R, although the ols class from SciPy needs to
+be loaded. The class is however not as general as the lm function from
+R.&lt;/p&gt;
+&lt;p&gt;For an introductory econometrics course this might be too cumbersome.
+However, the language itself is defined beautifully and &lt;strong&gt;everything&lt;/strong&gt;
+works similarly. So, once you get used to the seemingly cumbersome
+approach of Python with respect to basic econometrics, other
+functionalities requires far less investment in time, because the
+grammar, style and approach is always consistent.&lt;sup id=&#34;fnref:19&#34;&gt;&lt;a href=&#34;#fn:19&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;19&lt;/a&gt;&lt;/sup&gt; Note, that this
+is rather different from R which is far more chaotic in terms of
+approaches, which might lead to the argument that Python is actually
+simpler than R to learn because of its uniformity.&lt;/p&gt;
+&lt;p&gt;So, arguably the learning curve of Python is much steeper than that of
+STATA or R. However, in the end it does pay off when learning the
+language as it is not only a good language for learning programming, it
+is as well very useful for projects just outside the realm of basic
+econometrics. Working with strings (text analysis), images, spatial
+data, API&#39;s, large amounts of data, etcetera, is all very common and
+relatively straightforward in Python. Moreover, the community is very
+large (larger than that of R). But, not all of them are working in data
+science.&lt;/p&gt;
+&lt;p&gt;R and Python are often compared in their usefulness for statistical
+research in particular and data science in general.&lt;sup id=&#34;fnref:20&#34;&gt;&lt;a href=&#34;#fn:20&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;20&lt;/a&gt;&lt;/sup&gt; The outcome is
+still undecided. R has the killer applications but Python is catching up
+fast. Python is perhaps faster and at least better scalable, so perhaps
+should be considered for larger projects. One of Python benefits is that
+it is a more general skill which could be applied for other tasks as
+well. In any case, both of them are used very frequently outside
+academia.&lt;/p&gt;
+&lt;p&gt;Finally, Python is perhaps even more scriptable than R and can be
+combined with other languages as well. In terms of literature
+programming, Python has interactive notebooks (now called Jupyter
+notebooks) which are web applications where text and code can be run
+interactively.&lt;/p&gt;
+&lt;h2 id=&#34;statistics-in-social-science-education&#34;&gt;Statistics in social science education&lt;/h2&gt;
+&lt;p&gt;Choosing which statistical package in academic tuition to be used is a
+tough call&amp;mdash;mostly because of limited course time available, possible
+lock-in effects and vested interests in academic staff. And each of the
+software packages reviewed above have their own pros and cons.&lt;/p&gt;
+&lt;p&gt;STATA is arguably the winner when it comes to applying basic
+econometrics. However, it is not very flexible when it comes to
+non-econometric statistics (e.g., statistical or machine learning
+techniques), visualization and web interfaces. Moreover, it is not open
+source.&lt;/p&gt;
+&lt;p&gt;R is slightly more cumbersome than STATA when it comes to basic
+econometrics techniques, but it shines in flexibility, variety of
+packages (of which some have become killer application status),
+visualization support and interaction with other languages and
+applications.&lt;/p&gt;
+&lt;p&gt;Python is the most cumbersome in dealing with basic econometrics, but
+once learned the language can be used for a variety of applications and
+together with packages such as pandas and SciPy it can accomplish most
+tasks R can do but then in a more elegant, structured and consistent
+manner.&lt;/p&gt;
+&lt;p&gt;In the end it depends on the education goal. If students in the end
+should be able to apply &amp;lsquo;straighforward&amp;rsquo; econometrics techniques, such
+as diff-in-diff approaches as put forward by @angrist2008mostly, then
+STATA definitely suffices (and more than that). If only STATA would be
+open source.&lt;/p&gt;
+&lt;p&gt;However, if students need to be more flexible as in working with
+geo-referenced data, application programming interfaces, bayesian
+techniques, network analysis, more complex discrete choice models or
+writing their own likelihood functions, then STATA does not suffice
+anymore and should one, e.g., choose for R or Python. As perhaps
+anecdotal evidence, but I have seen many PhD students move from STATA to
+R as the former was not able to do anymore what they wanted.&lt;/p&gt;
+&lt;p&gt;As perhaps a final argument, R and especially Python skills are very
+transferable to other languages and outside academia. Not only the
+programming techniques, but as well working from command lines and
+integrating several files in a reproducible manner, are skills that are
+very useful, but unfortunately very missing as well.&lt;/p&gt;
+&lt;h2 id=&#34;concluding-remarks&#34;&gt;Concluding remarks&lt;/h2&gt;
+&lt;p&gt;What is often heard by students (and staff) is that they do not want to
+be programmers but social sience researchers instead, and I acknowledge
+that. My plea here is perhaps not to definitely choose for one of the
+applications above, but for a more systematic thinking in the type of
+research tools we teach our students and for trying to do so
+consistently throughout the academic curriculum. Teaching an
+introductory Python course, for example, and not using elements of that
+course in later courses seems a definite waste of time. So, above all,
+if STATA, Python or R is learned, let it come back in some form later at
+least in every period. Most courses somehow do use data (if only to
+create 3D pie charts).&lt;/p&gt;
+&lt;p&gt;Finally, by the audience at large there is now a greater need for
+reproducibility. This requires teaching our students perhaps different
+research tools and perhaps a different workflow when it comes to
+empirical research. At least, greater emphasis should be put on revision
+management, openness and scripting. Granted, some research tools are
+better in this than others, but it typically is the combination of
+research tools and the philosophy behind the set of research tools used
+that is essential.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;There are some exceptions, see, e.g., @healy2011choosing and
+@Arribas-Bel2014misc for a workshop I gave together with Daniel
+Arribas-Bel. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;There is a difference between econometrics on the one hand and
+applied statistics (including the now very popular data science) on
+the other hand. Economics students first and foremost need to able
+to apply applied econometric techniques, such as presented in
+@stock2007introduction and perhaps later in @angrist2008mostly. &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I will also briefly touch upon some other packages, but these
+three mentioned are most likely the ones most used in economics,
+except of course for the ubiquitous Excel. &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;There is and old saying that says that 80% of your research time
+goes in transforming data, while 20% is only spent on analysing the
+data. &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;For a wonderful timelapse video on the nonlinearity and even
+sometimes chaos of writing a research paper, see this
+
+&lt;a href=&#34;https://www.youtube.com/watch?v=hNENiG7LAnc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link&lt;/a&gt;
+. &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I should mention the object oriented matrix language Ox as well,
+which is mostly used by econometricians. Because of the steep
+learning curve and relatively small community I will not consider it
+here, but I am aware of its popularity in some particular research
+groups. &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See 
+&lt;a href=&#34;https://www.stata.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.stata.com/&lt;/a&gt;
+. &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I have to be careful though in making these sorts of statements.
+Usually, the popularity of software applications is researched by
+looking at search engine counts for jobs, frequently asked questions
+or counting popularity on the stackoverflow site
+(&lt;a href=&#34;https://stackoverflow.com/&#34;&gt;https://stackoverflow.com/&lt;/a&gt;). An interesting recent overview can
+be found on &lt;a href=&#34;http://r4stats.com/2017/06/19/scholarly-articles/&#34;&gt;http://r4stats.com/2017/06/19/scholarly-articles/&lt;/a&gt;. &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Although the set of &amp;lsquo;basic&amp;rsquo; procedures is quite extensive. &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:10&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Note that I do hesitate to drop the hype term &amp;lsquo;big data&amp;rsquo; here. &lt;a href=&#34;#fnref:10&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:11&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See &lt;a href=&#34;https://www.r-project.org/about.html&#34;&gt;https://www.r-project.org/about.html&lt;/a&gt;. &lt;a href=&#34;#fnref:11&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:12&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See
+&lt;a href=&#34;http://blog.revolutionanalytics.com/2017/01/cran-10000.html&#34;&gt;http://blog.revolutionanalytics.com/2017/01/cran-10000.html&lt;/a&gt;. &lt;a href=&#34;#fnref:12&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:13&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Steep learning curves are in principle not problematic as it
+indicates that you learn rapidly and in the end the pay-off should
+be large. For &amp;lsquo;quick and dirty&amp;rsquo; solutions, however, steep learning
+curves are problematic. &lt;a href=&#34;#fnref:13&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:14&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Good examples are the margins package in R that has similar
+features as the very useful margins command in STATA and the plm
+package for implementing fixed effects. &lt;a href=&#34;#fnref:14&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:15&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Fortunately, there is the great website 
+&lt;a href=&#34;https://cran.r-project.org/web/views/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN Task
+Views&lt;/a&gt;
+ which gives good
+overviews of the most important packages in several subfields, such
+as dealing with spatial data, Bayesian inference, econometrics and
+mathematical programming. &lt;a href=&#34;#fnref:15&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:16&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;R has one of the best implementations of so-called literate
+programming via the package knitr. Literate programming as
+originally coined by @knuth1984literate indicates that output of
+coding and documentation are generated simultaneously. Whether or
+not this is a good idea for larger research projects, literate
+programming can be very useful for generating documentation of R
+packages, web blogs, teaching assignments and smaller research
+papers. &lt;a href=&#34;#fnref:16&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:17&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See &lt;a href=&#34;https://www.python.org/&#34;&gt;https://www.python.org/&lt;/a&gt;. &lt;a href=&#34;#fnref:17&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:18&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Although there are some good tutorial texts to be found on
+internet, such as @sargent2015quantitative. &lt;a href=&#34;#fnref:18&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:19&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;For example, working with geospatial data by using the excellent
+
+&lt;a href=&#34;http://geopandas.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GeoPandas&lt;/a&gt;
+ package is then a breeze, which
+as a bonus might also obfuscates the need for using expensive and
+bloated GIS software applications. &lt;a href=&#34;#fnref:19&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:20&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;This seems another of these heavily disputed standard wars, such
+as the notorious 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Editor_war&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;editor
+war&lt;/a&gt;
+. A nice infographic
+of pros and cons of Python and R can be found
+
+&lt;a href=&#34;https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;
+. &lt;a href=&#34;#fnref:20&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Promotion Zhiling Wang</title>
+      <link>thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</link>
+      <pubDate>Tue, 06 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</guid>
+      <description>&lt;h3 id=&#34;promotion-and-defense-ceremony-of-zhiling-wang&#34;&gt;Promotion and defense ceremony of Zhiling Wang&lt;/h3&gt;
+&lt;p&gt;My second Ph.D. student got her Ph.D. degree! With an almost flawless defense and a very good Ph.D. thesis 
+&lt;a href=&#34;http://www.zhiling.guru/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zhiling&lt;/a&gt;
+ obviously deserves all the credit. However, I could not resist to post this picture. Somehow, I resemble Jose Mourinho, the angry looking football trainer.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/supervisor.jpg&#34; data-caption=&#34;At the promotion of Zhiling Wang&#34;&gt;
+
+
+  &lt;img src=&#34;thomasdegraaff.nl/img/supervisor.jpg&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    At the promotion of Zhiling Wang
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>Drawing Edgeworth boxes with LaTeX</title>
+      <link>thomasdegraaff.nl/post/2015-11-25-edgeworth/</link>
+      <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2015-11-25-edgeworth/</guid>
+      <description>&lt;h2 id=&#34;factor-mobility-and-welfare&#34;&gt;Factor mobility and welfare&lt;/h2&gt;
+&lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; students the Edgeworth-Bowley box. At first sight the concept is quite simple, but because there are restrictions for the total amount of both labour and capital in both regions or countries, the intuition behind the model  and especially the drawing of the box is rather complex. Therefore, I once wrote a straightforward but elaborate LaTeX script invoking the Tikz package.&lt;/p&gt;
+&lt;p&gt;The setting is as follows. We consider two regions, $A$ and $B$. The productionfunction of $A$ is $Y_A = K_A^{0.2}L_A^{0.8}$ and the productionfunction of $B$ is $Y_B = K_B^{0.6}L_B^{0.4}$. In the initial situation is the amount of capital in both regions equal to 1 ($K_A = K_B = 1$). The amount of labour is as well in both regions in the initial situation equal to 1 ($L_A = L_B = 1$). The next script shows how to draw an Edgeworth-Bowley box in $\LaTeX$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;% Edgeworth box---Optimal allocation of inputs for two economies
+% Author: Thomas de Graaff
+\documentclass{article} 
+\usepackage{tikz, verbatim}
+\usepackage{pgfplots}   %include other needed packages here    
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{0pt}%
+\begin{comment}
+:Title: Edgeworth box---Optimal allocation of inputs for two economies
+:Tags: pgfplots, economics
+:Author: Thomas de Graaff
+
+This edgeworth box describes the optimal allocation (pareto efficient) of inputs for the Cobb-Douglas production functions of two countries/regions (A and B). In addition, it shows the initial endowments of inputs and the resulting area of patero improvements. Parameters that can be changes: capital intensity parameter region A/B, total amount of labour and capital in A and B, and initial endowment K and L in A.
+\end{comment}
+\begin{document}   
+
+\begin{tikzpicture}[scale=1,thick]
+\usetikzlibrary{calc, intersections}	       %allows coordinate calculations.
+
+% Define parameters
+\def\alpha{0.2}		% Capital intensity parameter for region A.
+\def\beta{0.6}		% Capital intensity parameter for region B.
+\def\L{2}		% Total amount of labour in economy.
+\def\K{2}  		% Total amount of capital in economy.
+\def\PK{0.5}		% Share K in A in initial endowment.
+\def\PL{0.5}		% Share L in A in initial endowment.
+
+% Define isoquants
+
+\def\TotalY{(\L^\alpha)*(\K^(1-\alpha))}
+\def\InitYA{((\PL*\L)^(1-\alpha))*((\PK*\K)^(\alpha))}		
+\def\InitYB{(((1-\PL)*\L)^(1-\beta))*(((1-\PK)*\K)^(\beta))}
+\def\InitYAfromB{\TotalY-\InitYB}	
+
+\def\La{0.2*\L}
+\def\Lb{0.4*\L}
+\def\Lc{0.6*\L}
+\def\Ld{0.8*\L}
+
+\def\Ka{\alpha*(1-\beta)*\K*\La/((1-\alpha)*\beta*(\L-\La)+\alpha*(1-\beta)*\La)}
+\def\Kb{\alpha*(1-\beta)*\K*\Lb/((1-\alpha)*\beta*(\L-\Lb)+\alpha*(1-\beta)*\Lb)}
+\def\Kc{\alpha*(1-\beta)*\K*\Lc/((1-\alpha)*\beta*(\L-\Lc)+\alpha*(1-\beta)*\Lc)}
+\def\Kd{\alpha*(1-\beta)*\K*\Ld/((1-\alpha)*\beta*(\L-\Ld)+\alpha*(1-\beta)*\Ld)}
+
+\def\YAa{((\La)^(1-\alpha)*((\Ka)^\alpha)}
+\def\YAb{((\Lb)^(1-\alpha)*((\Kb)^\alpha)}
+\def\YAc{((\Lc)^(1-\alpha)*((\Kc)^\alpha)}
+\def\YAd{((\Ld)^(1-\alpha)*((\Kd)^\alpha)}
+
+\def\YBa{((\L-\La)^(1-\beta)*((\K-\Ka)^\beta)}
+\def\YBb{((\L-\Lb)^(1-\beta)*((\K-\Kb)^\beta)}
+\def\YBc{((\L-\Lc)^(1-\beta)*((\K-\Kc)^\beta)}
+\def\YBd{((\L-\Ld)^(1-\beta)*((\K-\Kd)^\beta)}
+
+\begin{axis}[
+        restrict y to domain=0:\K,
+        samples = 1000,     		
+        xmin = 0, xmax = \L,
+        ymin = 0, ymax = \K,
+		xlabel=$L_A$,
+		ylabel=$K_A$,
+		axis y line=left,
+        axis x line=bottom,
+        y axis line style={-}, 
+		x axis line style={-}
+		]
+		\def\LineA{(\InitYA/\x^(1-\alpha))^(1/\alpha))};
+		\def\LineB {\K-(\InitYB/(\L-\x)^(1-\beta))^(1/\beta)};
+		\def\LineAfromB{(\InitYAfromB/\x^(1-\alpha))^(1/\alpha))};
+			
+% color the area with all pareto improvements			
+      \addplot [fill=orange!40, opacity=0.5, draw=none,domain=0:\L] {\LineB} \closedcycle;
+      \addplot [fill=white, draw=none,domain=0:\L] {\LineA} |- (axis cs:0,0) -- (axis cs:0,\K)--cycle; 
+      			
+	  %Draw isoquants
+      \addplot[thin, dotted, mark=none, domain=0:\L] {(\YAa/\x^(1-\alpha))^(1/\alpha)};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {(\YAb/\x^(1-\alpha))^(1/\alpha)};
+      \addplot[thick, mark=none, domain=0:\L] {\LineA};     
+      \addplot[thin, dotted, mark=none, domain=0:\L] {(\YAc/\x^(1-\alpha))^(1/\alpha)};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {(\YAd/\x^(1-\alpha))^(1/\alpha)};
+   
+      \addplot[thin, dotted, mark=none, domain=0:\L] {\K-(\YBa/(\L-\x)^(1-\beta))^(1/\beta)};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {\K-(\YBb/(\L-\x)^(1-\beta))^(1/\beta)};
+      \addplot[thick, mark=none, domain=0:\L] {\LineB};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {\K-(\YBc/(\L-\x)^(1-\beta))^(1/\beta)};
+      \addplot[thin, dotted, mark=none, domain=0:\L] {\K-(\YBd/(\L-\x)^(1-\beta))^(1/\beta)};
+      
+	  %Draw contractcurve
+	  \addplot[mark=none, domain=0:\L, color=blue,thick]	{\alpha*(1-\beta)*\K*\x/((1-\alpha)*\beta*(\L-\x)+\alpha*(1-\beta)*\x)};
+	  %Draw initial endowments
+	 \addplot[thick, mark=*, fill=red!50] coordinates {(\L*\PL,\K*\PK)};
+\end{axis}
+
+% Draw mirrored axis
+\begin{axis}[
+        restrict y to domain=0:\K,
+        minor tick num=1,
+		xlabel=$L_B$,
+		ylabel=$K_B$,
+        xmin = 0, xmax = \L,
+        ymin = 0, ymax = \K,
+        axis y line=right, 
+        axis x line=top,
+        x dir=reverse,
+        y dir=reverse,
+        y axis line style={-}, 
+		x axis line style={-}
+		]
+\end{axis}
+\end{tikzpicture}
+\end{document} 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This produces the following diagram:&lt;/p&gt;
+&lt;img src=&#34;thomasdegraaff.nl/img/EdgeworthBox.png&#34; width = 800&gt;
+&lt;figcaption&gt;The Edgeworth-Bowley box and the corresponding Pareto improving area.&lt;/figcaption&gt;
+&lt;p&gt;Clearly, the initial situation (1,1) is not efficient and both regions
+can increase their welfare by &lt;em&gt;both&lt;/em&gt; migrating capital and
+labour. Labour will move from $B$ to $A$ and capital will move from
+$A$ to $B$. Note that the light grey area (should be light orange) area
+denotes the area with all pareto improvements.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Krugman&#39;s Increasing Returns and Economic Geography</title>
+      <link>thomasdegraaff.nl/post/2015-10-05-krugman/</link>
+      <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2015-10-05-krugman/</guid>
+      <description>&lt;h2 id=&#34;drawing-the-diagram-of-a-stylized-version-of-krugmans-increasing-returns-and-economic-geography&#34;&gt;Drawing the diagram of a stylized version of Krugman&#39;s &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; a simplified version of Krugman&#39;s model in his paper titled  &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;. The model we have adopted goes as follows:&lt;/p&gt;
+&lt;p&gt;We consider a simplified economy with two regions and 1 (million) workers ( $L=1$ ) in total. Region 1 is inhabited by 100,000 farmers (bound to their land so immobile), while in Region 2 there are 200,000 farmers. Note that in the notation of Krugman this boils down to $\pi_1 = 0.1$ and $\pi_2 = 0.2$. All other workers work in manufacturing. Assume now that there is a representative firm that has to choose if and in which region if would settle or that it would settle in both regions by having two branches (one in each region). The fixed costs to establish a firm (or branch) is 0.15. The transportcosts to move goods between region 1 and 2 are equal to 1 and each worker consumer consumes exactly one unit of the final product.&lt;/p&gt;
+&lt;p&gt;It is now up to the student to determine the equilibria in this economy (whether stable or unstable) and identify the trade-off for the firm. Doing this the most insightful and simple way is draw the so-called PP-line and the MM-line. Using the Tikz package within Latex simplifies this enormously. The following code shows how this can be done.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;% Krugman91---Firm location in two regions 
+% Author: Thomas de Graaff
+\documentclass{article}
+\usepackage{tikz, verbatim}
+\usepackage{pgfplots}   %include other needed packages here
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{0pt}%
+\begin{comment}
+:Title: Krugman91---Firm location in two regions 
+:Tags: Economic geography, economics, location behavior, 
+multiple equilbria
+:Author: Thomas de Graaff
+\end{comment}
+\begin{document}
+
+\begin{tikzpicture}[scale=1,thick]
+\usetikzlibrary{calc, intersections}   %allows coordinate calculations.
+
+% Define parameters
+\def\L{1} 				% Total amount of workers (normalized)
+\def\Pa{0.1}			% Total amount of farmers in regio 1
+\def\Pb{0.2}			% Total amount of farmers in regio 2
+\def\x{1} 				% Total demand (normalized)
+\def\F{0.15} 			% Fixed costs to set up a plant
+\def\t{1}				% Transportcosts
+
+\def\Fa{\F/(\t*\x)}
+\def\Fb{1-\F/(\t*\x)}
+\def\Eq{(\Pa/(\Pa+\Pb)}
+\def\Eqa{((\Fa-\Pa)/(1-\Pa-\Pb)}
+\def\Eqb{((\Fb-\Pa)/(1-\Pa-\Pb)}
+\def\Eqleft{min(\Fa-\Pa, 0)}
+\def\Eqright{max(\Fb-(1-\Pb), 0)}
+
+\begin{axis}[
+restrict y to domain=0:\L,
+samples = 1000,     		
+xmin = 0, xmax = \L,
+ymin = 0, ymax = \L,
+xlabel=$S_m$,
+ylabel=$S_p$,
+y axis line style={-}, 
+x axis line style={-},
+grid=major,
+legend pos=north west,
+legend entries={45$^\circ$ line,PP line, MM line}
+]
+\addplot[dotted, mark=none, domain=0:\L] {x};
+\addplot[thick, red, mark=none, domain=0:\L] coordinates {(0,\Pa) (1,1-\Pb)};
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(0,0) (0,\Fa)};			
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(1,1) (1,\Fb)};
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(0,\Fa) (\Fa,\Fa)};			
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(1,\Fb) (\Fb,\Fb)};
+\addplot[thick, blue, mark=none, domain=0:\L] coordinates {(\Fa,\Fa) (\Fb,\Fb)};
+\addplot[thick, mark=*, fill=red!90] coordinates {(0,\Pa+1000*\Eqleft)};			
+\addplot[thick, mark=*, fill=red!90] coordinates {(1,1-\Pb+1000*\Eqright)}; 
+\addplot[thick, mark=*, fill=red!90] coordinates {(\Eq,\Eq)};
+\addplot[thick, mark=*, fill=red!10] coordinates {(\Eqa,\Fa)}; 			 	
+\addplot[thick, mark=*, fill=red!10] coordinates {(\Eqb,\Fb)}; 			
+\end{axis}
+\end{tikzpicture}
+\end{document}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This produces the following diagram:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&#34;thomasdegraaff.nl/img/Krugman91.png&#34;&gt;&lt;img src=&#34;thomasdegraaff.nl/img/Krugman91.png&#34;&gt;&lt;/a&gt;
+  &lt;figcaption&gt;Equilibria in a stylized version of Krugman (1991).&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Clearly, there are with this configuration 3 equilibria; two are stable and one is unstable.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>WooW-II: Workshop on open Workflows</title>
+      <link>thomasdegraaff.nl/post/2015-07-29-woow-ii/</link>
+      <pubDate>Wed, 29 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>thomasdegraaff.nl/post/2015-07-29-woow-ii/</guid>
+      <description>&lt;p&gt;&lt;em&gt;With Daniel Arribas-Bel&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This resource describes WooW-II, a two-day workshop on open workflows for quantitative social scientists. The workshop is broken down in five main parts, where each of them typically consists of an introductionary tutorial and a hands-on assignment. The specific tools discussed in this workshop are Markdown, Pandoc, Git, Github, R, and Rstudio, but the theoretical approach applies to a wider range of tools (e.g., LaTeX, and Python).&lt;/p&gt;
+&lt;p&gt;By the end of the workshop, participants should be able to reproduce a paper of their own and make it available in an open form applying the concepts and tools introduced.&lt;/p&gt;
+&lt;p&gt;The original text can be found 
+&lt;a href=&#34;https://github.com/Thdegraaff/REGION_resource&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here on GitHub&lt;/a&gt;
+ and is now published as a resource in &lt;strong&gt;REGION&lt;/strong&gt;, see the link 
+&lt;a href=&#34;http://openjournals.wu.ac.at/ojs/index.php/region/article/view/85&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;
+.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
