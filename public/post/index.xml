@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts | Thomas de Graaff</title>
-    <link>http://www.thomasdegraaff.nl/post/</link>
-      <atom:link href="http://www.thomasdegraaff.nl/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>thomasdegraaff.nl/post/</link>
+      <atom:link href="thomasdegraaff.nl/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Posts</title>
-      <link>http://www.thomasdegraaff.nl/post/</link>
+      <link>thomasdegraaff.nl/post/</link>
     </image>
     
     <item>
       <title>Does new information technology change commuting behavior?</title>
-      <link>http://www.thomasdegraaff.nl/post/2019-01-10-informationtechnology/</link>
+      <link>thomasdegraaff.nl/post/2019-01-10-informationtechnology/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2019-01-10-informationtechnology/</guid>
+      <guid>thomasdegraaff.nl/post/2019-01-10-informationtechnology/</guid>
       <description>&lt;p&gt;Our paper &lt;em&gt;Does new information technology change commuting behavior&lt;/em&gt;
 written together with Sergejs Gubins and Jos van Ommeren is accepted
 in the &lt;strong&gt;Annals of Regional Science&lt;/strong&gt;. It turned out to be nice paper
@@ -50,9 +50,9 @@ profound impact on the spatial structure of the labor market.&lt;/p&gt;
     
     <item>
       <title>Valuation of Ethnic Diversity: Heterogeneous Effects in an Integrated Labor and Housing Market</title>
-      <link>http://www.thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</link>
+      <link>thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</link>
       <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</guid>
+      <guid>thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</guid>
       <description>&lt;p&gt;Our paper &lt;em&gt;Valuation of Ethnic Diversity: Heterogeneous Effects in an Integrated Labor and Housing Market&lt;/em&gt; written together with Jessie Bakens is accepted in the &lt;strong&gt;Journal of Economic Geopraphy&lt;/strong&gt;. Jessie and I worked quite hard on this and I am glad that we got the results. The abstract reads as follows:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;gt;We estimate the heterogeneous impact of the scale, composition and consumer good-effect of ethnic diversity on individuals&#39; job and residential location. Using an extensive pooled micro panel-data set in which homeowners in the Netherlands are identified in both the housing and labor market we can derive the combined effect of ethnic diversity in both markets. We test a model that integrates the utility and production function such that the location of work and residence are determined simultaneously by taking into account observed and unobserved heterogeneous individual behavior on both markets. We find that the scale of ethnic diversity, i.e., the share of immigrants, at the city level is mostly positively related to both wages and house prices. This is mainly through a positive productivity effect of immigrants, which results in negative implicit prices for housing (although small) in a city with a higher scale of ethnic diversity for the majority of the individuals in our data. The scale of ethnic diversity is only positively related to utility for a small group of homeowners, while the composition (diversity among immigrants) and consumer good-effect (ethnic diversity of restaurants) of ethnic diversity show overall no significant effect on both markets nor significant implicit prices. Moreover, we find that the majority of Dutch homeowners do not sort themselves out over municipalities by their preferences for ethnic diversity.
 &lt;/code&gt;&lt;/pre&gt;
@@ -61,9 +61,9 @@ profound impact on the spatial structure of the labor market.&lt;/p&gt;
     
     <item>
       <title>Barriers of Culture, Networks, and Language</title>
-      <link>http://www.thomasdegraaff.nl/post/2018-05-01-barriersofculturenetworksandlanguage/</link>
+      <link>thomasdegraaff.nl/post/2018-05-01-barriersofculturenetworksandlanguage/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2018-05-01-barriersofculturenetworksandlanguage/</guid>
+      <guid>thomasdegraaff.nl/post/2018-05-01-barriersofculturenetworksandlanguage/</guid>
       <description>&lt;p&gt;A new pubication is out in &lt;em&gt;REGION&lt;/em&gt; with Zhiling Wang and Peter
 Nijkamp titled &lt;strong&gt;Barriers of Culture, Networks, and Language&lt;/strong&gt;. A
 direct link can be found
@@ -97,9 +97,9 @@ countries.&lt;/p&gt;
     
     <item>
       <title>New Economic Geography model with R</title>
-      <link>http://www.thomasdegraaff.nl/post/new-economic-geography-model-with-r/</link>
+      <link>thomasdegraaff.nl/post/new-economic-geography-model-with-r/</link>
       <pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/new-economic-geography-model-with-r/</guid>
+      <guid>thomasdegraaff.nl/post/new-economic-geography-model-with-r/</guid>
       <description>&lt;h2 id=&#34;new-economic-geography-model-with-r&#34;&gt;New economic geography model with R&lt;/h2&gt;
 &lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;Why some regions have more economic activiy than others depend on a variety of factors, including regions&amp;rsquo; endowments, good policy and just sheer luck (oftentimes called path dependency). In the 1990s Paul Krugman constructed a model, the Core-Periphery model, that was able to model all these three elements. This model received quite some positive criticism (including a Nobel price), but still is rather complex in wielding it. In this post I show how one can actually program and depict the short term and long term equilibria that the model yields. The derived estimations are coming from Henri de Groot.&lt;/p&gt;
@@ -301,7 +301,7 @@ mid_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;1.75&amp;quot;, ]
   labs(title =&amp;quot;Wiggle diagram&amp;quot;, y = &amp;quot;Relative real wage&amp;quot;,
        subtitle = &amp;quot;Changes in relative real wage with varying lambda and transportation costs&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://www.thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(equilibria) + aes(t_vec, lam_vec) + 
   geom_point(aes(colour = factor(stable))) + 
   theme_economist() +
@@ -309,15 +309,15 @@ mid_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;1.75&amp;quot;, ]
   scale_colour_discrete(breaks = c(&amp;quot;0&amp;quot;, &amp;quot;1&amp;quot;), labels=c(&amp;quot;Unstable equilibrium&amp;quot;, &amp;quot;Stable equilibrium&amp;quot;)) +
   labs(title =&amp;quot;Tomahawk&amp;quot;, y = &amp;quot;lambda&amp;quot;, x = &amp;quot;transportation costs&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://www.thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Migrating from Jekyll to Hugo</title>
-      <link>http://www.thomasdegraaff.nl/post/2017-12-22-migrating/</link>
+      <link>thomasdegraaff.nl/post/2017-12-22-migrating/</link>
       <pubDate>Fri, 22 Dec 2017 14:08:26 +0100</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2017-12-22-migrating/</guid>
+      <guid>thomasdegraaff.nl/post/2017-12-22-migrating/</guid>
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;For quite some time I have been thinking about migrating my (very small) website to the 
 &lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hugo&lt;/a&gt;
@@ -349,9 +349,9 @@ mid_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;1.75&amp;quot;, ]
     
     <item>
       <title>Sortingmod: an R-package for sorting models</title>
-      <link>http://www.thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
+      <link>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
       <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
+      <guid>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;sortingmod is a package for estimating the sorting model - a discrete choice model which explains the location decision of heterogeneous individuals over a set of alternative locations. The model is developed by Bayer et al. (2004) following the work of Berry et al. (1995). It relies on the assumptions that individuals choose a location that maximizes their utility, and that heterogeneous individuals with different characteristics have different preferences, and different valuation for location characteristics. The results of the model provide choice probabilities for each alternative, as well as insight on the valuation patterns of heterogeneous agents, and marginal willingness-to-pay values for location characteristics. For the R-vignette go to 
 &lt;a href=&#34;http://www.thomasdegraaff.nl/sortingmod&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.thomasdegraaff.nl/sortingmod&lt;/a&gt;
@@ -420,9 +420,9 @@ s2.results &amp;lt;- second_stage(s1.results, data, c(&amp;quot;lnprice&amp;quot
     
     <item>
       <title>Choosing statistical software packages for education in the social sciences</title>
-      <link>http://www.thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</link>
+      <link>thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</link>
       <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</guid>
+      <guid>thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</guid>
       <description>&lt;h2 id=&#34;introduction-the-empirical-workflow&#34;&gt;Introduction: the empirical workflow&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Econometrics is much easier without the data&amp;mdash;Marno Verbeek&lt;/p&gt;
@@ -922,9 +922,9 @@ of pros and cons of Python and R can be found
     
     <item>
       <title>A lines map of building height in Amsterdam</title>
-      <link>http://www.thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</link>
+      <link>thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</link>
       <pubDate>Tue, 02 May 2017 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</guid>
+      <guid>thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;I just came across this wonderfull post on &lt;a href=&#34;https://www.r-bloggers.com&#34;&gt;https://www.r-bloggers.com&lt;/a&gt; &lt;a href=&#34;http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/&#34;&gt;http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/&lt;/a&gt; called Population Lines: How and Why I Created it) by James Cheshire. It allows for wonderfull (and artistic) maps constructed by only varations in height of horizontal lines. One might wonder how useful they are, but they sure are beautiful as one can see below in the population lines map of Europe.&lt;/p&gt;
 
@@ -945,10 +945,10 @@ of pros and cons of Python and R can be found
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;http://www.thomasdegraaff.nl/img/europe.png&#34; data-caption=&#34;Population lines map of Europe (source http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html).&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/europe.png&#34; data-caption=&#34;Population lines map of Europe (source http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html).&#34;&gt;
 
 
-  &lt;img src=&#34;http://www.thomasdegraaff.nl/img/europe.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;thomasdegraaff.nl/img/europe.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -1007,10 +1007,10 @@ ggsave(&#39;Amsterdam.png&#39;, width=10, height=10)
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;http://www.thomasdegraaff.nl/img/Amsterdam.png&#34; data-caption=&#34;Height of buildings in Amsterdam&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/Amsterdam.png&#34; data-caption=&#34;Height of buildings in Amsterdam&#34;&gt;
 
 
-  &lt;img src=&#34;http://www.thomasdegraaff.nl/img/Amsterdam.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;thomasdegraaff.nl/img/Amsterdam.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -1028,9 +1028,9 @@ ggsave(&#39;Amsterdam.png&#39;, width=10, height=10)
     
     <item>
       <title>A Heatmap of the Robustness of Determinants of European City growth</title>
-      <link>http://www.thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
+      <link>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
       <pubDate>Fri, 21 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
+      <guid>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Understanding what makes a city tick (e.g., the determinants that makes cities succesful in employment of economic growth) is vital for both policy makers and (regional) economists. Indeed, local policy makers usually want to know what they can contribute to the performance of their city or region. If policy makers can at all influence the performance, then most likely instruments vary between cities and regions. What is good for one city is not necessarily good for another. To analyse this, I ran many regressions of combinations of determinants and analyse their robustness (e.g., sign changes, changes in significance level and coefficients). The research is commissioned by the PBL Netherlands Environmental Assessment Agency.&lt;/p&gt;
 &lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;
@@ -1141,10 +1141,10 @@ $$&lt;/p&gt;
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;http://www.thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
 
 
-  &lt;img src=&#34;http://www.thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -1164,9 +1164,9 @@ $$&lt;/p&gt;
     
     <item>
       <title>Social Interaction and Crime</title>
-      <link>http://www.thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</link>
+      <link>thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</link>
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</guid>
+      <guid>thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</guid>
       <description>&lt;h2 id=&#34;social-interaction-and-crime-an-investigation-using-individual-offender-data-in-dutch-neighborhoods-conditionally-accepted-in-restat&#34;&gt;&lt;em&gt;Social Interaction and Crime: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; conditionally accepted in RESTAT&lt;/h2&gt;
 &lt;p&gt;Just heard that my paper &lt;em&gt;Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; written together with Wim Bernasco, Jan Rouwendal and Wouter Steenbeek is conditionally accepted in the &lt;strong&gt;Review of Economics and Statistics&lt;/strong&gt;. Im am rather happy with this result; especially given the fact that we have worked on this for more than 5 years (not consecutively but still). For those interested in the paper or forgotten what it is all about, here is the abstract:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1209,7 +1209,7 @@ return(myplot)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Which produces the following plot.&lt;/p&gt;
 &lt;figure&gt;
-  &lt;a href=&#34;http://www.thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;img src=&#34;http://www.thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;/a&gt;
+  &lt;a href=&#34;thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;img src=&#34;thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;/a&gt;
   &lt;figcaption&gt;Offender rates of property crime with
   neighborhood-specific variables and for the youth only.&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -1218,9 +1218,9 @@ return(myplot)
     
     <item>
       <title>Promotion Zhiling Wang</title>
-      <link>http://www.thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</link>
+      <link>thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</link>
       <pubDate>Tue, 06 Sep 2016 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</guid>
+      <guid>thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</guid>
       <description>&lt;h3 id=&#34;promotion-and-defense-ceremony-of-zhiling-wang&#34;&gt;Promotion and defense ceremony of Zhiling Wang&lt;/h3&gt;
 &lt;p&gt;My second Ph.D. student got her Ph.D. degree! With an almost flawless defense and a very good Ph.D. thesis 
 &lt;a href=&#34;http://www.zhiling.guru/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zhiling&lt;/a&gt;
@@ -1243,10 +1243,10 @@ return(myplot)
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;http://www.thomasdegraaff.nl/img/supervisor.jpg&#34; data-caption=&#34;At the promotion of Zhiling Wang&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/supervisor.jpg&#34; data-caption=&#34;At the promotion of Zhiling Wang&#34;&gt;
 
 
-  &lt;img src=&#34;http://www.thomasdegraaff.nl/img/supervisor.jpg&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;thomasdegraaff.nl/img/supervisor.jpg&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -1264,9 +1264,9 @@ return(myplot)
     
     <item>
       <title>Drawing Edgeworth boxes with LaTeX</title>
-      <link>http://www.thomasdegraaff.nl/post/2015-11-25-edgeworth/</link>
+      <link>thomasdegraaff.nl/post/2015-11-25-edgeworth/</link>
       <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2015-11-25-edgeworth/</guid>
+      <guid>thomasdegraaff.nl/post/2015-11-25-edgeworth/</guid>
       <description>&lt;h2 id=&#34;factor-mobility-and-welfare&#34;&gt;Factor mobility and welfare&lt;/h2&gt;
 &lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; students the Edgeworth-Bowley box. At first sight the concept is quite simple, but because there are restrictions for the total amount of both labour and capital in both regions or countries, the intuition behind the model  and especially the drawing of the box is rather complex. Therefore, I once wrote a straightforward but elaborate LaTeX script invoking the Tikz package.&lt;/p&gt;
 &lt;p&gt;The setting is as follows. We consider two regions, $A$ and $B$. The productionfunction of $A$ is $Y_A = K_A^{0.2}L_A^{0.8}$ and the productionfunction of $B$ is $Y_B = K_B^{0.6}L_B^{0.4}$. In the initial situation is the amount of capital in both regions equal to 1 ($K_A = K_B = 1$). The amount of labour is as well in both regions in the initial situation equal to 1 ($L_A = L_B = 1$). The next script shows how to draw an Edgeworth-Bowley box in $\LaTeX$.&lt;/p&gt;
@@ -1384,7 +1384,7 @@ This edgeworth box describes the optimal allocation (pareto efficient) of inputs
 \end{document} 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This produces the following diagram:&lt;/p&gt;
-&lt;img src=&#34;http://www.thomasdegraaff.nl/img/EdgeworthBox.png&#34; width = 800&gt;
+&lt;img src=&#34;thomasdegraaff.nl/img/EdgeworthBox.png&#34; width = 800&gt;
 &lt;figcaption&gt;The Edgeworth-Bowley box and the corresponding Pareto improving area.&lt;/figcaption&gt;
 &lt;p&gt;Clearly, the initial situation (1,1) is not efficient and both regions
 can increase their welfare by &lt;em&gt;both&lt;/em&gt; migrating capital and
@@ -1396,9 +1396,9 @@ denotes the area with all pareto improvements.&lt;/p&gt;
     
     <item>
       <title>Krugman&#39;s Increasing Returns and Economic Geography</title>
-      <link>http://www.thomasdegraaff.nl/post/2015-10-05-krugman/</link>
+      <link>thomasdegraaff.nl/post/2015-10-05-krugman/</link>
       <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2015-10-05-krugman/</guid>
+      <guid>thomasdegraaff.nl/post/2015-10-05-krugman/</guid>
       <description>&lt;h2 id=&#34;drawing-the-diagram-of-a-stylized-version-of-krugmans-increasing-returns-and-economic-geography&#34;&gt;Drawing the diagram of a stylized version of Krugman&#39;s &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; a simplified version of Krugman&#39;s model in his paper titled  &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;. The model we have adopted goes as follows:&lt;/p&gt;
 &lt;p&gt;We consider a simplified economy with two regions and 1 (million) workers ( $L=1$ ) in total. Region 1 is inhabited by 100,000 farmers (bound to their land so immobile), while in Region 2 there are 200,000 farmers. Note that in the notation of Krugman this boils down to $\pi_1 = 0.1$ and $\pi_2 = 0.2$. All other workers work in manufacturing. Assume now that there is a representative firm that has to choose if and in which region if would settle or that it would settle in both regions by having two branches (one in each region). The fixed costs to establish a firm (or branch) is 0.15. The transportcosts to move goods between region 1 and 2 are equal to 1 and each worker consumer consumes exactly one unit of the final product.&lt;/p&gt;
@@ -1469,7 +1469,7 @@ legend entries={45$^\circ$ line,PP line, MM line}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This produces the following diagram:&lt;/p&gt;
 &lt;figure&gt;
-  &lt;a href=&#34;http://www.thomasdegraaff.nl/img/Krugman91.png&#34;&gt;&lt;img src=&#34;http://www.thomasdegraaff.nl/img/Krugman91.png&#34;&gt;&lt;/a&gt;
+  &lt;a href=&#34;thomasdegraaff.nl/img/Krugman91.png&#34;&gt;&lt;img src=&#34;thomasdegraaff.nl/img/Krugman91.png&#34;&gt;&lt;/a&gt;
   &lt;figcaption&gt;Equilibria in a stylized version of Krugman (1991).&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;Clearly, there are with this configuration 3 equilibria; two are stable and one is unstable.&lt;/p&gt;
@@ -1478,9 +1478,9 @@ legend entries={45$^\circ$ line,PP line, MM line}
     
     <item>
       <title>Cultural diversity versus cultural distance</title>
-      <link>http://www.thomasdegraaff.nl/post/2015-07-29-culturaldiversity/</link>
+      <link>thomasdegraaff.nl/post/2015-07-29-culturaldiversity/</link>
       <pubDate>Wed, 29 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2015-07-29-culturaldiversity/</guid>
+      <guid>thomasdegraaff.nl/post/2015-07-29-culturaldiversity/</guid>
       <description>&lt;p&gt;&lt;em&gt;With Zhiling Wang and Peter Nijkamp&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;This study analyses the impact of cultural composition on regional attractiveness from the perspective of international migrant sorting behavior on a European regional NUTS1 level. We use an attitudinal survey to quantify cultural distances between natives and immigrants in the region concerned, and estimate the migrants’ varying preferences for both cultural diversity and cultural distance. To account for regional unobserved heterogeneity, our econometric analysis employs artificial instrumental variables, as developed by Bayer et al. (2004b). The main conclusions are twofold. On the one hand, cultural diversity increases regional attractiveness. On the other hand, average cultural distance greatly weakens regional attractiveness.&lt;/p&gt;
@@ -1512,10 +1512,10 @@ legend entries={45$^\circ$ line,PP line, MM line}
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;http://www.thomasdegraaff.nl/img/RSEAculturaldiversity.jpg&#34; data-caption=&#34;Our whole paper in a one-page comic!&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/RSEAculturaldiversity.jpg&#34; data-caption=&#34;Our whole paper in a one-page comic!&#34;&gt;
 
 
-  &lt;img src=&#34;http://www.thomasdegraaff.nl/img/RSEAculturaldiversity.jpg&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;thomasdegraaff.nl/img/RSEAculturaldiversity.jpg&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -1533,9 +1533,9 @@ legend entries={45$^\circ$ line,PP line, MM line}
     
     <item>
       <title>WooW-II: Workshop on open Workflows</title>
-      <link>http://www.thomasdegraaff.nl/post/2015-07-29-woow-ii/</link>
+      <link>thomasdegraaff.nl/post/2015-07-29-woow-ii/</link>
       <pubDate>Wed, 29 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2015-07-29-woow-ii/</guid>
+      <guid>thomasdegraaff.nl/post/2015-07-29-woow-ii/</guid>
       <description>&lt;p&gt;&lt;em&gt;With Daniel Arribas-Bel&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;This resource describes WooW-II, a two-day workshop on open workflows for quantitative social scientists. The workshop is broken down in five main parts, where each of them typically consists of an introductionary tutorial and a hands-on assignment. The specific tools discussed in this workshop are Markdown, Pandoc, Git, Github, R, and Rstudio, but the theoretical approach applies to a wider range of tools (e.g., LaTeX, and Python).&lt;/p&gt;
 &lt;p&gt;By the end of the workshop, participants should be able to reproduce a paper of their own and make it available in an open form applying the concepts and tools introduced.&lt;/p&gt;
@@ -1549,13 +1549,13 @@ legend entries={45$^\circ$ line,PP line, MM line}
     
     <item>
       <title>Stedelijke voorzieningen en bevolking: wie woont waar en waarom?</title>
-      <link>http://www.thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</link>
+      <link>thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</link>
       <pubDate>Sat, 15 Feb 2014 00:00:00 +0000</pubDate>
-      <guid>http://www.thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</guid>
+      <guid>thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</guid>
       <description>&lt;h2 id=&#34;waarom-zijn-sommige-steden-aantrekkelijker-dan-andere-steden&#34;&gt;Waarom zijn sommige steden aantrekkelijker dan andere steden?&lt;/h2&gt;
 &lt;p&gt;Eén van de belangrijke en boeiende onderzoeksvragen in de ruimtelijke economie betreft het verklaren waarom sommige steden aantrekkelijker zijn voor huishoudens en bedrijven dan andere. Als maatstaven voor aantrekkelijkheid worden vaak lonen en huizenprijzen genomen en deze verschillen inderdaad significant tussen gemeenten in Nederland. Zoals bijvoorbeeld de publicatie Stad en Land (De Groot e.a., 2010) al liet zien, kunnen de verschillen tussen grondprijzen in Nederland oplopen tot een factor 200 per vierkante meter kunnen jaarlonen verschillen tot 7 procent voor een zelfde soort baan. Een belangrijke verklaring voor deze verschillen ligt in de aanwezigheid van (stedelijke) voorzieningen. Huishoudens kunnen nu eenmaal een voorkeur hebben voor een historische binnenstad, de aanwezigheid van veel horeca of veel groenvoorzieningen en zijn daarom bereid om een relatief hogere huizenprijs te betalen; het is dus de locatie die voor een deel de huizenprijs bepaalt. Evenzo kunnen voorzieningen ertoe leiden dat werkgevers een voorkeur hebben voor een bepaald vestigingsgebied, en in het uiterste geval kunnen er zelfs productiviteitsverschillen ontstaan.&lt;/p&gt;
 &lt;p&gt;Deze publicatie geeft inzicht in de heterogene verschillen en kan 
-&lt;a href=&#34;http://www.thomasdegraaff.nl/papers/StedelijkeVoorzieningen.pdf&#34;&gt;hier&lt;/a&gt;
+&lt;a href=&#34;thomasdegraaff.nl/papers/StedelijkeVoorzieningen.pdf&#34;&gt;hier&lt;/a&gt;
  gedownload worden.&lt;/p&gt;
 </description>
     </item>
