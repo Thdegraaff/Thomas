@@ -2,93 +2,93 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories | Thomas de Graaff</title>
-    <link>thomasdegraaff.nl/categories/</link>
-      <atom:link href="thomasdegraaff.nl/categories/index.xml" rel="self" type="application/rss+xml" />
+    <link>http://www.thomasdegraaff.nl/categories/</link>
+      <atom:link href="http://www.thomasdegraaff.nl/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Categories</title>
-      <link>thomasdegraaff.nl/categories/</link>
+      <link>http://www.thomasdegraaff.nl/categories/</link>
     </image>
     
     <item>
-      <title>publication</title>
-      <link>thomasdegraaff.nl/categories/publication/</link>
+      <title>Publication</title>
+      <link>http://www.thomasdegraaff.nl/categories/publication/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/publication/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/publication/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>research</title>
-      <link>thomasdegraaff.nl/categories/research/</link>
+      <title>Research</title>
+      <link>http://www.thomasdegraaff.nl/categories/research/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/research/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/research/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Heterogeneity</title>
-      <link>thomasdegraaff.nl/categories/heterogeneity/</link>
+      <link>http://www.thomasdegraaff.nl/categories/heterogeneity/</link>
       <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/heterogeneity/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/heterogeneity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Interaction</title>
-      <link>thomasdegraaff.nl/categories/interaction/</link>
+      <link>http://www.thomasdegraaff.nl/categories/interaction/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/interaction/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/interaction/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Education</title>
-      <link>thomasdegraaff.nl/categories/education/</link>
+      <link>http://www.thomasdegraaff.nl/categories/education/</link>
       <pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/education/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/education/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>thomasdegraaff.nl/categories/r/</link>
+      <link>http://www.thomasdegraaff.nl/categories/r/</link>
       <pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/r/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hugo</title>
-      <link>thomasdegraaff.nl/categories/hugo/</link>
+      <link>http://www.thomasdegraaff.nl/categories/hugo/</link>
       <pubDate>Fri, 22 Dec 2017 14:08:26 +0100</pubDate>
-      <guid>thomasdegraaff.nl/categories/hugo/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reproducability</title>
-      <link>thomasdegraaff.nl/categories/reproducability/</link>
+      <link>http://www.thomasdegraaff.nl/categories/reproducability/</link>
       <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/reproducability/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/reproducability/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Students</title>
-      <link>thomasdegraaff.nl/categories/students/</link>
+      <link>http://www.thomasdegraaff.nl/categories/students/</link>
       <pubDate>Tue, 06 Sep 2016 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/students/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/students/</guid>
       <description></description>
     </item>
     
     <item>
       <title>LaTeX</title>
-      <link>thomasdegraaff.nl/categories/latex/</link>
+      <link>http://www.thomasdegraaff.nl/categories/latex/</link>
       <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/categories/latex/</guid>
+      <guid>http://www.thomasdegraaff.nl/categories/latex/</guid>
       <description></description>
     </item>
     

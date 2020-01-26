@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hugo | Thomas de Graaff</title>
-    <link>thomasdegraaff.nl/categories/hugo/</link>
-      <atom:link href="thomasdegraaff.nl/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <link>http://www.thomasdegraaff.nl/categories/hugo/</link>
+      <atom:link href="http://www.thomasdegraaff.nl/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     <description>hugo</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Fri, 22 Dec 2017 14:08:26 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>hugo</title>
-      <link>thomasdegraaff.nl/categories/hugo/</link>
+      <link>http://www.thomasdegraaff.nl/categories/hugo/</link>
     </image>
     
     <item>
       <title>Migrating from Jekyll to Hugo</title>
-      <link>thomasdegraaff.nl/post/2017-12-22-migrating/</link>
+      <link>http://www.thomasdegraaff.nl/post/2017-12-22-migrating/</link>
       <pubDate>Fri, 22 Dec 2017 14:08:26 +0100</pubDate>
-      <guid>thomasdegraaff.nl/post/2017-12-22-migrating/</guid>
+      <guid>http://www.thomasdegraaff.nl/post/2017-12-22-migrating/</guid>
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;For quite some time I have been thinking about migrating my (very small) website to the 
 &lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hugo&lt;/a&gt;
