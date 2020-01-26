@@ -322,20 +322,20 @@ mid_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;1.75&amp;quot;, ]
 &lt;p&gt;For quite some time I have been thinking about migrating my (very small) website to the 
 &lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hugo&lt;/a&gt;
  platform. Mostly because I admire the information rich structure of 
-&lt;a href=&#34;kieranhealy.org&#34;&gt;Kieran Healy&#39;s&lt;/a&gt;
+&lt;a href=&#34;kieranhealy.org&#34;&gt;Kieran Healy&amp;rsquo;s&lt;/a&gt;
  website and he converted already from 
 &lt;a href=&#34;https://jekyllrb.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Jekyll&lt;/a&gt;
  to Hugo a while ago. Because my website is indeed quite small, it does not suffer from Jekyll oftentimes being slow. However, I needed some additional features of my Jekyll site (e.g., converting bibtex to a reference list), which could not automatically be rendered by 
 &lt;a href=&#34;github.com&#34;&gt;Github&lt;/a&gt;
  which is my choice of deployment. Therefore, I used a rakefile which I did not completely understand, but resulting in asynchronous versions of source code and published website, which is undesirable. Finally, I have read somewhere that I can deploy my beloved &lt;code&gt;.org&lt;/code&gt; files as well using Hugo, which seems almost brilliant.&lt;/p&gt;
 &lt;h3 id=&#34;choosing-a-template&#34;&gt;Choosing a template&lt;/h3&gt;
-&lt;p&gt;So I decided to convert my website to Hugo with a website design close to that of Kieran Healy. Interestingly, Kieran Healy based his website on Greg Restall&#39;s 
+&lt;p&gt;So I decided to convert my website to Hugo with a website design close to that of Kieran Healy. Interestingly, Kieran Healy based his website on Greg Restall&amp;rsquo;s 
 &lt;a href=&#34;consequently.org&#34;&gt;consequently.org&lt;/a&gt;
 . There is a large amount of Hugo templates by now and the 
 &lt;a href=&#34;https://github.com/lambdafu/hugo-finite&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hugo-Finite&lt;/a&gt;
  came closest to what I wanted (actually, this template is based on that of Greg Restall). Unfortunately, it still needed quite a lot of (css) work to get it in the shape I wanted. Then, by sheer accident, I stumbled upon the website of 
 &lt;a href=&#34;https://robjhyndman.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rob J Hyndman&lt;/a&gt;
-, who had already worked on the Hugo-Finite template to make it look more like Kieran Healy&#39;s website. Moreover, his template works in combination with 
+, who had already worked on the Hugo-Finite template to make it look more like Kieran Healy&amp;rsquo;s website. Moreover, his template works in combination with 
 &lt;a href=&#34;https://bookdown.org/yihui/bookdown/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;bookdown&lt;/a&gt;
 , which might be handy, if I want to convert &lt;code&gt;.rmd&lt;/code&gt; files in the future (say for education purposes), therefore I decided to copy his template and adapt it to my own needs.&lt;/p&gt;
 &lt;h3 id=&#34;the-process--the-result&#34;&gt;The process &amp;amp; the result&lt;/h3&gt;
@@ -378,7 +378,7 @@ devtools::install_github(&amp;quot;thdegraaff/sortingmod&amp;quot;)
 &lt;li&gt;A vector indicating the chosen alternative (&lt;code&gt;code_name&lt;/code&gt;).&lt;/li&gt;
 &lt;li&gt;One or more columns indicating characteristics (&lt;code&gt;X_names&lt;/code&gt;) of the chosen alternative.&lt;/li&gt;
 &lt;li&gt;Each row of the data frame should represent a unique individual. The number of alternatives should therefore be smaller or equal to the number of individuals.&lt;/li&gt;
-&lt;li&gt;Individual and alternative characteristics should be numeric variables. Factor variables are not yet supported, so it&#39;s best to transform them into numeric dummy variables if you intend to include them in the model.&lt;/li&gt;
+&lt;li&gt;Individual and alternative characteristics should be numeric variables. Factor variables are not yet supported, so it&amp;rsquo;s best to transform them into numeric dummy variables if you intend to include them in the model.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
 &lt;p&gt;Define dataset, alternative identifier variable and explanatory variable sets X and Z&lt;/p&gt;
@@ -506,7 +506,7 @@ costs over .&lt;/p&gt;
 &lt;dd&gt;
 &lt;p&gt;First, and foremost, students should be able to use the package for
 straightforward econometric research. If that is not possible after
-one six-week&#39;s course, the software package is not particularly
+one six-week&amp;rsquo;s course, the software package is not particularly
 suitable.&lt;/p&gt;
 &lt;/dd&gt;
 &lt;dt&gt;Size of the community&lt;/dt&gt;
@@ -595,7 +595,7 @@ tools is rather limited. Moreover, STATA can only work with one active
 dataset, which makes merging datasets sometimes difficult. Finally,
 although there are some plugins, STATA is not designed for working with
 data stored on servers somewhere else via application programming
-interfaces (API&#39;s). Unfortunately, working via API&#39;s&lt;sup id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; becomes
+interfaces (API&amp;rsquo;s). Unfortunately, working via API&amp;rsquo;s&lt;sup id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; becomes
 increasingly important, if not only for the recent surge in open access
 data via local governments, Google, Twitter, Foursquare, etc.&lt;/p&gt;
 &lt;p&gt;STATA itself is well scriptable internally. although it is less
@@ -655,7 +655,7 @@ this case the object &amp;ldquo;model&amp;rdquo;) and use it later, and one can 
 databases (&amp;lsquo;dataframes&amp;rsquo;) at the same time. Both features are extremely
 useful for dealing with larger research projects. And although STATA
 still is more straightforward in basic econometrics, R users have
-developed several packages to emulate STATA&#39;s ease of use.&lt;sup id=&#34;fnref:14&#34;&gt;&lt;a href=&#34;#fn:14&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;14&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+developed several packages to emulate STATA&amp;rsquo;s ease of use.&lt;sup id=&#34;fnref:14&#34;&gt;&lt;a href=&#34;#fn:14&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;14&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;Because R is very flexible and the community is that huge (across
 disciplines as well), for almost every (statistical) problem a package
 most likely is developed (if feasible). The problem is, however, that
@@ -691,7 +691,7 @@ webpages.&lt;sup id=&#34;fnref:16&#34;&gt;&lt;a href=&#34;#fn:16&#34; class=&#34
 &lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
 &lt;p&gt;Opposite to STATA and even R, Python is an open source general object
 oriented programming language more in line with a language such as
-C++.&lt;sup id=&#34;fnref:17&#34;&gt;&lt;a href=&#34;#fn:17&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;17&lt;/a&gt;&lt;/sup&gt; Python was implemented by Guido van Rossum in the late 1980&#39;s
+C++.&lt;sup id=&#34;fnref:17&#34;&gt;&lt;a href=&#34;#fn:17&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;17&lt;/a&gt;&lt;/sup&gt; Python was implemented by Guido van Rossum in the late 1980&amp;rsquo;s
 and was built on the Modula-3 programming language. As it is a general
 progamming language one needs several so-called packages in order to
 make it work for econometrics in particular and data science in general,
@@ -720,7 +720,7 @@ STATA or R. However, in the end it does pay off when learning the
 language as it is not only a good language for learning programming, it
 is as well very useful for projects just outside the realm of basic
 econometrics. Working with strings (text analysis), images, spatial
-data, API&#39;s, large amounts of data, etcetera, is all very common and
+data, API&amp;rsquo;s, large amounts of data, etcetera, is all very common and
 relatively straightforward in Python. Moreover, the community is very
 large (larger than that of R). But, not all of them are working in data
 science.&lt;/p&gt;
@@ -1170,7 +1170,7 @@ $$&lt;/p&gt;
       <description>&lt;h2 id=&#34;social-interaction-and-crime-an-investigation-using-individual-offender-data-in-dutch-neighborhoods-conditionally-accepted-in-restat&#34;&gt;&lt;em&gt;Social Interaction and Crime: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; conditionally accepted in RESTAT&lt;/h2&gt;
 &lt;p&gt;Just heard that my paper &lt;em&gt;Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; written together with Wim Bernasco, Jan Rouwendal and Wouter Steenbeek is conditionally accepted in the &lt;strong&gt;Review of Economics and Statistics&lt;/strong&gt;. Im am rather happy with this result; especially given the fact that we have worked on this for more than 5 years (not consecutively but still). For those interested in the paper or forgotten what it is all about, here is the abstract:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Using data on the age, sex, ethnicity and criminal involvement of more than 14 million residents of all ages residing in approximately 4,000 neighborhoods in the Netherlands, this article tests if an individual&#39;s criminal involvement is affected by the proportion of criminals living in their neighborhood of residence. We develop a binomial discrete choice model for criminal involvement and estimate it on individual data. We control for the endogeneity that may be related to the unobserved neighborhood characteristics and take into account possible biases that may result from sorting behavior. We find significant social interaction effects but in contrast to earlier results our findings do not imply multiple equilibria or large multiplier effects.&lt;/p&gt;
+&lt;p&gt;Using data on the age, sex, ethnicity and criminal involvement of more than 14 million residents of all ages residing in approximately 4,000 neighborhoods in the Netherlands, this article tests if an individual&amp;rsquo;s criminal involvement is affected by the proportion of criminals living in their neighborhood of residence. We develop a binomial discrete choice model for criminal involvement and estimate it on individual data. We control for the endogeneity that may be related to the unobserved neighborhood characteristics and take into account possible biases that may result from sorting behavior. We find significant social interaction effects but in contrast to earlier results our findings do not imply multiple equilibria or large multiplier effects.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;There is a Tinbergen Institute discussion paper but that is rather old. More will follow later with hopefully a link to the pre-print version.&lt;/p&gt;
 &lt;h3 id=&#34;follow-up&#34;&gt;Follow-up&lt;/h3&gt;
@@ -1268,7 +1268,7 @@ return(myplot)
       <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
       <guid>thomasdegraaff.nl/post/2015-11-25-edgeworth/</guid>
       <description>&lt;h2 id=&#34;factor-mobility-and-welfare&#34;&gt;Factor mobility and welfare&lt;/h2&gt;
-&lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; students the Edgeworth-Bowley box. At first sight the concept is quite simple, but because there are restrictions for the total amount of both labour and capital in both regions or countries, the intuition behind the model  and especially the drawing of the box is rather complex. Therefore, I once wrote a straightforward but elaborate LaTeX script invoking the Tikz package.&lt;/p&gt;
+&lt;p&gt;For educational purposes we teach in the second year&amp;rsquo;s course &lt;em&gt;regional and urban economics&lt;/em&gt; students the Edgeworth-Bowley box. At first sight the concept is quite simple, but because there are restrictions for the total amount of both labour and capital in both regions or countries, the intuition behind the model  and especially the drawing of the box is rather complex. Therefore, I once wrote a straightforward but elaborate LaTeX script invoking the Tikz package.&lt;/p&gt;
 &lt;p&gt;The setting is as follows. We consider two regions, $A$ and $B$. The productionfunction of $A$ is $Y_A = K_A^{0.2}L_A^{0.8}$ and the productionfunction of $B$ is $Y_B = K_B^{0.6}L_B^{0.4}$. In the initial situation is the amount of capital in both regions equal to 1 ($K_A = K_B = 1$). The amount of labour is as well in both regions in the initial situation equal to 1 ($L_A = L_B = 1$). The next script shows how to draw an Edgeworth-Bowley box in $\LaTeX$.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;% Edgeworth box---Optimal allocation of inputs for two economies
 % Author: Thomas de Graaff
@@ -1399,8 +1399,8 @@ denotes the area with all pareto improvements.&lt;/p&gt;
       <link>thomasdegraaff.nl/post/2015-10-05-krugman/</link>
       <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
       <guid>thomasdegraaff.nl/post/2015-10-05-krugman/</guid>
-      <description>&lt;h2 id=&#34;drawing-the-diagram-of-a-stylized-version-of-krugmans-increasing-returns-and-economic-geography&#34;&gt;Drawing the diagram of a stylized version of Krugman&#39;s &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;&lt;/h2&gt;
-&lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; a simplified version of Krugman&#39;s model in his paper titled  &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;. The model we have adopted goes as follows:&lt;/p&gt;
+      <description>&lt;h2 id=&#34;drawing-the-diagram-of-a-stylized-version-of-krugmans-increasing-returns-and-economic-geography&#34;&gt;Drawing the diagram of a stylized version of Krugman&amp;rsquo;s &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;For educational purposes we teach in the second year&amp;rsquo;s course &lt;em&gt;regional and urban economics&lt;/em&gt; a simplified version of Krugman&amp;rsquo;s model in his paper titled  &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;. The model we have adopted goes as follows:&lt;/p&gt;
 &lt;p&gt;We consider a simplified economy with two regions and 1 (million) workers ( $L=1$ ) in total. Region 1 is inhabited by 100,000 farmers (bound to their land so immobile), while in Region 2 there are 200,000 farmers. Note that in the notation of Krugman this boils down to $\pi_1 = 0.1$ and $\pi_2 = 0.2$. All other workers work in manufacturing. Assume now that there is a representative firm that has to choose if and in which region if would settle or that it would settle in both regions by having two branches (one in each region). The fixed costs to establish a firm (or branch) is 0.15. The transportcosts to move goods between region 1 and 2 are equal to 1 and each worker consumer consumes exactly one unit of the final product.&lt;/p&gt;
 &lt;p&gt;It is now up to the student to determine the equilibria in this economy (whether stable or unstable) and identify the trade-off for the firm. Doing this the most insightful and simple way is draw the so-called PP-line and the MM-line. Using the Tikz package within Latex simplifies this enormously. The following code shows how this can be done.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;% Krugman91---Firm location in two regions 
