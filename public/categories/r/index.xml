@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R | Thomas de Graaff</title>
-    <link>thomasdegraaff.nl/categories/r/</link>
-      <atom:link href="thomasdegraaff.nl/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://www.thomasdegraaff.nl/categories/r/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Sun, 04 Feb 2018 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>R</title>
-      <link>thomasdegraaff.nl/categories/r/</link>
+      <link>https://www.thomasdegraaff.nl/categories/r/</link>
     </image>
     
     <item>
       <title>New Economic Geography model with R</title>
-      <link>thomasdegraaff.nl/post/new-economic-geography-model-with-r/</link>
+      <link>https://www.thomasdegraaff.nl/post/new-economic-geography-model-with-r/</link>
       <pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/new-economic-geography-model-with-r/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/new-economic-geography-model-with-r/</guid>
       <description>&lt;h2 id=&#34;new-economic-geography-model-with-r&#34;&gt;New economic geography model with R&lt;/h2&gt;
 &lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;Why some regions have more economic activiy than others depend on a variety of factors, including regions&amp;rsquo; endowments, good policy and just sheer luck (oftentimes called path dependency). In the 1990s Paul Krugman constructed a model, the Core-Periphery model, that was able to model all these three elements. This model received quite some positive criticism (including a Nobel price), but still is rather complex in wielding it. In this post I show how one can actually program and depict the short term and long term equilibria that the model yields. The derived estimations are coming from Henri de Groot.&lt;/p&gt;
@@ -218,7 +218,7 @@ mid_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;1.75&amp;quot;, ]
   labs(title =&amp;quot;Wiggle diagram&amp;quot;, y = &amp;quot;Relative real wage&amp;quot;,
        subtitle = &amp;quot;Changes in relative real wage with varying lambda and transportation costs&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(equilibria) + aes(t_vec, lam_vec) + 
   geom_point(aes(colour = factor(stable))) + 
   theme_economist() +
@@ -226,15 +226,15 @@ mid_line &amp;lt;- neg_data[neg_data$transport == &amp;quot;1.75&amp;quot;, ]
   scale_colour_discrete(breaks = c(&amp;quot;0&amp;quot;, &amp;quot;1&amp;quot;), labels=c(&amp;quot;Unstable equilibrium&amp;quot;, &amp;quot;Stable equilibrium&amp;quot;)) +
   labs(title =&amp;quot;Tomahawk&amp;quot;, y = &amp;quot;lambda&amp;quot;, x = &amp;quot;transportation costs&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.thomasdegraaff.nl/rmarkdown-libs/figure-html4/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Sortingmod: an R-package for sorting models</title>
-      <link>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
+      <link>https://www.thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
       <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;sortingmod is a package for estimating the sorting model - a discrete choice model which explains the location decision of heterogeneous individuals over a set of alternative locations. The model is developed by Bayer et al. (2004) following the work of Berry et al. (1995). It relies on the assumptions that individuals choose a location that maximizes their utility, and that heterogeneous individuals with different characteristics have different preferences, and different valuation for location characteristics. The results of the model provide choice probabilities for each alternative, as well as insight on the valuation patterns of heterogeneous agents, and marginal willingness-to-pay values for location characteristics. For the R-vignette go to 
 &lt;a href=&#34;http://www.thomasdegraaff.nl/sortingmod&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.thomasdegraaff.nl/sortingmod&lt;/a&gt;
@@ -303,9 +303,9 @@ s2.results &amp;lt;- second_stage(s1.results, data, c(&amp;quot;lnprice&amp;quot
     
     <item>
       <title>A lines map of building height in Amsterdam</title>
-      <link>thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</link>
+      <link>https://www.thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</link>
       <pubDate>Tue, 02 May 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;I just came across this wonderfull post on &lt;a href=&#34;https://www.r-bloggers.com&#34;&gt;https://www.r-bloggers.com&lt;/a&gt; &lt;a href=&#34;http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/&#34;&gt;http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/&lt;/a&gt; called Population Lines: How and Why I Created it) by James Cheshire. It allows for wonderfull (and artistic) maps constructed by only varations in height of horizontal lines. One might wonder how useful they are, but they sure are beautiful as one can see below in the population lines map of Europe.&lt;/p&gt;
 
@@ -326,10 +326,10 @@ s2.results &amp;lt;- second_stage(s1.results, data, c(&amp;quot;lnprice&amp;quot
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/europe.png&#34; data-caption=&#34;Population lines map of Europe (source http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html).&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://www.thomasdegraaff.nl/img/europe.png&#34; data-caption=&#34;Population lines map of Europe (source http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html).&#34;&gt;
 
 
-  &lt;img src=&#34;thomasdegraaff.nl/img/europe.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://www.thomasdegraaff.nl/img/europe.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -388,10 +388,10 @@ ggsave(&#39;Amsterdam.png&#39;, width=10, height=10)
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/Amsterdam.png&#34; data-caption=&#34;Height of buildings in Amsterdam&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://www.thomasdegraaff.nl/img/Amsterdam.png&#34; data-caption=&#34;Height of buildings in Amsterdam&#34;&gt;
 
 
-  &lt;img src=&#34;thomasdegraaff.nl/img/Amsterdam.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://www.thomasdegraaff.nl/img/Amsterdam.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -409,9 +409,9 @@ ggsave(&#39;Amsterdam.png&#39;, width=10, height=10)
     
     <item>
       <title>A Heatmap of the Robustness of Determinants of European City growth</title>
-      <link>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
+      <link>https://www.thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
       <pubDate>Fri, 21 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Understanding what makes a city tick (e.g., the determinants that makes cities succesful in employment of economic growth) is vital for both policy makers and (regional) economists. Indeed, local policy makers usually want to know what they can contribute to the performance of their city or region. If policy makers can at all influence the performance, then most likely instruments vary between cities and regions. What is good for one city is not necessarily good for another. To analyse this, I ran many regressions of combinations of determinants and analyse their robustness (e.g., sign changes, changes in significance level and coefficients). The research is commissioned by the PBL Netherlands Environmental Assessment Agency.&lt;/p&gt;
 &lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;
@@ -522,10 +522,10 @@ $$&lt;/p&gt;
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://www.thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
 
 
-  &lt;img src=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://www.thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -545,9 +545,9 @@ $$&lt;/p&gt;
     
     <item>
       <title>Social Interaction and Crime</title>
-      <link>thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</link>
+      <link>https://www.thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</link>
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</guid>
       <description>&lt;h2 id=&#34;social-interaction-and-crime-an-investigation-using-individual-offender-data-in-dutch-neighborhoods-conditionally-accepted-in-restat&#34;&gt;&lt;em&gt;Social Interaction and Crime: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; conditionally accepted in RESTAT&lt;/h2&gt;
 &lt;p&gt;Just heard that my paper &lt;em&gt;Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; written together with Wim Bernasco, Jan Rouwendal and Wouter Steenbeek is conditionally accepted in the &lt;strong&gt;Review of Economics and Statistics&lt;/strong&gt;. Im am rather happy with this result; especially given the fact that we have worked on this for more than 5 years (not consecutively but still). For those interested in the paper or forgotten what it is all about, here is the abstract:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -590,7 +590,7 @@ return(myplot)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Which produces the following plot.&lt;/p&gt;
 &lt;figure&gt;
-  &lt;a href=&#34;thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;img src=&#34;thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;/a&gt;
+  &lt;a href=&#34;https://www.thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;img src=&#34;https://www.thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;/a&gt;
   &lt;figcaption&gt;Offender rates of property crime with
   neighborhood-specific variables and for the youth only.&lt;/figcaption&gt;
 &lt;/figure&gt;

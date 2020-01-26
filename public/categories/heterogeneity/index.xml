@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Heterogeneity | Thomas de Graaff</title>
-    <link>thomasdegraaff.nl/categories/heterogeneity/</link>
-      <atom:link href="thomasdegraaff.nl/categories/heterogeneity/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://www.thomasdegraaff.nl/categories/heterogeneity/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/categories/heterogeneity/index.xml" rel="self" type="application/rss+xml" />
     <description>Heterogeneity</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Sun, 18 Nov 2018 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Heterogeneity</title>
-      <link>thomasdegraaff.nl/categories/heterogeneity/</link>
+      <link>https://www.thomasdegraaff.nl/categories/heterogeneity/</link>
     </image>
     
     <item>
       <title>Valuation of Ethnic Diversity: Heterogeneous Effects in an Integrated Labor and Housing Market</title>
-      <link>thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</link>
+      <link>https://www.thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</link>
       <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/2018-11-18-valuationofethnicdiversity/</guid>
       <description>&lt;p&gt;Our paper &lt;em&gt;Valuation of Ethnic Diversity: Heterogeneous Effects in an Integrated Labor and Housing Market&lt;/em&gt; written together with Jessie Bakens is accepted in the &lt;strong&gt;Journal of Economic Geopraphy&lt;/strong&gt;. Jessie and I worked quite hard on this and I am glad that we got the results. The abstract reads as follows:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;gt;We estimate the heterogeneous impact of the scale, composition and consumer good-effect of ethnic diversity on individuals&#39; job and residential location. Using an extensive pooled micro panel-data set in which homeowners in the Netherlands are identified in both the housing and labor market we can derive the combined effect of ethnic diversity in both markets. We test a model that integrates the utility and production function such that the location of work and residence are determined simultaneously by taking into account observed and unobserved heterogeneous individual behavior on both markets. We find that the scale of ethnic diversity, i.e., the share of immigrants, at the city level is mostly positively related to both wages and house prices. This is mainly through a positive productivity effect of immigrants, which results in negative implicit prices for housing (although small) in a city with a higher scale of ethnic diversity for the majority of the individuals in our data. The scale of ethnic diversity is only positively related to utility for a small group of homeowners, while the composition (diversity among immigrants) and consumer good-effect (ethnic diversity of restaurants) of ethnic diversity show overall no significant effect on both markets nor significant implicit prices. Moreover, we find that the majority of Dutch homeowners do not sort themselves out over municipalities by their preferences for ethnic diversity.
 &lt;/code&gt;&lt;/pre&gt;
@@ -25,9 +25,9 @@
     
     <item>
       <title>Sortingmod: an R-package for sorting models</title>
-      <link>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
+      <link>https://www.thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
       <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;sortingmod is a package for estimating the sorting model - a discrete choice model which explains the location decision of heterogeneous individuals over a set of alternative locations. The model is developed by Bayer et al. (2004) following the work of Berry et al. (1995). It relies on the assumptions that individuals choose a location that maximizes their utility, and that heterogeneous individuals with different characteristics have different preferences, and different valuation for location characteristics. The results of the model provide choice probabilities for each alternative, as well as insight on the valuation patterns of heterogeneous agents, and marginal willingness-to-pay values for location characteristics. For the R-vignette go to 
 &lt;a href=&#34;http://www.thomasdegraaff.nl/sortingmod&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.thomasdegraaff.nl/sortingmod&lt;/a&gt;
@@ -96,9 +96,9 @@ s2.results &amp;lt;- second_stage(s1.results, data, c(&amp;quot;lnprice&amp;quot
     
     <item>
       <title>A Heatmap of the Robustness of Determinants of European City growth</title>
-      <link>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
+      <link>https://www.thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
       <pubDate>Fri, 21 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Understanding what makes a city tick (e.g., the determinants that makes cities succesful in employment of economic growth) is vital for both policy makers and (regional) economists. Indeed, local policy makers usually want to know what they can contribute to the performance of their city or region. If policy makers can at all influence the performance, then most likely instruments vary between cities and regions. What is good for one city is not necessarily good for another. To analyse this, I ran many regressions of combinations of determinants and analyse their robustness (e.g., sign changes, changes in significance level and coefficients). The research is commissioned by the PBL Netherlands Environmental Assessment Agency.&lt;/p&gt;
 &lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;
@@ -209,10 +209,10 @@ $$&lt;/p&gt;
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://www.thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
 
 
-  &lt;img src=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://www.thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -232,9 +232,9 @@ $$&lt;/p&gt;
     
     <item>
       <title>Social Interaction and Crime</title>
-      <link>thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</link>
+      <link>https://www.thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</link>
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/2016-09-12-socialinteractionandcrime/</guid>
       <description>&lt;h2 id=&#34;social-interaction-and-crime-an-investigation-using-individual-offender-data-in-dutch-neighborhoods-conditionally-accepted-in-restat&#34;&gt;&lt;em&gt;Social Interaction and Crime: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; conditionally accepted in RESTAT&lt;/h2&gt;
 &lt;p&gt;Just heard that my paper &lt;em&gt;Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhoods&lt;/em&gt; written together with Wim Bernasco, Jan Rouwendal and Wouter Steenbeek is conditionally accepted in the &lt;strong&gt;Review of Economics and Statistics&lt;/strong&gt;. Im am rather happy with this result; especially given the fact that we have worked on this for more than 5 years (not consecutively but still). For those interested in the paper or forgotten what it is all about, here is the abstract:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -277,7 +277,7 @@ return(myplot)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Which produces the following plot.&lt;/p&gt;
 &lt;figure&gt;
-  &lt;a href=&#34;thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;img src=&#34;thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;/a&gt;
+  &lt;a href=&#34;https://www.thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;img src=&#34;https://www.thomasdegraaff.nl/img/equilibriaPropertyYoungNeigh.png&#34;&gt;&lt;/a&gt;
   &lt;figcaption&gt;Offender rates of property crime with
   neighborhood-specific variables and for the youth only.&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -286,13 +286,13 @@ return(myplot)
     
     <item>
       <title>Stedelijke voorzieningen en bevolking: wie woont waar en waarom?</title>
-      <link>thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</link>
+      <link>https://www.thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</link>
       <pubDate>Sat, 15 Feb 2014 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/2014-02-15-soortzoektsoort/</guid>
       <description>&lt;h2 id=&#34;waarom-zijn-sommige-steden-aantrekkelijker-dan-andere-steden&#34;&gt;Waarom zijn sommige steden aantrekkelijker dan andere steden?&lt;/h2&gt;
 &lt;p&gt;Eén van de belangrijke en boeiende onderzoeksvragen in de ruimtelijke economie betreft het verklaren waarom sommige steden aantrekkelijker zijn voor huishoudens en bedrijven dan andere. Als maatstaven voor aantrekkelijkheid worden vaak lonen en huizenprijzen genomen en deze verschillen inderdaad significant tussen gemeenten in Nederland. Zoals bijvoorbeeld de publicatie Stad en Land (De Groot e.a., 2010) al liet zien, kunnen de verschillen tussen grondprijzen in Nederland oplopen tot een factor 200 per vierkante meter kunnen jaarlonen verschillen tot 7 procent voor een zelfde soort baan. Een belangrijke verklaring voor deze verschillen ligt in de aanwezigheid van (stedelijke) voorzieningen. Huishoudens kunnen nu eenmaal een voorkeur hebben voor een historische binnenstad, de aanwezigheid van veel horeca of veel groenvoorzieningen en zijn daarom bereid om een relatief hogere huizenprijs te betalen; het is dus de locatie die voor een deel de huizenprijs bepaalt. Evenzo kunnen voorzieningen ertoe leiden dat werkgevers een voorkeur hebben voor een bepaald vestigingsgebied, en in het uiterste geval kunnen er zelfs productiviteitsverschillen ontstaan.&lt;/p&gt;
 &lt;p&gt;Deze publicatie geeft inzicht in de heterogene verschillen en kan 
-&lt;a href=&#34;thomasdegraaff.nl/papers/StedelijkeVoorzieningen.pdf&#34;&gt;hier&lt;/a&gt;
+&lt;a href=&#34;https://www.thomasdegraaff.nl/papers/StedelijkeVoorzieningen.pdf&#34;&gt;hier&lt;/a&gt;
  gedownload worden.&lt;/p&gt;
 </description>
     </item>

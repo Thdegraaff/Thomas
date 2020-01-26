@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Students | Thomas de Graaff</title>
-    <link>thomasdegraaff.nl/categories/students/</link>
-      <atom:link href="thomasdegraaff.nl/categories/students/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://www.thomasdegraaff.nl/categories/students/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/categories/students/index.xml" rel="self" type="application/rss+xml" />
     <description>Students</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Tue, 06 Sep 2016 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Students</title>
-      <link>thomasdegraaff.nl/categories/students/</link>
+      <link>https://www.thomasdegraaff.nl/categories/students/</link>
     </image>
     
     <item>
       <title>Promotion Zhiling Wang</title>
-      <link>thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</link>
+      <link>https://www.thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</link>
       <pubDate>Tue, 06 Sep 2016 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/2016-09-06-promotionzhilingwang/</guid>
       <description>&lt;h3 id=&#34;promotion-and-defense-ceremony-of-zhiling-wang&#34;&gt;Promotion and defense ceremony of Zhiling Wang&lt;/h3&gt;
 &lt;p&gt;My second Ph.D. student got her Ph.D. degree! With an almost flawless defense and a very good Ph.D. thesis 
 &lt;a href=&#34;http://www.zhiling.guru/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zhiling&lt;/a&gt;
@@ -39,10 +39,10 @@
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/supervisor.jpg&#34; data-caption=&#34;At the promotion of Zhiling Wang&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://www.thomasdegraaff.nl/img/supervisor.jpg&#34; data-caption=&#34;At the promotion of Zhiling Wang&#34;&gt;
 
 
-  &lt;img src=&#34;thomasdegraaff.nl/img/supervisor.jpg&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://www.thomasdegraaff.nl/img/supervisor.jpg&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 

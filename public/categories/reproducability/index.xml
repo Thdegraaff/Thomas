@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reproducability | Thomas de Graaff</title>
-    <link>thomasdegraaff.nl/categories/reproducability/</link>
-      <atom:link href="thomasdegraaff.nl/categories/reproducability/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://www.thomasdegraaff.nl/categories/reproducability/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/categories/reproducability/index.xml" rel="self" type="application/rss+xml" />
     <description>Reproducability</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Fri, 08 Sep 2017 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Reproducability</title>
-      <link>thomasdegraaff.nl/categories/reproducability/</link>
+      <link>https://www.thomasdegraaff.nl/categories/reproducability/</link>
     </image>
     
     <item>
       <title>Sortingmod: an R-package for sorting models</title>
-      <link>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
+      <link>https://www.thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</link>
       <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/sortingmod-an-r-package-for-sorting-models/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;sortingmod is a package for estimating the sorting model - a discrete choice model which explains the location decision of heterogeneous individuals over a set of alternative locations. The model is developed by Bayer et al. (2004) following the work of Berry et al. (1995). It relies on the assumptions that individuals choose a location that maximizes their utility, and that heterogeneous individuals with different characteristics have different preferences, and different valuation for location characteristics. The results of the model provide choice probabilities for each alternative, as well as insight on the valuation patterns of heterogeneous agents, and marginal willingness-to-pay values for location characteristics. For the R-vignette go to 
 &lt;a href=&#34;http://www.thomasdegraaff.nl/sortingmod&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.thomasdegraaff.nl/sortingmod&lt;/a&gt;
@@ -85,9 +85,9 @@ s2.results &amp;lt;- second_stage(s1.results, data, c(&amp;quot;lnprice&amp;quot
     
     <item>
       <title>Choosing statistical software packages for education in the social sciences</title>
-      <link>thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</link>
+      <link>https://www.thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</link>
       <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/choosing-statistical-software-package-for-education-in-the-social-sciences/</guid>
       <description>&lt;h2 id=&#34;introduction-the-empirical-workflow&#34;&gt;Introduction: the empirical workflow&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Econometrics is much easier without the data&amp;mdash;Marno Verbeek&lt;/p&gt;
@@ -587,9 +587,9 @@ of pros and cons of Python and R can be found
     
     <item>
       <title>A lines map of building height in Amsterdam</title>
-      <link>thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</link>
+      <link>https://www.thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</link>
       <pubDate>Tue, 02 May 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/a-lines-map-of-building-height-in-amsterdam/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;I just came across this wonderfull post on &lt;a href=&#34;https://www.r-bloggers.com&#34;&gt;https://www.r-bloggers.com&lt;/a&gt; &lt;a href=&#34;http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/&#34;&gt;http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/&lt;/a&gt; called Population Lines: How and Why I Created it) by James Cheshire. It allows for wonderfull (and artistic) maps constructed by only varations in height of horizontal lines. One might wonder how useful they are, but they sure are beautiful as one can see below in the population lines map of Europe.&lt;/p&gt;
 
@@ -610,10 +610,10 @@ of pros and cons of Python and R can be found
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/europe.png&#34; data-caption=&#34;Population lines map of Europe (source http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html).&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://www.thomasdegraaff.nl/img/europe.png&#34; data-caption=&#34;Population lines map of Europe (source http://blog.revolutionanalytics.com/2017/04/where-europe-lives.html).&#34;&gt;
 
 
-  &lt;img src=&#34;thomasdegraaff.nl/img/europe.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://www.thomasdegraaff.nl/img/europe.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -672,10 +672,10 @@ ggsave(&#39;Amsterdam.png&#39;, width=10, height=10)
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/Amsterdam.png&#34; data-caption=&#34;Height of buildings in Amsterdam&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://www.thomasdegraaff.nl/img/Amsterdam.png&#34; data-caption=&#34;Height of buildings in Amsterdam&#34;&gt;
 
 
-  &lt;img src=&#34;thomasdegraaff.nl/img/Amsterdam.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://www.thomasdegraaff.nl/img/Amsterdam.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -693,9 +693,9 @@ ggsave(&#39;Amsterdam.png&#39;, width=10, height=10)
     
     <item>
       <title>A Heatmap of the Robustness of Determinants of European City growth</title>
-      <link>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
+      <link>https://www.thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</link>
       <pubDate>Fri, 21 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/a-heatmap-of-the-robustness-of-determinants-of-european-city-growth/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Understanding what makes a city tick (e.g., the determinants that makes cities succesful in employment of economic growth) is vital for both policy makers and (regional) economists. Indeed, local policy makers usually want to know what they can contribute to the performance of their city or region. If policy makers can at all influence the performance, then most likely instruments vary between cities and regions. What is good for one city is not necessarily good for another. To analyse this, I ran many regressions of combinations of determinants and analyse their robustness (e.g., sign changes, changes in significance level and coefficients). The research is commissioned by the PBL Netherlands Environmental Assessment Agency.&lt;/p&gt;
 &lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;
@@ -806,10 +806,10 @@ $$&lt;/p&gt;
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://www.thomasdegraaff.nl/img/heatmap_gva.png&#34; data-caption=&#34;Heatmap of percentage significance of indicators on European city growth.&#34;&gt;
 
 
-  &lt;img src=&#34;thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://www.thomasdegraaff.nl/img/heatmap_gva.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -829,9 +829,9 @@ $$&lt;/p&gt;
     
     <item>
       <title>WooW-II: Workshop on open Workflows</title>
-      <link>thomasdegraaff.nl/post/2015-07-29-woow-ii/</link>
+      <link>https://www.thomasdegraaff.nl/post/2015-07-29-woow-ii/</link>
       <pubDate>Wed, 29 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>thomasdegraaff.nl/post/2015-07-29-woow-ii/</guid>
+      <guid>https://www.thomasdegraaff.nl/post/2015-07-29-woow-ii/</guid>
       <description>&lt;p&gt;&lt;em&gt;With Daniel Arribas-Bel&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;This resource describes WooW-II, a two-day workshop on open workflows for quantitative social scientists. The workshop is broken down in five main parts, where each of them typically consists of an introductionary tutorial and a hands-on assignment. The specific tools discussed in this workshop are Markdown, Pandoc, Git, Github, R, and Rstudio, but the theoretical approach applies to a wider range of tools (e.g., LaTeX, and Python).&lt;/p&gt;
 &lt;p&gt;By the end of the workshop, participants should be able to reproduce a paper of their own and make it available in an open form applying the concepts and tools introduced.&lt;/p&gt;

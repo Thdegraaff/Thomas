@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications | Thomas de Graaff</title>
-    <link>thomasdegraaff.nl/publication/</link>
-      <atom:link href="thomasdegraaff.nl/publication/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://www.thomasdegraaff.nl/publication/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/publication/index.xml" rel="self" type="application/rss+xml" />
     <description>Publications</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Publications</title>
-      <link>thomasdegraaff.nl/publication/</link>
+      <link>https://www.thomasdegraaff.nl/publication/</link>
     </image>
     
   </channel>
