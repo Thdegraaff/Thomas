@@ -675,7 +675,7 @@
 <h3 id="introduction">Introduction</h3>
 <p>Why some regions have more economic activiy than others depend on a variety of factors, including regions&rsquo; endowments, good policy and just sheer luck (oftentimes called path dependency). In the 1990s Paul Krugman constructed a model, the Core-Periphery model, that was able to model all these three elements. This model received quite some positive criticism (including a Nobel price), but still is rather complex in wielding it. In this post I show how one can actually program and depict the short term and long term equilibria that the model yields. The derived estimations are coming from Henri de Groot.</p>
 <h3 id="the-actual-code">The actual code</h3>
-<p>We first need to read in some packages that we will use</p>
+<p>We first need to read in some packages that we will use:</p>
 <pre><code class="language-r">################################################################
 # Read in libraries
 ################################################################
@@ -700,7 +700,7 @@ bet     &lt;- 0.8  # variable costs
 alp     &lt;- 0.08 # fixed costs
 delta   &lt;- 0.4  # budget share manufacturing
 </code></pre>
-<p>Moreover, we need some additional (none structural) constants, but needed for the iteration and the granularity of our plots</p>
+<p>Moreover, we need some additional (none structural) constants, but needed for the iteration and the granularity of our plots:</p>
 <pre><code class="language-r">################################################################
 # Define iterations and stepsize for transporation and lambda
 ################################################################
@@ -715,7 +715,7 @@ step_t &lt;- 0.01
 </code></pre>
 <p>The model containts 6 non-linear equations, namely:</p>
 <p><code>$$\begin{align} Y_1 &amp;= \phi_1(1-\gamma)L + \lambda_1 \gamma LW_1 \\ Y_2 &amp;= \phi_2(1-\gamma)L + (1-\lambda_1) \gamma LW_2 \\ W_1 &amp;= \rho \beta^{-\rho}\left(\frac{\delta}{\alpha(\epsilon-1)}\right)^{1/\epsilon} \left(Y_1 I_1^{\epsilon-1} + T^{1-\epsilon}Y_2 I_2^{\epsilon-1}\right)^{1/\epsilon}\\ W_2 &amp;= \rho \beta^{-\rho}\left(\frac{\delta}{\alpha(\epsilon-1)}\right)^{1/\epsilon} \left(T^{1-\epsilon}Y_1 I_1^{\epsilon-1} + Y_2 I_2^{\epsilon-1}\right)^{1/\epsilon}\\ I_1 &amp;= \left(\frac{\gamma L}{\alpha \epsilon} \right)^{1/(1-\epsilon)}\left(\frac{\beta}{\rho}\right) \left(\lambda W_1^{1-\epsilon} + (1-\lambda)T^{1-\epsilon} W_2^{1-\epsilon}\right)^{1/(1-\epsilon)}\\ I_2 &amp;= \left(\frac{\gamma L}{\alpha \epsilon} \right)^{1/(1-\epsilon)}\left(\frac{\beta}{\rho}\right) \left(\lambda T^{1-\epsilon} W_1^{1-\epsilon} + (1-\lambda) W_2^{1-\epsilon}\right)^{1/(1-\epsilon)}\\ \end{align}$$</code></p>
-<p>The first two equations are total regional incomes, equation 3 and 4 give the regional wages and the last two equations determine regional price indices.</p>
+<p>The first two equations denote  total regional income for regional 1 and 2, equation 3 and 4 give the regional wages for both regions and the last two equations determine regional price indices.</p>
 <p>Thus, the key optimalisation procedure looks as follows:</p>
 <pre><code class="language-r">################################################################
 # Definite optimal function
@@ -872,7 +872,7 @@ mid_line &lt;- neg_data[neg_data$transport == &quot;1.75&quot;, ]
   labs(title =&quot;Wiggle diagram&quot;, y = &quot;Relative real wage&quot;,
        subtitle = &quot;Changes in relative real wage with varying lambda and transportation costs&quot;)
 </code></pre>
-<p><img src="/rmarkdown-libs/figure-html4/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2018-02-04-new-economic-geography-model-with-r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre><code class="language-r">ggplot(equilibria) + aes(t_vec, lam_vec) + 
   geom_point(aes(colour = factor(stable))) + 
   theme_economist() +
@@ -880,7 +880,7 @@ mid_line &lt;- neg_data[neg_data$transport == &quot;1.75&quot;, ]
   scale_colour_discrete(breaks = c(&quot;0&quot;, &quot;1&quot;), labels=c(&quot;Unstable equilibrium&quot;, &quot;Stable equilibrium&quot;)) +
   labs(title =&quot;Tomahawk&quot;, y = &quot;lambda&quot;, x = &quot;transportation costs&quot;)
 </code></pre>
-<p><img src="/rmarkdown-libs/figure-html4/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2018-02-04-new-economic-geography-model-with-r_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 
     </div>
 

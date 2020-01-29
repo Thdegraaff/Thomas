@@ -1,14 +1,16 @@
 ---
 title: New Economic Geography model with R
 author: Thomas
-math: true
 date: '2018-02-04'
+math: true
 slug: new-economic-geography-model-with-r
 categories:
   - R
   - Education
   - Interaction
 tags: []
+output:
+  md_document
 ---
 
 ## New economic geography model with R
@@ -19,7 +21,7 @@ Why some regions have more economic activiy than others depend on a variety of f
 
 ### The actual code
 
-We first need to read in some packages that we will use
+We first need to read in some packages that we will use:
 
 
 ```r
@@ -52,7 +54,7 @@ alp     <- 0.08 # fixed costs
 delta   <- 0.4  # budget share manufacturing
 ```
 
-Moreover, we need some additional (none structural) constants, but needed for the iteration and the granularity of our plots
+Moreover, we need some additional (none structural) constants, but needed for the iteration and the granularity of our plots:
 
 ```r
 ################################################################
@@ -79,7 +81,7 @@ I_1 &= \left(\frac{\gamma L}{\alpha \epsilon} \right)^{1/(1-\epsilon)}\left(\fra
 I_2 &= \left(\frac{\gamma L}{\alpha \epsilon} \right)^{1/(1-\epsilon)}\left(\frac{\beta}{\rho}\right) \left(\lambda T^{1-\epsilon} W_1^{1-\epsilon} + (1-\lambda) W_2^{1-\epsilon}\right)^{1/(1-\epsilon)}\\
 \end{align}$$`
 
-The first two equations are total regional incomes, equation 3 and 4 give the regional wages and the last two equations determine regional price indices. 
+The first two equations denote  total regional income for regional 1 and 2, equation 3 and 4 give the regional wages for both regions and the last two equations determine regional price indices. 
 
 Thus, the key optimalisation procedure looks as follows:
 
@@ -249,7 +251,7 @@ ggplot(neg_data) + aes(lambda, rel, group = transport) + geom_line(size = 0.5, c
        subtitle = "Changes in relative real wage with varying lambda and transportation costs")
 ```
 
-<img src="/rmarkdown-libs/figure-html4/unnamed-chunk-6-1.png" width="672" />
+<img src="/post/2018-02-04-new-economic-geography-model-with-r_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 
 ```r
@@ -261,4 +263,4 @@ ggplot(equilibria) + aes(t_vec, lam_vec) +
   labs(title ="Tomahawk", y = "lambda", x = "transportation costs")
 ```
 
-<img src="/rmarkdown-libs/figure-html4/unnamed-chunk-7-1.png" width="672" />
+<img src="/post/2018-02-04-new-economic-geography-model-with-r_files/figure-html/unnamed-chunk-7-1.png" width="672" />
