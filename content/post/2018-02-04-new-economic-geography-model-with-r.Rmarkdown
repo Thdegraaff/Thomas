@@ -9,6 +9,8 @@ categories:
   - Education
   - Interaction
 tags: []
+output:
+  md_document
 ---
 
 ## New economic geography model with R
