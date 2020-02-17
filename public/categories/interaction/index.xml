@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>interaction | Thomas de Graaff</title>
+    <title>Interaction | Thomas de Graaff</title>
     <link>https://www.thomasdegraaff.nl/categories/interaction/</link>
       <atom:link href="https://www.thomasdegraaff.nl/categories/interaction/index.xml" rel="self" type="application/rss+xml" />
-    <description>interaction</description>
+    <description>Interaction</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Tue, 01 May 2018 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
-      <title>interaction</title>
+      <title>Interaction</title>
       <link>https://www.thomasdegraaff.nl/categories/interaction/</link>
     </image>
     
