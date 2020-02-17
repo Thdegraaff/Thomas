@@ -6,11 +6,5 @@
       <atom:link href="https://www.thomasdegraaff.nl/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>Thomas de Graaff</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright>
-    <image>
-      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
-      <title>Thomas de Graaff</title>
-      <link>https://www.thomasdegraaff.nl/authors/admin/</link>
-    </image>
-    
   </channel>
 </rss>

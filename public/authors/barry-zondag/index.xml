@@ -6,12 +6,6 @@
       <atom:link href="https://www.thomasdegraaff.nl/authors/barry-zondag/index.xml" rel="self" type="application/rss+xml" />
     <description>Barry Zondag</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Tue, 01 Jan 2013 00:00:00 +0000</lastBuildDate>
-    <image>
-      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
-      <title>Barry Zondag</title>
-      <link>https://www.thomasdegraaff.nl/authors/barry-zondag/</link>
-    </image>
-    
     <item>
       <title>A population-employment interaction model as labour module in TIGRIS XL</title>
       <link>https://www.thomasdegraaff.nl/publication/de-graaff-2013-cont/</link>

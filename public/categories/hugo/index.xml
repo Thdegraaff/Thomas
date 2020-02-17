@@ -21,20 +21,20 @@
 &lt;p&gt;For quite some time I have been thinking about migrating my (very small) website to the 
 &lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hugo&lt;/a&gt;
  platform. Mostly because I admire the information rich structure of 
-&lt;a href=&#34;kieranhealy.org&#34;&gt;Kieran Healy&#39;s&lt;/a&gt;
+&lt;a href=&#34;kieranhealy.org&#34;&gt;Kieran Healy&amp;rsquo;s&lt;/a&gt;
  website and he converted already from 
 &lt;a href=&#34;https://jekyllrb.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Jekyll&lt;/a&gt;
  to Hugo a while ago. Because my website is indeed quite small, it does not suffer from Jekyll oftentimes being slow. However, I needed some additional features of my Jekyll site (e.g., converting bibtex to a reference list), which could not automatically be rendered by 
 &lt;a href=&#34;github.com&#34;&gt;Github&lt;/a&gt;
  which is my choice of deployment. Therefore, I used a rakefile which I did not completely understand, but resulting in asynchronous versions of source code and published website, which is undesirable. Finally, I have read somewhere that I can deploy my beloved &lt;code&gt;.org&lt;/code&gt; files as well using Hugo, which seems almost brilliant.&lt;/p&gt;
 &lt;h3 id=&#34;choosing-a-template&#34;&gt;Choosing a template&lt;/h3&gt;
-&lt;p&gt;So I decided to convert my website to Hugo with a website design close to that of Kieran Healy. Interestingly, Kieran Healy based his website on Greg Restall&#39;s 
+&lt;p&gt;So I decided to convert my website to Hugo with a website design close to that of Kieran Healy. Interestingly, Kieran Healy based his website on Greg Restall&amp;rsquo;s 
 &lt;a href=&#34;consequently.org&#34;&gt;consequently.org&lt;/a&gt;
 . There is a large amount of Hugo templates by now and the 
 &lt;a href=&#34;https://github.com/lambdafu/hugo-finite&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hugo-Finite&lt;/a&gt;
  came closest to what I wanted (actually, this template is based on that of Greg Restall). Unfortunately, it still needed quite a lot of (css) work to get it in the shape I wanted. Then, by sheer accident, I stumbled upon the website of 
 &lt;a href=&#34;https://robjhyndman.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rob J Hyndman&lt;/a&gt;
-, who had already worked on the Hugo-Finite template to make it look more like Kieran Healy&#39;s website. Moreover, his template works in combination with 
+, who had already worked on the Hugo-Finite template to make it look more like Kieran Healy&amp;rsquo;s website. Moreover, his template works in combination with 
 &lt;a href=&#34;https://bookdown.org/yihui/bookdown/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;bookdown&lt;/a&gt;
 , which might be handy, if I want to convert &lt;code&gt;.rmd&lt;/code&gt; files in the future (say for education purposes), therefore I decided to copy his template and adapt it to my own needs.&lt;/p&gt;
 &lt;h3 id=&#34;the-process--the-result&#34;&gt;The process &amp;amp; the result&lt;/h3&gt;

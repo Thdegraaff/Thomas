@@ -318,7 +318,7 @@ costs over .&lt;/p&gt;
 &lt;dd&gt;
 &lt;p&gt;First, and foremost, students should be able to use the package for
 straightforward econometric research. If that is not possible after
-one six-week&#39;s course, the software package is not particularly
+one six-week&amp;rsquo;s course, the software package is not particularly
 suitable.&lt;/p&gt;
 &lt;/dd&gt;
 &lt;dt&gt;Size of the community&lt;/dt&gt;
@@ -407,7 +407,7 @@ tools is rather limited. Moreover, STATA can only work with one active
 dataset, which makes merging datasets sometimes difficult. Finally,
 although there are some plugins, STATA is not designed for working with
 data stored on servers somewhere else via application programming
-interfaces (API&#39;s). Unfortunately, working via API&#39;s&lt;sup id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; becomes
+interfaces (API&amp;rsquo;s). Unfortunately, working via API&amp;rsquo;s&lt;sup id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; becomes
 increasingly important, if not only for the recent surge in open access
 data via local governments, Google, Twitter, Foursquare, etc.&lt;/p&gt;
 &lt;p&gt;STATA itself is well scriptable internally. although it is less
@@ -467,7 +467,7 @@ this case the object &amp;ldquo;model&amp;rdquo;) and use it later, and one can 
 databases (&amp;lsquo;dataframes&amp;rsquo;) at the same time. Both features are extremely
 useful for dealing with larger research projects. And although STATA
 still is more straightforward in basic econometrics, R users have
-developed several packages to emulate STATA&#39;s ease of use.&lt;sup id=&#34;fnref:14&#34;&gt;&lt;a href=&#34;#fn:14&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;14&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+developed several packages to emulate STATA&amp;rsquo;s ease of use.&lt;sup id=&#34;fnref:14&#34;&gt;&lt;a href=&#34;#fn:14&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;14&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;Because R is very flexible and the community is that huge (across
 disciplines as well), for almost every (statistical) problem a package
 most likely is developed (if feasible). The problem is, however, that
@@ -503,7 +503,7 @@ webpages.&lt;sup id=&#34;fnref:16&#34;&gt;&lt;a href=&#34;#fn:16&#34; class=&#34
 &lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
 &lt;p&gt;Opposite to STATA and even R, Python is an open source general object
 oriented programming language more in line with a language such as
-C++.&lt;sup id=&#34;fnref:17&#34;&gt;&lt;a href=&#34;#fn:17&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;17&lt;/a&gt;&lt;/sup&gt; Python was implemented by Guido van Rossum in the late 1980&#39;s
+C++.&lt;sup id=&#34;fnref:17&#34;&gt;&lt;a href=&#34;#fn:17&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;17&lt;/a&gt;&lt;/sup&gt; Python was implemented by Guido van Rossum in the late 1980&amp;rsquo;s
 and was built on the Modula-3 programming language. As it is a general
 progamming language one needs several so-called packages in order to
 make it work for econometrics in particular and data science in general,
@@ -532,7 +532,7 @@ STATA or R. However, in the end it does pay off when learning the
 language as it is not only a good language for learning programming, it
 is as well very useful for projects just outside the realm of basic
 econometrics. Working with strings (text analysis), images, spatial
-data, API&#39;s, large amounts of data, etcetera, is all very common and
+data, API&amp;rsquo;s, large amounts of data, etcetera, is all very common and
 relatively straightforward in Python. Moreover, the community is very
 large (larger than that of R). But, not all of them are working in data
 science.&lt;/p&gt;
@@ -784,7 +784,7 @@ of pros and cons of Python and R can be found
       <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
       <guid>https://www.thomasdegraaff.nl/post/2015-11-25-edgeworth/</guid>
       <description>&lt;h2 id=&#34;factor-mobility-and-welfare&#34;&gt;Factor mobility and welfare&lt;/h2&gt;
-&lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; students the Edgeworth-Bowley box. At first sight the concept is quite simple, but because there are restrictions for the total amount of both labour and capital in both regions or countries, the intuition behind the model  and especially the drawing of the box is rather complex. Therefore, I once wrote a straightforward but elaborate LaTeX script invoking the Tikz package.&lt;/p&gt;
+&lt;p&gt;For educational purposes we teach in the second year&amp;rsquo;s course &lt;em&gt;regional and urban economics&lt;/em&gt; students the Edgeworth-Bowley box. At first sight the concept is quite simple, but because there are restrictions for the total amount of both labour and capital in both regions or countries, the intuition behind the model  and especially the drawing of the box is rather complex. Therefore, I once wrote a straightforward but elaborate LaTeX script invoking the Tikz package.&lt;/p&gt;
 &lt;p&gt;The setting is as follows. We consider two regions, $A$ and $B$. The productionfunction of $A$ is $Y_A = K_A^{0.2}L_A^{0.8}$ and the productionfunction of $B$ is $Y_B = K_B^{0.6}L_B^{0.4}$. In the initial situation is the amount of capital in both regions equal to 1 ($K_A = K_B = 1$). The amount of labour is as well in both regions in the initial situation equal to 1 ($L_A = L_B = 1$). The next script shows how to draw an Edgeworth-Bowley box in $\LaTeX$.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;% Edgeworth box---Optimal allocation of inputs for two economies
 % Author: Thomas de Graaff
@@ -915,8 +915,8 @@ denotes the area with all pareto improvements.&lt;/p&gt;
       <link>https://www.thomasdegraaff.nl/post/2015-10-05-krugman/</link>
       <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
       <guid>https://www.thomasdegraaff.nl/post/2015-10-05-krugman/</guid>
-      <description>&lt;h2 id=&#34;drawing-the-diagram-of-a-stylized-version-of-krugmans-increasing-returns-and-economic-geography&#34;&gt;Drawing the diagram of a stylized version of Krugman&#39;s &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;&lt;/h2&gt;
-&lt;p&gt;For educational purposes we teach in the second year&#39;s course &lt;em&gt;regional and urban economics&lt;/em&gt; a simplified version of Krugman&#39;s model in his paper titled  &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;. The model we have adopted goes as follows:&lt;/p&gt;
+      <description>&lt;h2 id=&#34;drawing-the-diagram-of-a-stylized-version-of-krugmans-increasing-returns-and-economic-geography&#34;&gt;Drawing the diagram of a stylized version of Krugman&amp;rsquo;s &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;For educational purposes we teach in the second year&amp;rsquo;s course &lt;em&gt;regional and urban economics&lt;/em&gt; a simplified version of Krugman&amp;rsquo;s model in his paper titled  &lt;em&gt;Increasing Returns and Economic Geography&lt;/em&gt;. The model we have adopted goes as follows:&lt;/p&gt;
 &lt;p&gt;We consider a simplified economy with two regions and 1 (million) workers ( $L=1$ ) in total. Region 1 is inhabited by 100,000 farmers (bound to their land so immobile), while in Region 2 there are 200,000 farmers. Note that in the notation of Krugman this boils down to $\pi_1 = 0.1$ and $\pi_2 = 0.2$. All other workers work in manufacturing. Assume now that there is a representative firm that has to choose if and in which region if would settle or that it would settle in both regions by having two branches (one in each region). The fixed costs to establish a firm (or branch) is 0.15. The transportcosts to move goods between region 1 and 2 are equal to 1 and each worker consumer consumes exactly one unit of the final product.&lt;/p&gt;
 &lt;p&gt;It is now up to the student to determine the equilibria in this economy (whether stable or unstable) and identify the trade-off for the firm. Doing this the most insightful and simple way is draw the so-called PP-line and the MM-line. Using the Tikz package within Latex simplifies this enormously. The following code shows how this can be done.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;% Krugman91---Firm location in two regions 
