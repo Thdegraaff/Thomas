@@ -296,36 +296,6 @@
 
 
   
-  
-  
-  
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js" integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css" integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin="anonymous">
-  
-  <script>
-  window.addEventListener("load", function(){
-    window.cookieconsent.initialise({
-      "palette": {
-        "popup": {
-          "background": "#795548",
-          "text": "hsla(16, 24%, 85%, 1)"
-        },
-        "button": {
-          "background": "hsla(16, 24%, 85%, 1)",
-          "text": "#795548"
-        }
-      },
-      "theme": "classic",
-      "content": {
-        "message": "This website uses cookies to ensure you get the best experience on our website.",
-        "dismiss": "Got it!",
-        "link": "Learn more",
-        "href": "https://www.cookiesandyou.com"
-      }
-    })});
-  </script>
-
 
 
   
@@ -697,7 +667,7 @@ devtools::install_github(&quot;thdegraaff/sortingmod&quot;)
 <li>A vector indicating the chosen alternative (<code>code_name</code>).</li>
 <li>One or more columns indicating characteristics (<code>X_names</code>) of the chosen alternative.</li>
 <li>Each row of the data frame should represent a unique individual. The number of alternatives should therefore be smaller or equal to the number of individuals.</li>
-<li>Individual and alternative characteristics should be numeric variables. Factor variables are not yet supported, so it&rsquo;s best to transform them into numeric dummy variables if you intend to include them in the model.</li>
+<li>Individual and alternative characteristics should be numeric variables. Factor variables are not yet supported, so it's best to transform them into numeric dummy variables if you intend to include them in the model.</li>
 </ul>
 <h2 id="usage">Usage</h2>
 <p>Define dataset, alternative identifier variable and explanatory variable sets X and Z</p>
