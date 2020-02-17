@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zhiling Wang | Thomas de Graaff</title>
+    <link>https://www.thomasdegraaff.nl/authors/zhiling-wang/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/authors/zhiling-wang/index.xml" rel="self" type="application/rss+xml" />
+    <description>Zhiling Wang</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Zhiling Wang</title>
+      <link>https://www.thomasdegraaff.nl/authors/zhiling-wang/</link>
+    </image>
+    
+    <item>
+      <title>Barriers of Culture, Networks, and Language in International Migration: A Review</title>
+      <link>https://www.thomasdegraaff.nl/publication/wang-2018-barriers/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/wang-2018-barriers/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

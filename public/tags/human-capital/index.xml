@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>human capital | Thomas de Graaff</title>
+    <link>https://www.thomasdegraaff.nl/tags/human-capital/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/tags/human-capital/index.xml" rel="self" type="application/rss+xml" />
+    <description>human capital</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Thu, 01 Jul 2010 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>human capital</title>
+      <link>https://www.thomasdegraaff.nl/tags/human-capital/</link>
+    </image>
+    
+    <item>
+      <title>The role of human capital in language acquisition among immigrants in US metropolitan</title>
+      <link>https://www.thomasdegraaff.nl/publication/waldorf-2010/</link>
+      <pubDate>Thu, 01 Jul 2010 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/waldorf-2010/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

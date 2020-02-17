@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Meta-analysis | Thomas de Graaff</title>
+    <link>https://www.thomasdegraaff.nl/tags/meta-analysis/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/tags/meta-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <description>Meta-analysis</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Thu, 01 Jan 2004 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Meta-analysis</title>
+      <link>https://www.thomasdegraaff.nl/tags/meta-analysis/</link>
+    </image>
+    
+    <item>
+      <title>The Performance of Diagnostics for Spatial Dependence in Linear Regression Models: A Meta-Analysis of Simulation Studies</title>
+      <link>https://www.thomasdegraaff.nl/publication/florax-2004-cont/</link>
+      <pubDate>Thu, 01 Jan 2004 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/florax-2004-cont/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

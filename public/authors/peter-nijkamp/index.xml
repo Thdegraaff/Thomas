@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Peter Nijkamp | Thomas de Graaff</title>
+    <link>https://www.thomasdegraaff.nl/authors/peter-nijkamp/</link>
+      <atom:link href="https://www.thomasdegraaff.nl/authors/peter-nijkamp/index.xml" rel="self" type="application/rss+xml" />
+    <description>Peter Nijkamp</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thomas de Graaff, 2020</copyright><lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Peter Nijkamp</title>
+      <link>https://www.thomasdegraaff.nl/authors/peter-nijkamp/</link>
+    </image>
+    
+    <item>
+      <title>Barriers of Culture, Networks, and Language in International Migration: A Review</title>
+      <link>https://www.thomasdegraaff.nl/publication/wang-2018-barriers/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/wang-2018-barriers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cultural Diversity and Cultural Distance as Choice Determinants of Migration Destination</title>
+      <link>https://www.thomasdegraaff.nl/publication/wang-2016/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/wang-2016/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Socio-economic impacts of migrant clustering on Dutch neighbourhoods: In search of optimal migrant diversity</title>
+      <link>https://www.thomasdegraaff.nl/publication/de-graaff-2010/</link>
+      <pubDate>Wed, 01 Dec 2010 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/de-graaff-2010/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ethnic network externalities and labor market integration</title>
+      <link>https://www.thomasdegraaff.nl/publication/graaff-2008-cont/</link>
+      <pubDate>Tue, 01 Jan 2008 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/graaff-2008-cont/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spatial Effects and Non-Linearity in Spatial Regression Models: Simulation Results for Several Misspecification Tests</title>
+      <link>https://www.thomasdegraaff.nl/publication/de-graaff-2006-cont/</link>
+      <pubDate>Sun, 01 Jan 2006 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/de-graaff-2006-cont/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Resilience: An Evolutionary Approach to Spatial Economic Systems</title>
+      <link>https://www.thomasdegraaff.nl/publication/de-graaff-2002/</link>
+      <pubDate>Tue, 01 Jan 2002 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/de-graaff-2002/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A General Misspecification Test for Spatial Regression Models: Dependence, Heterogeneity, and Nonlinearity</title>
+      <link>https://www.thomasdegraaff.nl/publication/de-graaff-2001-b/</link>
+      <pubDate>Mon, 01 Jan 2001 00:00:00 +0000</pubDate>
+      <guid>https://www.thomasdegraaff.nl/publication/de-graaff-2001-b/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
