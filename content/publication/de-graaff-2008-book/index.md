@@ -1,11 +1,11 @@
 ---
 title: "Woonwerkdynamiek in Nederlandse gemeenten"
 date: 2008-01-01
-publishDate: 2020-02-17T14:30:23.664710Z
+publishDate: 2020-04-02T11:26:16.675784Z
 authors: ["Thomas de Graaff", "Frank G. Van Oort", "Sanne Boschman"]
 publication_types: ["5"]
 abstract: ""
-featured: true
+featured: false
 publication: "*Rotterdam/Den Haag: NAi Uitgevers/Ruimtelijk Planbureau*"
 ---
 
