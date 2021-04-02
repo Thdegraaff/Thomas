@@ -22,7 +22,7 @@ their results.
 ## Background material 
 
 Paul Koster refers in his knowledge clip to the work of Sanko, Daly and Kroes (2002). 
-You can find this paper [here](docs/sanko.pdf)
+You can find this paper [here](/docs/sanko.pdf).
 
 ## previous theses
 
@@ -30,3 +30,7 @@ Already many theses have been written using Stated preference techniques. Below
 are some we do find of good quality and that also display the variation in topics. 
 These theses should only be used for inspiration. Do not copy their methodological approach!
 
+Theses:
+
+- [Gerben de Jong (2014)](/docs/gerben_de_jong.pdf)
+- [Lena Pax(2020)](/docs/lena_pax.pdf)
