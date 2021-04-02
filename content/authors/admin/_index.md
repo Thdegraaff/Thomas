@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Assistant professor in spatial economics
+role: Associate professor in spatial economics
 
 # Organizations/Affiliations
 organizations:

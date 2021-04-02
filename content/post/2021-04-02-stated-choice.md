@@ -1,4 +1,14 @@
-# Stated choice experiments
+---
+title: Stated choice experiments
+author: Thomas de Graaf
+date: '2021-04-02'
+slug: stated-choice-experiments
+categories:
+- Teaching
+- Reproducability
+---
+
+# What is this about? 
 
 This is a more static and general post and deals with all sorts of materials
 considering **stated choice experiments** to help master students in conducting
