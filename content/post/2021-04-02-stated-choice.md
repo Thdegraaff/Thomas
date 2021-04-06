@@ -19,7 +19,7 @@ their results.
 
 ## Knowledge clips
 
-Paul koster has made several clip on stated choice experiments
+Paul Koster has made several clip on stated choice experiments
 
 - [An introduction](https://video.vu.nl/media/Choice+experiments/1_ej62gyoc)
 - [About designing in Excel](https://video.vu.nl/media/Statistical+design+of+choice+experiments+in+Excel/1_hksvwdnm)
@@ -29,12 +29,12 @@ Note that Paul Koster uses a different approach than usual as he allocates point
 
 I myself have made some clips this year. One is on an exam question (which is about the interpretation of the outcome and possible biases that may arise in Stated Preference surveys); the other deals with working with logistics regressions and why it is so different from ordinary least squares. 
 
-- [Exam question: the value of statistical life](https://video.vu.nl/edit/1_fvt0xobo)
-- [Logistis regression](https://video.vu.nl/edit/1_f48s6l0b)
+- [Exam question: the value of statistical life](https://video.vu.nl/media/vosl/1_ato8hlbc)
+- [Logistis regression](https://video.vu.nl/media/logistic%20regression/1_09nkiqyb)
 
 ## Background material 
 
-Paul Koster refers in his knowledge clip to the work of Sanko, Daly and Kroes (2002). 
+Paul Koster refers in his knowledge clip to the work of Sanko, Daly and Kroes (2002), so does Vincent van den Berg in this [lecture](/docs/SCE.pdf).
 You can find this paper [here](/docs/sanko.pdf).
 
 ## previous theses
