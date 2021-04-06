@@ -47,3 +47,4 @@ Theses:
 
 - [Gerben de Jong (2014)](/docs/gerben_de_jong.pdf)
 - [Lena Pax (2020)](/docs/lena_pax.pdf)
+- [Erika de Keyser (2020)](/docs/de_keyser.pdf)
