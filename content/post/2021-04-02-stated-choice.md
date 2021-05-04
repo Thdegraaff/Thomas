@@ -41,7 +41,7 @@ Vincent van de Berg also created content in the context of transport economics:
 Paul Koster refers in his knowledge clip to the work of Sanko, Daly and Kroes (2002), so does Vincent van den Berg in this [lecture](/docs/SCE.pdf).
 You can find this paper [here](/docs/sanko.pdf).
 
-## previous theses
+## Previous theses
 
 Already many theses have been written using Stated preference techniques. Below
 are some we do find of good quality and that also display the variation in topics. 
