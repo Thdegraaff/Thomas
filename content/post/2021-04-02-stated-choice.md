@@ -32,6 +32,10 @@ I myself have made some clips this year. One is on an exam question (which is ab
 - [Exam question: the value of statistical life](https://video.vu.nl/media/vosl/1_ato8hlbc)
 - [Logistis regression](https://video.vu.nl/media/logistic%20regression/1_09nkiqyb)
 
+Vincent van de Berg also created content in the context of transport economics:
+
+- [Stated choice experiments (empirical transport economics)](https://video.vu.nl/media/2+Stated+choice+experiments+%28empirical+transport+economics%29/1_75utwqeb)
+
 ## Background material 
 
 Paul Koster refers in his knowledge clip to the work of Sanko, Daly and Kroes (2002), so does Vincent van den Berg in this [lecture](/docs/SCE.pdf).
